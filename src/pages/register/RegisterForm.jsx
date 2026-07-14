@@ -93,7 +93,7 @@ export default function RegisterForm() {
               type="text"
               autoComplete="name"
 
-              className="!bg-search placeholder:text-search-foreground rounded-lg"
+              className="bg-search! placeholder:text-search-foreground rounded-lg"
               placeholder={t('registerPage.fullName')}
               {...register('fullName')}
             />
@@ -112,7 +112,7 @@ export default function RegisterForm() {
             <Input
               type="email"
               autoComplete="email"
-              className="!bg-search placeholder:text-search-foreground rounded-lg"
+              className="bg-search! placeholder:text-search-foreground rounded-lg"
               placeholder={t('registerPage.email')}
               {...register('email')}
             />
@@ -129,7 +129,7 @@ export default function RegisterForm() {
   <Input
     type="text"
     autoComplete="username"
-    className="!bg-search placeholder:text-search-foreground rounded-lg"
+    className="bg-search! placeholder:text-search-foreground rounded-lg"
     placeholder={t('registerPage.userName')}
     {...register('userName')}
   />
@@ -149,7 +149,7 @@ export default function RegisterForm() {
               type="tel"
               autoComplete="tel"
               dir="ltr"
-              className={`!bg-search placeholder:text-search-foreground rounded-lg ${
+              className={`bg-search! placeholder:text-search-foreground rounded-lg ${
                 isArabic ? 'text-right' : 'text-left'
               }`}
               placeholder={t('registerPage.phoneNumber')}

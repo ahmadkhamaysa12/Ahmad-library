@@ -91,7 +91,7 @@ export default function LoginForm() {
 
             <Input
               type="email"
-              className="!bg-search placeholder:text-search-foreground rounded-lg"
+              className="bg-search! placeholder:text-search-foreground rounded-lg"
               placeholder="example@email.com"
               {...register('email')}
             />

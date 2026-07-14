@@ -14,7 +14,7 @@ export const LoginSchema = yup.object({
     .required('Password is required.')
     .min(6, 'Password must be at least 6 characters')
     .matches(
-      /^[A-Z][A-Za-z0-9!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]*$/,
+      /^[A-Z][A-Za-z0-9!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]*$/,
       'Password must begin with a capital letter and may include letters, numbers, and special characters.',
     ),
 });

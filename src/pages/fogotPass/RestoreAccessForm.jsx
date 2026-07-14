@@ -1,18 +1,15 @@
 import { useNavigate, Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
-
+import { useForm, useWatch } from "react-hook-form";
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 
-import { yupResolver } from '@hookform/resolvers/yup';
-import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { Languages, Moon, Sun } from 'lucide-react';
 import { useTheme } from 'next-themes';
 
-import { ResetPasswordSchema } from '../../validation/ResetPasswordSchema';
 
 import logo from '../../assets/logo.svg';
 import authinstance from '../../api/authAxiosInstance';
@@ -24,17 +21,17 @@ export default function ResetPassword() {
 
   const navigate = useNavigate();
 
-  const {
-    register,
-    handleSubmit,
-    watch,
-    formState: { errors, isSubmitting },
-  } = useForm({
-    resolver: yupResolver(ResetPasswordSchema),
-    mode: 'onBlur',
-  });
+const {
+  register,
+  handleSubmit,
+  control,
+  formState: { errors, isSubmitting },
+} = useForm();
 
-  const email = watch('email');
+  const email = useWatch({
+  control,
+  name: "email",
+});
 
   const changeLanguage = () => {
     i18n.changeLanguage(i18n.language === 'en' ? 'ar' : 'en');
@@ -104,7 +101,7 @@ export default function ResetPassword() {
                 type="email"
                 autoComplete="email"
                 placeholder="example@email.com"
-                className="!bg-search placeholder:text-search-foreground rounded-lg"
+                className="bg-search! placeholder:text-search-foreground rounded-lg"
                 {...register('email')}
               />
 
@@ -131,7 +128,7 @@ export default function ResetPassword() {
               type="text"
               autoComplete="one-time-code"
               placeholder="0000"
-              className="!bg-search placeholder:text-search-foreground rounded-lg"
+              className="bg-search! placeholder:text-search-foreground rounded-lg"
               {...register('code')}
             />
 
@@ -149,7 +146,7 @@ export default function ResetPassword() {
               type="password"
               autoComplete="new-password"
               placeholder={t('resetPage.password')}
-              className="!bg-search placeholder:text-search-foreground rounded-lg"
+              className="bg-search! placeholder:text-search-foreground rounded-lg"
               {...register('newPassword')}
             />
 

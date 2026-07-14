@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import  { useEffect } from 'react';
 import sideImage from '../../assets/side.png';
 import RestoreAcssessForm from './RestoreAccessForm';
 
