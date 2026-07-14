@@ -44,6 +44,7 @@ i18n
             failed: 'Registration failed',
             haveAccount: 'Already have an account?',
             createAccount: 'Create Account',
+            userName:"User Name"
           },
           resetPage: {
             welcome: 'Reset Password',
@@ -99,6 +100,7 @@ i18n
             failed: 'فشل إنشاء الحساب',
             haveAccount: 'لديك حساب بالفعل؟',
             createAccount: 'إنشاء الحساب',
+            userName:"اسم المستخدم"
           },
           resetPage: {
             welcome: 'إعادة تعيين كلمة المرور',
