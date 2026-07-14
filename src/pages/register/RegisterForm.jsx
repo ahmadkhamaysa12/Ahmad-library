@@ -1,13 +1,12 @@
-import { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
-
+import { Loader2 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 
-import { Eye, EyeOff, Languages, Moon, Sun } from 'lucide-react';
+import { Languages, Moon, Sun } from 'lucide-react';
 
 import { useTranslation } from 'react-i18next';
 import { useForm } from 'react-hook-form';
@@ -15,48 +14,45 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { useTheme } from 'next-themes';
 
 import logo from '../../assets/logo.svg';
-import { LoginSchema } from '../../validation/LoginSchema';
+import { RegisterSchema } from '../../validation/RegisterSchema';
 
 import authinstance from '../../api/authAxiosInstance';
-import useAuthStore from '../../store/useAuthStore';
 import i18n from '../../i18next';
 
-export default function LoginForm() {
-  const [showPassword, setShowPassword] = useState(false);
-
+export default function RegisterForm() {
   const { t } = useTranslation();
   const { theme, setTheme } = useTheme();
-
+  const isArabic = i18n.language === 'ar';
   const navigate = useNavigate();
-
-  const setToken = useAuthStore((state) => state.setToken);
-
   const {
     register,
     handleSubmit,
     formState: { errors, isSubmitting },
   } = useForm({
-    resolver: yupResolver(LoginSchema),
+    resolver: yupResolver(RegisterSchema),
     mode: 'onBlur',
   });
 
   const onSubmit = async (data) => {
-    try {
-      const response = await authinstance.post('/auth/Account/Login', data);
+  console.log("FORM DATA:", data);
 
-      if (response.status === 200) {
-        toast.success(t('loginPage.success'));
+  try {
+    const response = await authinstance.post(
+      '/auth/Account/Register',
+      data
+    );
 
-        setToken(response.data.accessToken);
+    console.log(response);
 
-        navigate('/');
-      }
-    } catch (error) {
-      toast.error(t('loginPage.failed'));
-
-      console.log(error.response?.data || error.message);
+    if (response.status === 200 || response.status === 201) {
+      toast.success(t('registerPage.success'));
+      navigate('/login');
     }
-  };
+  } catch (error) {
+    console.log(error);
+    toast.error(t('registerPage.failed'));
+  }
+};
 
   const changeLanguage = () => {
     i18n.changeLanguage(i18n.language === 'en' ? 'ar' : 'en');
@@ -74,25 +70,50 @@ export default function LoginForm() {
         </Link>
 
         <CardTitle className="text-2xl font-bold">
-          {t('loginPage.welcome')}
+          {t('registerPage.welcome')}
         </CardTitle>
 
         <p className="text-muted-foreground text-sm">
-          {t('loginPage.subtitle')}
+          {t('registerPage.subtitle')}
         </p>
       </CardHeader>
 
       <CardContent>
-        <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
+        <form
+          noValidate
+          onSubmit={handleSubmit(onSubmit)}
+          className="space-y-5"
+        >
+          {/* FullName */}
+
+          <div className="space-y-2">
+            <Label>{t('registerPage.fullName')}</Label>
+
+            <Input
+              type="text"
+              autoComplete="name"
+
+              className="!bg-search placeholder:text-search-foreground rounded-lg"
+              placeholder={t('registerPage.fullName')}
+              {...register('fullName')}
+            />
+
+            {errors.fullName && (
+              <p className="text-sm text-red-500">
+                {t(errors.fullName.message)}
+              </p>
+            )}
+          </div>
           {/* Email */}
 
           <div className="space-y-2">
-            <Label>{t('loginPage.email')}</Label>
+            <Label>{t('registerPage.email')}</Label>
 
             <Input
               type="email"
+              autoComplete="email"
               className="!bg-search placeholder:text-search-foreground rounded-lg"
-              placeholder="example@email.com"
+              placeholder={t('registerPage.email')}
               {...register('email')}
             />
 
@@ -100,36 +121,62 @@ export default function LoginForm() {
               <p className="text-sm text-red-500">{t(errors.email.message)}</p>
             )}
           </div>
+{/* Username */}
+
+<div className="space-y-2">
+  <Label>{t('registerPage.userName')}</Label>
+
+  <Input
+    type="text"
+    autoComplete="username"
+    className="!bg-search placeholder:text-search-foreground rounded-lg"
+    placeholder={t('registerPage.userName')}
+    {...register('userName')}
+  />
+
+  {errors.userName && (
+    <p className="text-sm text-red-500">
+      {t(errors.userName.message)}
+    </p>
+  )}
+</div>
+          {/* phoneNumber */}
+
+          <div className="space-y-2">
+            <Label>{t('registerPage.phoneNumber')}</Label>
+
+            <Input
+              type="tel"
+              autoComplete="tel"
+              dir="ltr"
+              className={`!bg-search placeholder:text-search-foreground rounded-lg ${
+                isArabic ? 'text-right' : 'text-left'
+              }`}
+              placeholder={t('registerPage.phoneNumber')}
+              {...register('phoneNumber')}
+            />
+
+            {errors.phoneNumber && (
+              <p className="text-sm text-red-500">
+                {t(errors.phoneNumber.message)}
+              </p>
+            )}
+          </div>
 
           {/* Password */}
 
           <div className="space-y-2">
-            <Label>{t('loginPage.password')}</Label>
+            <Label>{t('registerPage.password')}</Label>
 
             <div className="bg-search relative rounded-lg">
               <Input
-                type={showPassword ? 'text' : 'password'}
-
-                placeholder="••••••••"
-
-                className="placeholder:text-search-foreground pr-10"
-
+                type="password"
+                
+                autoComplete="new-password"
+                className="placeholder:text-search-foreground"
+                placeholder={t('registerPage.password')}
                 {...register('password')}
               />
-
-              <button
-                type="button"
-
-                onClick={() => setShowPassword(!showPassword)}
-
-                className="text-search-foreground absolute top-1/2 right-3 -translate-y-1/2"
-              >
-                {showPassword ? (
-                  <EyeOff className="h-5 w-5" />
-                ) : (
-                  <Eye className="h-5 w-5" />
-                )}
-              </button>
             </div>
 
             {errors.password && (
@@ -138,34 +185,30 @@ export default function LoginForm() {
               </p>
             )}
           </div>
+          {/* Register Button */}
 
-          {/* Remember */}
-
-          <div className="flex justify-between text-sm">
-            <label className="flex items-center gap-2">
-              <input type="checkbox" />
-
-              {t('loginPage.remember')}
-            </label>
-
-            <Link to="/forgotPass" className="text-primary hover:underline">
-              {t('loginPage.forgotpass')}
-            </Link>
-          </div>
-
-          {/* Login Button */}
-
-          <Button type="submit" className="w-full" disabled={isSubmitting}>
-            {isSubmitting ? t('loginPage.loggingIn') : t('login')}
+          <Button
+  type="submit"
+  className="flex w-full items-center justify-center gap-2"
+  disabled={isSubmitting}
+>
+            {isSubmitting ? (
+              <>
+                <Loader2 className="h-4 w-4 animate-spin" />
+                <span>{t('registerPage.creating')}</span>
+              </>
+            ) : (
+              <span>{t('registerPage.createAccount')}</span>
+            )}
           </Button>
 
           {/* Register + Settings */}
 
           <div className="flex items-center justify-between gap-3 max-[400px]:flex-col">
             <p className="text-muted-foreground text-sm whitespace-nowrap">
-              {t('loginPage.noAccount')}{' '}
-              <Link to="/register" className="text-primary hover:underline">
-                {t('loginPage.createAccount')}
+              {t('registerPage.haveAccount')}{' '}
+              <Link to="/login" className="text-primary hover:underline">
+                {t('login')}
               </Link>
             </p>
 
