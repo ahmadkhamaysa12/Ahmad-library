@@ -8,13 +8,14 @@ import {
   User,
 } from 'lucide-react';
 
+import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import i18n from '../../i18next';
 import { useTheme } from 'next-themes';
 
 import { Button } from '../ui/button';
 import { Input } from '@/components/ui/input';
-
+import useAuthStore from '../../store/useAuthStore';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -22,17 +23,18 @@ import {
   DropdownMenuTrigger,
 } from '../ui/dropdown-menu';
 
-
 import { Sheet, SheetContent, SheetTrigger } from '../ui/sheet';
 
 export default function Navbar() {
   const { t } = useTranslation();
   const { theme, setTheme } = useTheme();
   const direction = i18n.language === 'ar' ? 'rtl' : 'ltr';
+  const token = useAuthStore((state) => state.token);
+  const logout = useAuthStore((state) => state.logout);
   const links = [
-    { name: t('home'), href: '/' },
-    { name: t('books'), href: '/books' },
-    { name: t('categories'), href: '/categories' },
+    { name: t('home'), to: '/' },
+    { name: t('books'), to: '/books' },
+    { name: t('categories'), to: '/categories' },
   ];
   const changeLanguage = () => {
     i18n.changeLanguage(i18n.language === 'en' ? 'ar' : 'en');
@@ -58,13 +60,13 @@ export default function Navbar() {
         {/* Desktop Links */}
         <nav className="hidden items-center gap-8 lg:flex">
           {links.map((link) => (
-            <a
-              key={link.href}
-              href={link.href}
+            <Link
+              key={link.to}
+              to={link.to}
               className="text-foreground hover:text-primary text-sm font-medium transition-colors"
             >
               {link.name}
-            </a>
+            </Link>
           ))}
         </nav>
         {/* Actions */}
@@ -97,9 +99,36 @@ export default function Navbar() {
             <DropdownMenuTrigger className="text-foreground hover:bg-accent hover:text-accent-foreground inline-flex h-9 w-9 items-center justify-center rounded-md transition-colors">
               <User className="h-5 w-5" />
             </DropdownMenuTrigger>
+
             <DropdownMenuContent align="end">
-              <DropdownMenuItem>{t('profile')}</DropdownMenuItem>
-              <DropdownMenuItem>{t('logout')}</DropdownMenuItem>
+              {token ? (
+                <>
+                  <DropdownMenuItem>
+                    <Link
+                      to="/Profile"
+                      className="text-foreground hover:text-primary w-full text-sm font-medium transition-colors"
+                    >
+                      {t('profile')}
+                    </Link>
+                  </DropdownMenuItem>
+
+                  <DropdownMenuItem
+                    onClick={logout}
+                    className="text-foreground hover:text-primary cursor-pointer text-sm font-medium transition-colors"
+                  >
+                    {t('logout')}
+                  </DropdownMenuItem>
+                </>
+              ) : (
+                <DropdownMenuItem>
+                  <Link
+                    to="/Login"
+                    className="text-foreground hover:text-primary w-full text-sm font-medium transition-colors"
+                  >
+                    {t('login')}
+                  </Link>
+                </DropdownMenuItem>
+              )}
             </DropdownMenuContent>
           </DropdownMenu>
         </div>

@@ -1,6 +1,6 @@
-import i18n from "i18next";
-import LanguageDetector from "i18next-browser-languagedetector";
-import { initReactI18next } from "react-i18next";
+import i18n from 'i18next';
+import LanguageDetector from 'i18next-browser-languagedetector';
+import { initReactI18next } from 'react-i18next';
 
 i18n
   .use(LanguageDetector)
@@ -9,31 +9,39 @@ i18n
     resources: {
       en: {
         translation: {
-          lib_name: "Ahmad Library",
-          home: "Home",
-          books: "Books",
-          cats: "Categories",
-          about: "About Us",
-          contact: "Contact Us",
-          search: "Search title, author",
-          categories: "Categories",
+          lib_name: 'Ahmad Library',
+          home: 'Home',
+          books: 'Books',
+          cats: 'Categories',
+          about: 'About Us',
+          contact: 'Contact Us',
+          search: 'Search title, author',
+          categories: 'Categories',
+          profile: 'Profile',
+          logout: 'Logout',
+          login: 'Login',
+          register: 'Create New Account',
         },
       },
 
       ar: {
         translation: {
-          lib_name: "مكتبة احمد",
-          home: "الرئيسية",
-          books: "الكتب",
-          cats: "التصنيفات",
-          about: "من نحن",
-          contact: "اتصل بنا",
-          search: "ابحث عن الكتاب أو المؤلف",
-          categories: "الاصناف",
+          lib_name: 'مكتبة احمد',
+          home: 'الرئيسية',
+          books: 'الكتب',
+          cats: 'التصنيفات',
+          about: 'من نحن',
+          contact: 'اتصل بنا',
+          search: 'ابحث عن الكتاب أو المؤلف',
+          categories: 'الاصناف',
+          profile: 'الملف الشخصي',
+          logout: 'تسجيل الخروج',
+          login: 'تسجيل الدخول',
+          register: 'إنشاء حساب جديد',
         },
       },
     },
-    fallbackLng: "en",
+    fallbackLng: 'en',
     interpolation: { escapeValue: false },
   });
 
