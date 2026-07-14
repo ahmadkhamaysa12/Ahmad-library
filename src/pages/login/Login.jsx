@@ -27,7 +27,12 @@ export default function Login() {
 
   return (
     <main className="h-dvh w-full overflow-hidden">
-      <div className="grid h-dvh md:grid-cols-2">
+      <div className="grid h-dvh md:grid-cols-2">{/* Form */}
+        <div className="flex h-full items-center justify-center px-4 overflow-y-auto md:overflow-hidden">
+          <div className="w-full max-w-lg lg:max-w-xl xl:max-w-2xl">
+            <LoginForm />
+          </div>
+        </div>
         {/* Image */}
         <div className="hidden md:block h-full">
           <img
@@ -37,12 +42,7 @@ export default function Login() {
           />
         </div>
 
-        {/* Form */}
-        <div className="flex h-full items-center justify-center px-4 overflow-y-auto md:overflow-hidden">
-          <div className="w-full max-w-lg lg:max-w-xl xl:max-w-2xl">
-            <LoginForm />
-          </div>
-        </div>
+        
       </div>
     </main>
   );
