@@ -6,57 +6,77 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 
-import { useTranslation } from 'react-i18next';
-import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-
-import logo from '../../assets/logo.svg';
-import { RestoreAccessSchema } from '../../validation/RestoreAccessSchema';
-
-import authinstance from '../../api/authAxiosInstance';
+import { useForm } from 'react-hook-form';
+import { useTranslation } from 'react-i18next';
 import { Languages, Moon, Sun } from 'lucide-react';
 import { useTheme } from 'next-themes';
+
+import { ResetPasswordSchema } from '../../validation/ResetPasswordSchema';
+
+import logo from '../../assets/logo.svg';
+import authinstance from '../../api/authAxiosInstance';
 import i18n from '../../i18next';
 
-export default function RestoreAccessForm() {
+export default function ResetPassword() {
   const { t } = useTranslation();
   const { theme, setTheme } = useTheme();
 
-  const changeLanguage = () => {
-    i18n.changeLanguage(i18n.language === 'en' ? 'ar' : 'en');
-  };
   const navigate = useNavigate();
 
   const {
     register,
     handleSubmit,
+    watch,
     formState: { errors, isSubmitting },
   } = useForm({
-    resolver: yupResolver(RestoreAccessSchema),
+    resolver: yupResolver(ResetPasswordSchema),
     mode: 'onBlur',
   });
 
+  const email = watch('email');
+
+  const changeLanguage = () => {
+    i18n.changeLanguage(i18n.language === 'en' ? 'ar' : 'en');
+  };
+
+  const sendCode = async () => {
+    try {
+      await authinstance.post('/auth/Account/SendCode', {
+        email,
+      });
+
+      toast.success(t('resetPage.codeSent'));
+    } catch (error) {
+      toast.error(t('resetPage.failed'));
+      console.log(error.response?.data || error.message);
+    }
+  };
+
   const onSubmit = async (data) => {
     try {
-      const response = await authinstance.post(
-        '/auth/Account/SendCode',
-        data,
+      const response = await authinstance.patch(
+        '/auth/Account/ResetPassword',
+        {
+          email: data.email,
+          code: data.code,
+          newPassword: data.newPassword,
+        },
       );
 
       if (response.status === 200) {
-        toast.success(t('restorePage.success'));
+        toast.success(t('resetPage.success'));
         navigate('/login');
       }
     } catch (error) {
-      toast.error(t('restorePage.failed'));
-
+      toast.error(t('resetPage.failed'));
       console.log(error.response?.data || error.message);
     }
   };
 
   return (
     <Card className="w-full border-none shadow-lg">
-      <CardHeader className="flex flex-col items-center justify-center text-center">
+      <CardHeader className="flex flex-col items-center text-center">
         <Link to="/">
           <img
             src={logo}
@@ -66,42 +86,93 @@ export default function RestoreAccessForm() {
         </Link>
 
         <CardTitle className="text-2xl font-bold">
-          {t('restorePage.welcome')}
+          {t('resetPage.welcome')}
         </CardTitle>
 
         <p className="text-muted-foreground text-sm">
-          {t('restorePage.subtitle')}
+          {t('resetPage.subtitle')}
         </p>
       </CardHeader>
 
       <CardContent>
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
-          {/* Email */}
-
           <div className="space-y-2">
-            <Label>{t('restorePage.email')}</Label>
+            <Label>{t('resetPage.email')}</Label>
 
-            <Input
-              type="email"
-              autoComplete="email"
-              className="!bg-search placeholder:text-search-foreground rounded-lg"
-              placeholder="example@email.com"
-              {...register('email')}
-            />
+            <div className="flex gap-2">
+              <Input
+                type="email"
+                autoComplete="email"
+                placeholder="example@email.com"
+                className="!bg-search placeholder:text-search-foreground rounded-lg"
+                {...register('email')}
+              />
+
+              <Button
+                type="button"
+                onClick={sendCode}
+                className="whitespace-nowrap"
+              >
+                {t('resetPage.sendCode')}
+              </Button>
+            </div>
 
             {errors.email && (
-              <p className="text-sm text-red-500">{t(errors.email.message)}</p>
+              <p className="text-sm text-red-500">
+                {t(errors.email.message)}
+              </p>
             )}
           </div>
 
-          {/* Button */}
+          <div className="space-y-2">
+            <Label>{t('resetPage.code')}</Label>
 
-          <Button type="submit" className="w-full" disabled={isSubmitting}>
-            {isSubmitting ? t('restorePage.sending') : t('restorePage.send')}
+            <Input
+              type="text"
+              autoComplete="one-time-code"
+              placeholder="0000"
+              className="!bg-search placeholder:text-search-foreground rounded-lg"
+              {...register('code')}
+            />
+
+            {errors.code && (
+              <p className="text-sm text-red-500">
+                {t(errors.code.message)}
+              </p>
+            )}
+          </div>
+
+          <div className="space-y-2">
+            <Label>{t('resetPage.password')}</Label>
+
+            <Input
+              type="password"
+              autoComplete="new-password"
+              placeholder={t('resetPage.password')}
+              className="!bg-search placeholder:text-search-foreground rounded-lg"
+              {...register('newPassword')}
+            />
+
+            {errors.newPassword && (
+              <p className="text-sm text-red-500">
+                {t(errors.newPassword.message)}
+              </p>
+            )}
+          </div>
+
+          <Button
+            type="submit"
+            disabled={isSubmitting}
+            className="w-full"
+          >
+            {isSubmitting
+              ? t('resetPage.resetting')
+              : t('resetPage.reset')}
           </Button>
+
           <div className="flex items-center justify-between gap-3 max-[400px]:flex-col">
             <p className="text-muted-foreground text-sm whitespace-nowrap">
-              {t('restorePage.rememberPassword')}{' '}
+              {t('resetPage.rememberPassword')}{' '}
               <Link to="/login" className="text-primary hover:underline">
                 {t('login')}
               </Link>
@@ -121,7 +192,9 @@ export default function RestoreAccessForm() {
                 type="button"
                 variant="outline"
                 size="icon"
-                onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
+                onClick={() =>
+                  setTheme(theme === 'dark' ? 'light' : 'dark')
+                }
               >
                 {theme === 'dark' ? (
                   <Sun className="h-5 w-5" />
