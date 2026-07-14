@@ -1,7 +1,8 @@
-import 'react'
+import Books from "../books/Books";
 
 export default function Home() {
+  
   return (
-    <div>Home</div>
-  )
+    <Books />
+  );
 }
