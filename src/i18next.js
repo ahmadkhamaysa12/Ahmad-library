@@ -21,6 +21,17 @@ i18n
           logout: 'Logout',
           login: 'Login',
           register: 'Create New Account',
+          loginPage: {
+            welcome: 'Welcome Back',
+            subtitle: 'Login to your account',
+            email: 'Email',
+            password: 'Password',
+            remember: 'Remember me',
+            forgotpass: 'Forgot password?',
+            noAccount: "Don't have an account?",
+            createAccount: 'Create account',
+            loggingIn: "Signing in..."
+          },
         },
       },
 
@@ -38,6 +49,17 @@ i18n
           logout: 'تسجيل الخروج',
           login: 'تسجيل الدخول',
           register: 'إنشاء حساب جديد',
+          loginPage: {
+            welcome: 'مرحبًا بعودتك',
+            subtitle: 'سجّل الدخول إلى حسابك',
+            email: 'البريد الإلكتروني',
+            password: 'كلمة المرور',
+            remember: 'تذكرني',
+            forgotpass: 'هل نسيت كلمة المرور؟',
+            noAccount: 'ليس لديك حساب؟',
+            createAccount: 'إنشاء حساب',
+            loggingIn: "جارٍ تسجيل الدخول..."
+          },
         },
       },
     },

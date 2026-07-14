@@ -8,7 +8,7 @@ import { Label } from '@/components/ui/label';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 
 import { Eye, EyeOff } from 'lucide-react';
-
+import { useTranslation } from 'react-i18next';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 
@@ -20,9 +20,8 @@ import useAuthStore from '../../store/useAuthStore';
 
 export default function LoginForm() {
   const [showPassword, setShowPassword] = useState(false);
-
+  const {t}=useTranslation();
   const navigate = useNavigate();
-const token = useAuthStore((state) => state.token);
   const setToken = useAuthStore((state) => state.setToken);
 
   const {
@@ -61,15 +60,15 @@ const token = useAuthStore((state) => state.token);
           className="mx-auto mb-4 h-20 w-20 object-contain"
         />
 
-        <CardTitle className="text-2xl font-bold">Welcome Back</CardTitle>
+        <CardTitle className="text-2xl font-bold">{t("loginPage.welcome")}</CardTitle>
 
-        <p className="text-muted-foreground text-sm">Login to your account</p>
+        <p className="text-muted-foreground text-sm">{t('loginPage.subtitle')}</p>
       </CardHeader>
 
       <CardContent>
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
           <div className="space-y-2">
-            <Label htmlFor="email">Email</Label>
+            <Label htmlFor="email">{t('loginPage.email')}</Label>
 
             <Input
               id="email"
@@ -84,7 +83,7 @@ const token = useAuthStore((state) => state.token);
           </div>
 
           <div className="space-y-2">
-            <Label htmlFor="password">Password</Label>
+            <Label htmlFor="password">{t('loginPage.password')}</Label>
 
             <div className="relative">
               <Input
@@ -116,22 +115,22 @@ const token = useAuthStore((state) => state.token);
           <div className="flex justify-between text-sm">
             <label className="flex items-center gap-2">
               <input type="checkbox" />
-              Remember me
+              {t('loginPage.remember')}
             </label>
 
             <Link to="/forgotPass" className="text-primary hover:underline">
-              Forgot password?
+              {t('loginPage.forgotpass')}
             </Link>
           </div>
 
-          <Button type="submit" className="w-full" disabled={isSubmitting}>
-            {isSubmitting ? 'Loading...' : 'Login'}
-          </Button>
+<Button type="submit" className="w-full" disabled={isSubmitting}>
+  {isSubmitting ? t("loginPage.loggingIn") : t("login")}
+</Button>
 
           <p className="text-muted-foreground text-center text-sm">
-            Don't have an account?{' '}
+            {t('loginPage.noAccount')}{' '}
             <Link to="/register" className="text-primary hover:underline">
-              Create account
+              {t('loginPage.createAccount')}
             </Link>
           </p>
         </form>
