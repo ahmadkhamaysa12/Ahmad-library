@@ -22,7 +22,6 @@ import {
   DropdownMenuTrigger,
 } from '../ui/dropdown-menu';
 
-import { Separator } from '../ui/separator';
 
 import { Sheet, SheetContent, SheetTrigger } from '../ui/sheet';
 
