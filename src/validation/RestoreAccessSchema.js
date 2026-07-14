@@ -1,6 +1,6 @@
 import * as yup from "yup";
 
-export const ForgotPasswordSchema = yup.object({
+export const RestoreAccessSchema = yup.object({
   email: yup
     .string()
     .email("Email must be a valid email.")
