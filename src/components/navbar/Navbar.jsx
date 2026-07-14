@@ -129,9 +129,14 @@ export default function Navbar() {
                   </DropdownMenuItem>
                 </>
               ) : (
-                <DropdownMenuItem>
-                  <Link to="/Login">{t('login')}</Link>
-                </DropdownMenuItem>
+                <>
+                  <DropdownMenuItem>
+                    <Link to="/Login">{t('login')}</Link>
+                  </DropdownMenuItem>
+                  <DropdownMenuItem>
+                    <Link to="/register">{t('register')}</Link>
+                  </DropdownMenuItem>
+                </>
               )}
             </DropdownMenuContent>
           </DropdownMenu>
@@ -219,13 +224,22 @@ export default function Navbar() {
                         </button>
                       </>
                     ) : (
-                      <Link
-                        to="/Login"
-                        className="hover:bg-accent flex w-full items-center justify-center gap-3 rounded-lg py-3 text-lg font-medium"
-                      >
-                        <User className="h-5 w-5" />
-                        {t('login')}
-                      </Link>
+                      <>
+                        <Link
+                          to="/Login"
+                          className="hover:bg-accent flex w-full items-center justify-center gap-3 rounded-lg py-3 text-lg font-medium"
+                        >
+                          <User className="h-5 w-5" />
+                          {t('login')}
+                        </Link>
+                        <Link
+                          to="/register"
+                          className="hover:bg-accent flex w-full items-center justify-center gap-3 rounded-lg py-3 text-lg font-medium"
+                        >
+                          <User className="h-5 w-5" />
+                          {t('register')}
+                        </Link>
+                      </>
                     )}
                   </div>
                 </nav>
