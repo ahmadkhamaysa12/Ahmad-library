@@ -6,6 +6,7 @@ import {
   ShoppingCart,
   Sun,
   User,
+  LogOut,
 } from 'lucide-react';
 
 import { Link } from 'react-router-dom';
@@ -16,6 +17,7 @@ import { useTheme } from 'next-themes';
 import { Button } from '../ui/button';
 import { Input } from '@/components/ui/input';
 import useAuthStore from '../../store/useAuthStore';
+
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -28,26 +30,37 @@ import { Sheet, SheetContent, SheetTrigger } from '../ui/sheet';
 export default function Navbar() {
   const { t } = useTranslation();
   const { theme, setTheme } = useTheme();
+
   const direction = i18n.language === 'ar' ? 'rtl' : 'ltr';
+
   const token = useAuthStore((state) => state.token);
   const logout = useAuthStore((state) => state.logout);
+
   const links = [
     { name: t('home'), to: '/' },
     { name: t('books'), to: '/books' },
     { name: t('categories'), to: '/categories' },
   ];
+
   const changeLanguage = () => {
     i18n.changeLanguage(i18n.language === 'en' ? 'ar' : 'en');
   };
+
+  const toggleTheme = () => {
+    setTheme(theme === 'dark' ? 'light' : 'dark');
+  };
+
   const iconButton =
     'text-foreground hover:bg-accent hover:text-accent-foreground transition-colors';
+
   return (
-    <header className="border-border bg-background/80 sticky top-0 z-50 w-full border-b backdrop-blur-xl">
+    <header className="bg-background/80 border-border sticky top-0 z-50 w-full border-b backdrop-blur-xl">
       <div className="container mx-auto flex h-16 items-center justify-between px-4">
         {/* Logo */}
-        <a href="/" className="text-primary text-2xl font-bold">
+        <Link to="/" className="text-primary text-2xl font-bold">
           {t('lib_name')}
-        </a>
+        </Link>
+
         {/* Search */}
         <div className="bg-search hidden h-10 w-80 items-center rounded-lg px-3 sm:flex">
           <Search className="text-search-foreground h-4 w-4" />
@@ -57,6 +70,7 @@ export default function Navbar() {
             className="text-search-foreground placeholder:text-search-foreground border-0 shadow-none focus-visible:ring-0"
           />
         </div>
+
         {/* Desktop Links */}
         <nav className="hidden items-center gap-8 lg:flex">
           {links.map((link) => (
@@ -69,11 +83,13 @@ export default function Navbar() {
             </Link>
           ))}
         </nav>
-        {/* Actions */}
+
+        {/* Desktop Actions */}
         <div className="hidden items-center gap-1 lg:flex">
           <Button variant="ghost" size="icon" className={iconButton}>
             <ShoppingCart className="h-5 w-5" />
           </Button>
+
           <Button
             variant="ghost"
             size="icon"
@@ -82,10 +98,11 @@ export default function Navbar() {
           >
             <Languages className="h-5 w-5" />
           </Button>
+
           <Button
             variant="ghost"
             size="icon"
-            onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
+            onClick={toggleTheme}
             className={iconButton}
           >
             {theme === 'dark' ? (
@@ -94,9 +111,9 @@ export default function Navbar() {
               <Moon className="h-5 w-5" />
             )}
           </Button>
-          {/* User Dropdown */}
+
           <DropdownMenu>
-            <DropdownMenuTrigger className="text-foreground hover:bg-accent hover:text-accent-foreground inline-flex h-9 w-9 items-center justify-center rounded-md transition-colors">
+            <DropdownMenuTrigger className="hover:bg-accent inline-flex h-9 w-9 items-center justify-center rounded-md">
               <User className="h-5 w-5" />
             </DropdownMenuTrigger>
 
@@ -104,88 +121,117 @@ export default function Navbar() {
               {token ? (
                 <>
                   <DropdownMenuItem>
-                    <Link
-                      to="/Profile"
-                      className="text-foreground hover:text-primary w-full text-sm font-medium transition-colors"
-                    >
-                      {t('profile')}
-                    </Link>
+                    <Link to="/Profile">{t('profile')}</Link>
                   </DropdownMenuItem>
 
-                  <DropdownMenuItem
-                    onClick={logout}
-                    className="text-foreground hover:text-primary cursor-pointer text-sm font-medium transition-colors"
-                  >
+                  <DropdownMenuItem onClick={logout} className="cursor-pointer">
                     {t('logout')}
                   </DropdownMenuItem>
                 </>
               ) : (
                 <DropdownMenuItem>
-                  <Link
-                    to="/Login"
-                    className="text-foreground hover:text-primary w-full text-sm font-medium transition-colors"
-                  >
-                    {t('login')}
-                  </Link>
+                  <Link to="/Login">{t('login')}</Link>
                 </DropdownMenuItem>
               )}
             </DropdownMenuContent>
           </DropdownMenu>
         </div>
+
         {/* Mobile */}
         <div className="lg:hidden">
-          <Sheet>
-            <SheetTrigger className="hover:bg-accent inline-flex h-9 w-9 items-center justify-center rounded-md">
-              <Menu className="h-6 w-6" />
-            </SheetTrigger>
-            <SheetContent
-              side={direction === 'rtl' ? 'left' : 'right'}
-              className="bg-background text-foreground"
-            >
-              <nav className="mt-8 flex w-full flex-col gap-6">
-                <div className="flex flex-col items-center gap-6">
-                  {links.map((link) => (
-                    <a
-                      key={link.href}
-                      href={link.href}
-                      className="text-lg font-medium"
+          {/* Mobile */}
+          <div className="lg:hidden">
+            <Sheet>
+              <SheetTrigger className="hover:bg-accent inline-flex h-9 w-9 items-center justify-center rounded-md">
+                <Menu className="h-6 w-6" />
+              </SheetTrigger>
+
+              <SheetContent
+                side={direction === 'rtl' ? 'left' : 'right'}
+                className="bg-background text-foreground"
+              >
+                <nav className="flex w-full flex-col items-center gap-6 pt-10">
+                  {/* Links */}
+                  <div className="flex w-full flex-col items-center gap-2 px-6">
+                    {links.map((link) => (
+                      <Link
+                        key={link.to}
+                        to={link.to}
+                        className="hover:bg-accent flex w-full justify-center rounded-lg py-3 text-lg font-medium transition-colors"
+                      >
+                        {link.name}
+                      </Link>
+                    ))}
+                  </div>
+
+                  <div className="bg-border h-px w-full" />
+
+                  {/* Settings */}
+                  <div className="flex w-full flex-col items-center gap-3 px-6">
+                    <Button
+                      variant="outline"
+                      onClick={changeLanguage}
+                      className="w-full justify-center"
                     >
-                      {link.name}
-                    </a>
-                  ))}
-                </div>
-                <div className="bg-border h-px w-full" />
-                <div className="flex flex-col gap-3 pt-2">
-                  <Button variant="outline" onClick={changeLanguage}>
-                    <Languages className="mr-2 h-4 w-fit" />
-                    {t('language')}
-                  </Button>
-                  <Button
-                    variant="outline"
-                    onClick={() =>
-                      setTheme(theme === 'dark' ? 'light' : 'dark')
-                    }
-                  >
-                    {theme === 'dark' ? (
+                      <Languages className="mr-2 h-4 w-4" />
+                      {t('language')}
+                    </Button>
+
+                    <Button
+                      variant="outline"
+                      onClick={toggleTheme}
+                      className="w-full justify-center"
+                    >
+                      {theme === 'dark' ? (
+                        <>
+                          <Sun className="mr-2 h-4 w-4" />
+                          {t('light_mode')}
+                        </>
+                      ) : (
+                        <>
+                          <Moon className="mr-2 h-4 w-4" />
+                          {t('dark_mode')}
+                        </>
+                      )}
+                    </Button>
+                  </div>
+
+                  <div className="bg-border h-px w-full" />
+
+                  {/* Account */}
+                  <div className="flex w-full flex-col items-center gap-3 px-6">
+                    {token ? (
                       <>
-                        <Sun className="mr-2 h-4 w-4" />
-                        {t('light_mode')}
+                        <Link
+                          to="/Profile"
+                          className="hover:bg-accent flex w-full items-center justify-center gap-3 rounded-lg py-3 text-lg font-medium"
+                        >
+                          <User className="h-5 w-5" />
+                          {t('profile')}
+                        </Link>
+
+                        <button
+                          onClick={logout}
+                          className="hover:bg-accent flex w-full items-center justify-center gap-3 rounded-lg py-3 text-lg font-medium"
+                        >
+                          <LogOut className="h-5 w-5" />
+                          {t('logout')}
+                        </button>
                       </>
                     ) : (
-                      <>
-                        <Moon className="mr-2 h-4 w-4" />
-                        {t('dark_mode')}
-                      </>
+                      <Link
+                        to="/Login"
+                        className="hover:bg-accent flex w-full items-center justify-center gap-3 rounded-lg py-3 text-lg font-medium"
+                      >
+                        <User className="h-5 w-5" />
+                        {t('login')}
+                      </Link>
                     )}
-                  </Button>
-                  <Button variant="outline">
-                    <User className="mr-2 h-4 w-4" />
-                    {t('profile')}
-                  </Button>
-                </div>
-              </nav>
-            </SheetContent>
-          </Sheet>
+                  </div>
+                </nav>
+              </SheetContent>
+            </Sheet>
+          </div>
         </div>
       </div>
     </header>
