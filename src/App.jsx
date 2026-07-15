@@ -9,6 +9,7 @@ import GuestRouter from './GuestRouter';
 
 import Home from './pages/home/Home';
 import Books from './pages/books/Books';
+import Book from './pages/books/Book';
 import Categories from './pages/categories/Categories';
 
 import Login from './pages/login/Login';
@@ -36,7 +37,7 @@ export default function App() {
         <Route path="/" element={<Home />} />
 
         <Route path="/books" element={<Books />} />
-
+        <Route path="/book/:id" element={<Book />} />
         <Route path="/categories" element={<Categories />} />
 
         <Route element={<ProtectedRouter />}>

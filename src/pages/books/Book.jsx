@@ -1,6 +1,9 @@
 
+import BookMainPart from "@/components/forBook/BookMainPart";
+import { useParams } from "react-router-dom";
+
 export default function Book() {
-return (
-  <div>ahmad</div>
-)
+  const { id } = useParams();
+  
+  return <BookMainPart id={id}/>;
 }
