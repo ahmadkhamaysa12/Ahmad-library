@@ -5,15 +5,15 @@ import { useNavigate } from 'react-router-dom';
 import useAddToCart from '@/hooks/useAddToCart';
 
 export default function AllBooks() {
-   const { mutate: addToCart, isPending } = useAddToCart();
+  const { mutate: addToCart, isPending } = useAddToCart();
   const navigate = useNavigate();
   const { data: books, isLoading, error } = useBooks();
   const handleAddToCart = (id) => {
-  addToCart({
-    ProductId: Number(id),
-    Count: 1,
-  });
-};
+    addToCart({
+      ProductId: Number(id),
+      Count: 1,
+    });
+  };
   if (isLoading) {
     return (
       <div className="grid gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
@@ -90,12 +90,12 @@ export default function AllBooks() {
               </span>
 
               <button
-  onClick={() => handleAddToCart(book.id)}
-  disabled={isPending}
-  className="bg-primary text-primary-foreground rounded-lg p-2 transition hover:opacity-90 disabled:opacity-50"
->
-  <ShoppingBasket className="h-5 w-5" />
-</button>
+                onClick={() => handleAddToCart(book.id)}
+                disabled={isPending}
+                className="bg-primary text-primary-foreground rounded-lg p-2 transition hover:opacity-90 disabled:opacity-50"
+              >
+                <ShoppingBasket className="h-5 w-5" />
+              </button>
             </div>
           </div>
         </div>
