@@ -1,6 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 import { useTranslation } from 'react-i18next';
-import axiosInstance from '../api/axiosInstance';
+import axiosInstance from '@/api/axiosInstance';
+
 
 export default function useBooks() {
   const { i18n } = useTranslation();

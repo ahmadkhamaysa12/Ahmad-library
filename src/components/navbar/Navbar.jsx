@@ -8,7 +8,7 @@ import {
   User,
   LogOut,
 } from 'lucide-react';
-
+import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import i18n from '../../i18next';
@@ -30,7 +30,7 @@ import { Sheet, SheetContent, SheetTrigger } from '../ui/sheet';
 export default function Navbar() {
   const { t } = useTranslation();
   const { theme, setTheme } = useTheme();
-
+const navigate = useNavigate();
   const direction = i18n.language === 'ar' ? 'rtl' : 'ltr';
 
   const token = useAuthStore((state) => state.token);
@@ -87,7 +87,7 @@ export default function Navbar() {
 
           {/* Desktop Actions */}
           <div className="hidden items-center gap-1 lg:flex">
-            <Button variant="ghost" size="icon" className={iconButton}>
+            <Button onClick={() => navigate(`/cart`)} variant="ghost" size="icon" className={iconButton}>
               <ShoppingCart className="h-5 w-5" />
             </Button>
 

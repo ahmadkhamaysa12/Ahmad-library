@@ -1,15 +1,24 @@
-import axios from "axios";
-import i18next from "i18next";
+import axios from 'axios';
+import i18next from 'i18next';
+import useAuthStore from '@/store/useAuthStore';
 
-const authInstance = axios.create({
+const authAxiosInstance = axios.create({
   baseURL: import.meta.env.VITE_BURL,
   withCredentials: true,
 });
 
-authInstance.interceptors.request.use((config) => {
-  config.headers["Accept-Language"] = i18next.language;
+authAxiosInstance.interceptors.request.use((config) => {
+  config.headers = config.headers || {};
+
+  config.headers['Accept-Language'] = i18next.language;
+
+  const token = useAuthStore.getState().token;
+
+  if (token) {
+    config.headers.Authorization = `Bearer ${token}`;
+  }
 
   return config;
 });
 
-export default authInstance;
+export default authAxiosInstance;
