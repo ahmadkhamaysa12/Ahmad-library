@@ -3,7 +3,7 @@ import useBooks from '@/hooks/useBooks';
 import { ShoppingBasket, Star } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 export default function AllBooks() {
-   const navigate = useNavigate();
+  const navigate = useNavigate();
   const { data: books, isLoading, error } = useBooks();
   if (isLoading) {
     return (
@@ -36,9 +36,8 @@ export default function AllBooks() {
 
   return (
     <div className="mt-6 grid gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6">
-      { books.map((book) => (
+      {books.map((book) => (
         <div
-        
           key={book.id}
           className="group bg-card border-border mx-auto flex h-full w-full flex-col overflow-hidden rounded-xl border transition-all duration-300 hover:-translate-y-2 hover:shadow-xl"
         >
@@ -68,7 +67,12 @@ export default function AllBooks() {
             </div>
 
             {/* Title */}
-            <h3 className="line-clamp-1 text-lg font-semibold" onClick={() => navigate(`/book/${book.id}`)}>{book.name}</h3>
+            <h3
+              className="line-clamp-1 cursor-progress text-lg font-semibold select-none"
+              onClick={() => navigate(`/book/${book.id}`)}
+            >
+              {book.name}
+            </h3>
 
             {/* Price + Button */}
             <div className="mt-auto flex items-center justify-between pt-2">
