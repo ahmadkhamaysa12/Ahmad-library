@@ -4,8 +4,8 @@
 
 :root {
 	--background: oklch(98.08% 0.0079 286.25);
-	--foreground: oklch(0.2621 0.0487 172.5522);
-	--card: oklch(1 0 0);
+	--foreground: oklch(29.85% 0.0483 164.34);
+	--card: oklch(99.78% 0.0011 17.18);
 	--card-foreground: oklch(0.2621 0.0487 172.5522);
 	--popover: oklch(1 0 0);
 	--popover-foreground: oklch(0.2621 0.0487 172.5522);
@@ -15,7 +15,7 @@
 	--primary-foreground: oklch(1 0 0);
 	--secondary: oklch(0.5533 0.0775 78.8422);
 	--secondary-foreground: oklch(1 0 0);
-	--muted: oklch(0.967 0.0029 264.5419);
+	--muted: oklch(98.85% 0.0057 84.57);
 	--muted-foreground: oklch(0.4461 0.0263 256.8018);
 	--accent: oklch(0.9683 0.0069 247.8956);
 	--accent-foreground: oklch(0.378 0.073 168.9398);
@@ -65,9 +65,9 @@
 }
 
 .dark {
-	--background: oklch(21.743% 0.03345 174.828);
-	--foreground: oklch(0.9711 0.0074 80.7211);
-	--card: oklch(0.2712 0.0466 174.1761);
+	--background: oklch(18.61% 0.029 166.4);
+	--foreground: oklch(90.68% 0.0472 171.02);
+	--card: oklch(18.61% 0.029 166.4);	
 	--card-foreground: oklch(0.9711 0.0074 80.7211);
 	--popover: oklch(0.2037 0.0354 175.3593);
 	--popover-foreground: oklch(0.9711 0.0074 80.7211);
@@ -77,13 +77,13 @@
 	--primary-foreground: oklch(0.2037 0.0354 175.3593);
 	--secondary: oklch(0.7342 0.0846 81.6475);
 	--secondary-foreground: oklch(0.2037 0.0354 175.3593);
-	--muted: oklch(0.317 0.0551 172.3935);
+	--muted: oklch(21.72% 0.0343 168.47);
 	--muted-foreground: oklch(0.7107 0.0351 256.7878);
 	--accent: oklch(0.317 0.0551 172.3935);
 	--accent-foreground: oklch(0.6959 0.1491 162.4796);
 	--destructive: oklch(0.3958 0.1331 25.723);
 	--destructive-foreground: oklch(0.9711 0.0074 80.7211);
-	--border: oklch(0.3489 0.0584 174.2614);
+	--border: oklch(23.34% 0.0278 171.42);
 	--input: oklch(0.2712 0.0466 174.1761);
 	--ring: oklch(0.6959 0.1491 162.4796);
 	--chart-1: oklch(0.6959 0.1491 162.4796);
@@ -183,6 +183,7 @@
 	--tracking-wide: calc(var(--tracking-normal) + 0.025em);
 	--tracking-wider: calc(var(--tracking-normal) + 0.05em);
 	--tracking-widest: calc(var(--tracking-normal) + 0.1em);
+
 }
 
 @layer base {
