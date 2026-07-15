@@ -1,9 +1,12 @@
-import React from 'react';
+import 'react';
 import useCart from '../../hooks/useCart';
 import useUpdateQty from '../../hooks/useUpdateQty';
 import useRemoveFromCart from '../../hooks/useRemoveFromCart';
+import useClearCart from '../../hooks/useClearCart';
 
 export default function Cart() {
+  const { mutate: clearCart, isPending: isClearing } = useClearCart();
+
   const { data: cart, isLoading, error } = useCart();
 
   const { mutate: updateQty, isPending: isUpdating } = useUpdateQty();
@@ -15,16 +18,16 @@ export default function Cart() {
   if (error) return <div>Error loading cart</div>;
 
   const handleUpdateQty = (productId, count) => {
-  if (count === 0) {
-    removeFromCart(productId);
-    return;
-  }
+    if (count === 0) {
+      removeFromCart(productId);
+      return;
+    }
 
-  updateQty({
-    productId,
-    count,
-  });
-};
+    updateQty({
+      productId,
+      count,
+    });
+  };
 
   const handleRemove = (productId) => {
     removeFromCart(productId);
@@ -84,9 +87,16 @@ export default function Cart() {
           </div>
         ))}
       </div>
+      <div className="mt-6 flex items-center justify-between border-t pt-4">
+        <h2 className="text-xl font-bold">Total: ${cart?.cartTotal}</h2>
 
-      <div className="mt-6 border-t pt-4 text-xl font-bold">
-        Total: ${cart?.cartTotal}
+        <button
+          disabled={isClearing}
+          onClick={() => clearCart()}
+          className="border-destructive text-destructive hover:bg-destructive/10 rounded-lg border px-4 py-2 font-bold transition disabled:opacity-50"
+        >
+          {isClearing ? 'Clearing...' : 'Clear Cart'}
+        </button>
       </div>
     </div>
   );

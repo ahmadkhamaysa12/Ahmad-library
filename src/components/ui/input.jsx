@@ -1,4 +1,4 @@
-import * as React from "react";
+import "react";
 import { Input as InputPrimitive } from "@base-ui/react/input";
 import { cva } from "class-variance-authority";
 import { cn } from "@/lib/utils";

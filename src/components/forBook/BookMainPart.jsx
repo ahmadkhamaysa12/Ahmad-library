@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import  { useState } from 'react';
 import { ShoppingCart, Star, ChevronRight } from 'lucide-react';
 import useBook from '@/hooks/useBook';
 import useAddToCart from '@/hooks/useAddToCart';
@@ -56,7 +56,7 @@ export default function BookMainPart({ id }) {
 
           <ChevronRight className="mx-2 h-3 w-3" />
 
-          <span className="text-secondary max-w-[200px] truncate">
+          <span className="text-secondary max-w-50 truncate">
             {book.name}
           </span>
         </nav>
@@ -66,7 +66,7 @@ export default function BookMainPart({ id }) {
 
           {/* Image */}
           <div className="flex flex-col gap-6">
-            <div className="border-border bg-card aspect-[4/5] rounded-xl border p-4 shadow-lg">
+            <div className="border-border bg-card aspect-4/5 rounded-xl border p-4 shadow-lg">
               <div className="bg-muted flex h-full items-center justify-center overflow-hidden rounded-lg">
 
                 <img

@@ -1,4 +1,4 @@
-import React from 'react';
+import 'react';
 import useBooks from '@/hooks/useBooks';
 import { ShoppingBasket, Star } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';

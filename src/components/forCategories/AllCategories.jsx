@@ -1,5 +1,5 @@
 import useCategories from '@/hooks/useCategories';
-import React from 'react';
+import 'react';
 import { useTranslation } from 'react-i18next';
 
 import { Badge } from '@/components/ui/badge';
@@ -52,7 +52,7 @@ export default function AllCategories() {
       {categories.map((category) => (
         <Card
           key={category.id}
-          className="group mx-auto w-full max-w-[240px] overflow-hidden rounded-xl border pt-0 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl"
+          className="group mx-auto w-full max-w-60 overflow-hidden rounded-xl border pt-0 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl"
         >
           <div className="bg-muted flex h-48 items-center justify-center p-5">
             <img

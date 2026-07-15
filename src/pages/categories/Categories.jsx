@@ -1,4 +1,4 @@
-import React from 'react'
+import 'react'
 import AllCategories from '../../components/forCategories/AllCategories'
 export default function Categories() {
   return (
