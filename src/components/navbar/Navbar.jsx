@@ -67,7 +67,7 @@ export default function Navbar() {
 
           <Input
             placeholder={t('search')}
-            className="text-search-foreground placeholder:text-search-foreground border-0 shadow-none focus-visible:ring-0"
+            className="border-0 shadow-none focus-visible:ring-0"
           />
         </div>
 

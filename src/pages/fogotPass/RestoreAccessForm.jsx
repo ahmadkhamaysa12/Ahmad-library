@@ -1,6 +1,6 @@
 import { useNavigate, Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import { useForm, useWatch } from "react-hook-form";
+import { useForm, useWatch } from 'react-hook-form';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
@@ -9,7 +9,6 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { useTranslation } from 'react-i18next';
 import { Languages, Moon, Sun } from 'lucide-react';
 import { useTheme } from 'next-themes';
-
 
 import logo from '../../assets/logo.svg';
 import authinstance from '../../api/authAxiosInstance';
@@ -21,17 +20,17 @@ export default function ResetPassword() {
 
   const navigate = useNavigate();
 
-const {
-  register,
-  handleSubmit,
-  control,
-  formState: { errors, isSubmitting },
-} = useForm();
+  const {
+    register,
+    handleSubmit,
+    control,
+    formState: { errors, isSubmitting },
+  } = useForm();
 
   const email = useWatch({
-  control,
-  name: "email",
-});
+    control,
+    name: 'email',
+  });
 
   const changeLanguage = () => {
     i18n.changeLanguage(i18n.language === 'en' ? 'ar' : 'en');
@@ -52,14 +51,11 @@ const {
 
   const onSubmit = async (data) => {
     try {
-      const response = await authinstance.patch(
-        '/auth/Account/ResetPassword',
-        {
-          email: data.email,
-          code: data.code,
-          newPassword: data.newPassword,
-        },
-      );
+      const response = await authinstance.patch('/auth/Account/ResetPassword', {
+        email: data.email,
+        code: data.code,
+        newPassword: data.newPassword,
+      });
 
       if (response.status === 200) {
         toast.success(t('resetPage.success'));
@@ -101,7 +97,6 @@ const {
                 type="email"
                 autoComplete="email"
                 placeholder="example@email.com"
-                className="bg-search! placeholder:text-search-foreground rounded-lg"
                 {...register('email')}
               />
 
@@ -115,9 +110,7 @@ const {
             </div>
 
             {errors.email && (
-              <p className="text-sm text-red-500">
-                {t(errors.email.message)}
-              </p>
+              <p className="text-sm text-red-500">{t(errors.email.message)}</p>
             )}
           </div>
 
@@ -128,14 +121,11 @@ const {
               type="text"
               autoComplete="one-time-code"
               placeholder="0000"
-              className="bg-search! placeholder:text-search-foreground rounded-lg"
               {...register('code')}
             />
 
             {errors.code && (
-              <p className="text-sm text-red-500">
-                {t(errors.code.message)}
-              </p>
+              <p className="text-sm text-red-500">{t(errors.code.message)}</p>
             )}
           </div>
 
@@ -146,7 +136,6 @@ const {
               type="password"
               autoComplete="new-password"
               placeholder={t('resetPage.password')}
-              className="bg-search! placeholder:text-search-foreground rounded-lg"
               {...register('newPassword')}
             />
 
@@ -157,14 +146,8 @@ const {
             )}
           </div>
 
-          <Button
-            type="submit"
-            disabled={isSubmitting}
-            className="w-full"
-          >
-            {isSubmitting
-              ? t('resetPage.resetting')
-              : t('resetPage.reset')}
+          <Button type="submit" disabled={isSubmitting} className="w-full">
+            {isSubmitting ? t('resetPage.resetting') : t('resetPage.reset')}
           </Button>
 
           <div className="flex items-center justify-between gap-3 max-[400px]:flex-col">
@@ -189,9 +172,7 @@ const {
                 type="button"
                 variant="outline"
                 size="icon"
-                onClick={() =>
-                  setTheme(theme === 'dark' ? 'light' : 'dark')
-                }
+                onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
               >
                 {theme === 'dark' ? (
                   <Sun className="h-5 w-5" />

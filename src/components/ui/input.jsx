@@ -1,24 +1,37 @@
-import * as React from "react"
-import { Input as InputPrimitive } from "@base-ui/react/input"
+import * as React from "react";
+import { Input as InputPrimitive } from "@base-ui/react/input";
+import { cva } from "class-variance-authority";
+import { cn } from "@/lib/utils";
 
-import { cn } from "@/lib/utils"
+const inputVariants = cva(
+  "w-full rounded-lg border transition-colors outline-none",
+  {
+    variants: {
+      size: {
+        sm: "h-8 px-2 text-sm",
+        md: "h-10 px-3 text-base",
+        lg: "h-12 px-4 text-lg",
+      },
+      variant: {
+        default: "bg-search placeholder:text-search-foreground rounded-lg",
+        filled: "border-transparent bg-muted",
+        outline: "border-2 border-primary",
+      },
+    },
+    defaultVariants: {
+      size: "md",
+      variant: "default",
+    },
+  }
+);
 
-function Input({
-  className,
-  type,
-  ...props
-}) {
+function Input({ className, size, variant, ...props }) {
   return (
     <InputPrimitive
-      type={type}
-      data-slot="input"
-      className={cn(
-        "h-8 w-full min-w-0 rounded-lg border border-input bg-transparent px-2.5 py-1 text-base transition-colors outline-none file:inline-flex file:h-6 file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-foreground placeholder:text-muted-foreground focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50 disabled:pointer-events-none disabled:cursor-not-allowed disabled:bg-input/50 disabled:opacity-50 aria-invalid:border-destructive aria-invalid:ring-3 aria-invalid:ring-destructive/20 dark:bg-transparent dark:disabled:bg-input/80 dark:aria-invalid:border-destructive/50 dark:aria-invalid:ring-destructive/40",
-        className
-      )}
+      className={cn(inputVariants({ size, variant }), className)}
       {...props}
     />
   );
 }
 
-export { Input }
+export { Input };

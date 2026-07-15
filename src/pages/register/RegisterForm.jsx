@@ -34,25 +34,22 @@ export default function RegisterForm() {
   });
 
   const onSubmit = async (data) => {
-  console.log("FORM DATA:", data);
+    console.log('FORM DATA:', data);
 
-  try {
-    const response = await authinstance.post(
-      '/auth/Account/Register',
-      data
-    );
+    try {
+      const response = await authinstance.post('/auth/Account/Register', data);
 
-    console.log(response);
+      console.log(response);
 
-    if (response.status === 200 || response.status === 201) {
-      toast.success(t('registerPage.success'));
-      navigate('/login');
+      if (response.status === 200 || response.status === 201) {
+        toast.success(t('registerPage.success'));
+        navigate('/login');
+      }
+    } catch (error) {
+      console.log(error);
+      toast.error(t('registerPage.failed'));
     }
-  } catch (error) {
-    console.log(error);
-    toast.error(t('registerPage.failed'));
-  }
-};
+  };
 
   const changeLanguage = () => {
     i18n.changeLanguage(i18n.language === 'en' ? 'ar' : 'en');
@@ -93,7 +90,6 @@ export default function RegisterForm() {
               type="text"
               autoComplete="name"
 
-              className="bg-search! placeholder:text-search-foreground rounded-lg"
               placeholder={t('registerPage.fullName')}
               {...register('fullName')}
             />
@@ -112,7 +108,6 @@ export default function RegisterForm() {
             <Input
               type="email"
               autoComplete="email"
-              className="bg-search! placeholder:text-search-foreground rounded-lg"
               placeholder={t('registerPage.email')}
               {...register('email')}
             />
@@ -121,25 +116,24 @@ export default function RegisterForm() {
               <p className="text-sm text-red-500">{t(errors.email.message)}</p>
             )}
           </div>
-{/* Username */}
+          {/* Username */}
 
-<div className="space-y-2">
-  <Label>{t('registerPage.userName')}</Label>
+          <div className="space-y-2">
+            <Label>{t('registerPage.userName')}</Label>
 
-  <Input
-    type="text"
-    autoComplete="username"
-    className="bg-search! placeholder:text-search-foreground rounded-lg"
-    placeholder={t('registerPage.userName')}
-    {...register('userName')}
-  />
+            <Input
+              type="text"
+              autoComplete="username"
+              placeholder={t('registerPage.userName')}
+              {...register('userName')}
+            />
 
-  {errors.userName && (
-    <p className="text-sm text-red-500">
-      {t(errors.userName.message)}
-    </p>
-  )}
-</div>
+            {errors.userName && (
+              <p className="text-sm text-red-500">
+                {t(errors.userName.message)}
+              </p>
+            )}
+          </div>
           {/* phoneNumber */}
 
           <div className="space-y-2">
@@ -149,9 +143,7 @@ export default function RegisterForm() {
               type="tel"
               autoComplete="tel"
               dir="ltr"
-              className={`bg-search! placeholder:text-search-foreground rounded-lg ${
-                isArabic ? 'text-right' : 'text-left'
-              }`}
+              className={` ${isArabic ? 'text-right' : 'text-left'}`}
               placeholder={t('registerPage.phoneNumber')}
               {...register('phoneNumber')}
             />
@@ -171,9 +163,7 @@ export default function RegisterForm() {
             <div className="bg-search relative rounded-lg">
               <Input
                 type="password"
-                
                 autoComplete="new-password"
-                className="placeholder:text-search-foreground"
                 placeholder={t('registerPage.password')}
                 {...register('password')}
               />
@@ -187,11 +177,7 @@ export default function RegisterForm() {
           </div>
           {/* Register Button */}
 
-          <Button
-  type="submit"
-  className="flex w-full items-center justify-center gap-2"
-  disabled={isSubmitting}
->
+          <Button type="submit" className="flex w-full" disabled={isSubmitting}>
             {isSubmitting ? (
               <>
                 <Loader2 className="h-4 w-4 animate-spin" />

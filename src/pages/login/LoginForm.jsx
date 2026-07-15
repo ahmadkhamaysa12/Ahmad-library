@@ -91,7 +91,6 @@ export default function LoginForm() {
 
             <Input
               type="email"
-              className="bg-search! placeholder:text-search-foreground rounded-lg"
               placeholder="example@email.com"
               {...register('email')}
             />
@@ -109,11 +108,8 @@ export default function LoginForm() {
             <div className="bg-search relative rounded-lg">
               <Input
                 type={showPassword ? 'text' : 'password'}
-
+                className="px-10"
                 placeholder="••••••••"
-
-                className="placeholder:text-search-foreground pr-10"
-
                 {...register('password')}
               />
 
@@ -122,7 +118,7 @@ export default function LoginForm() {
 
                 onClick={() => setShowPassword(!showPassword)}
 
-                className="text-search-foreground absolute top-1/2 right-3 -translate-y-1/2"
+                className="absolute top-1/2 right-3 -translate-y-1/2"
               >
                 {showPassword ? (
                   <EyeOff className="h-5 w-5" />
