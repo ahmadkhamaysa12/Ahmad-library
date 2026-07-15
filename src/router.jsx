@@ -27,6 +27,7 @@ export default function router() {
         <Route path="/" element={<Home />} />
 
         <Route path="/books" element={<Books />} />
+        <Route path="/books/:id" element={<Books />} />
         <Route path="/book/:id" element={<Book />} />
         <Route path="/categories" element={<Categories />} />
 

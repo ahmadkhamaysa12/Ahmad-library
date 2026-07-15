@@ -1,6 +1,7 @@
 import useCategories from '@/hooks/useCategories';
 import 'react';
 import { useTranslation } from 'react-i18next';
+import { useNavigate } from 'react-router-dom';
 
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
@@ -15,6 +16,7 @@ import {
 import logo from '../../assets/logo.svg';
 
 export default function AllCategories() {
+  const navigate = useNavigate();
   const { data: categories, isLoading, error } = useCategories();
   const { t } = useTranslation();
 
@@ -79,7 +81,7 @@ export default function AllCategories() {
           </CardHeader>
 
           <CardFooter>
-            <Button className="w-full">
+            <Button onClick={() => navigate(`/books/${category.id}`)} className="w-full">
               {t('viewCategory')}
             </Button>
           </CardFooter>

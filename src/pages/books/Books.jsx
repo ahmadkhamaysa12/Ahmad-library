@@ -1,7 +1,8 @@
-import 'react'
-import AllBooks from '../../components/forBooks/AllBooks'
+import { useParams } from 'react-router-dom';
+import AllBooks from '@/components/forBooks/AllBooks';
+
 export default function Books() {
-  return (
-    <AllBooks />
-  )
-}
+  const { id } = useParams();
+
+  return <AllBooks categoryId={id} />;
+} 
