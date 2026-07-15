@@ -1,11 +1,23 @@
 import React from 'react';
 import useCart from '../../hooks/useCart';
+import useUpdateQty from '../../hooks/useUpdateQty';
 
 export default function Cart() {
   const { data: cart, isLoading, error } = useCart();
 
+  const { mutate: updateQty, isPending } = useUpdateQty();
+
   if (isLoading) return <div>Loading...</div>;
   if (error) return <div>Error loading cart</div>;
+
+  const handleUpdateQty = (productId, count) => {
+    if (count < 1) return;
+
+    updateQty({
+      productId,
+      count,
+    });
+  };
 
   return (
     <div className="p-6">
@@ -22,7 +34,29 @@ export default function Cart() {
 
               <p>Price: ${item.price}</p>
 
-              <p>Quantity: {item.count}</p>
+              <div className="mt-3 flex items-center gap-3">
+                <button
+                  disabled={isPending}
+                  onClick={() =>
+                    handleUpdateQty(item.productId, item.count - 1)
+                  }
+                  className="hover:bg-muted rounded-lg border px-3 py-1 font-bold"
+                >
+                  -
+                </button>
+
+                <span className="font-bold">{item.count}</span>
+
+                <button
+                  disabled={isPending}
+                  onClick={() =>
+                    handleUpdateQty(item.productId, item.count + 1)
+                  }
+                  className="hover:bg-muted rounded-lg border px-3 py-1 font-bold"
+                >
+                  +
+                </button>
+              </div>
             </div>
 
             <div>
@@ -38,4 +72,3 @@ export default function Cart() {
     </div>
   );
 }
-  
