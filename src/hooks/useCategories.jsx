@@ -2,15 +2,15 @@ import { useQuery } from '@tanstack/react-query';
 import { useTranslation } from 'react-i18next';
 import axiosInstance from '../api/axiosInstance';
 
-export default function useBooks() {
+export default function useCategories() {
   const { i18n } = useTranslation();
-  const useBooks = async () => {
-    const response = await axiosInstance.get(`/Products`);
+  const useCategories = async () => {
+    const response = await axiosInstance.get(`/Categories`);
     return response.data.response.data;
   };
   return useQuery({
-    queryKey: ['books', i18n.language],
-    queryFn: useBooks,
+    queryKey: ['categories', i18n.language],
+    queryFn: useCategories,
     staleTime: 1000 * 60 * 5,
   });
 }
