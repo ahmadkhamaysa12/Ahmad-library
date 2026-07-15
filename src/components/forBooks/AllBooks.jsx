@@ -34,7 +34,7 @@ export default function AllBooks() {
 
   return (
     <div className="mt-6 grid gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6">
-      {books.map((book) => (
+      { books.map((book) => (
         <div
           key={book.id}
           className="group bg-card border-border mx-auto flex h-full w-full flex-col overflow-hidden rounded-xl border transition-all duration-300 hover:-translate-y-2 hover:shadow-xl"

@@ -21,6 +21,9 @@ i18n
           logout: 'Logout',
           login: 'Login',
           register: 'Create New Account',
+          booksCount: 'books',
+          viewCategory: 'View Category',
+          browseBooks: 'Browse books in this category.',
           loginPage: {
             welcome: 'Welcome Back',
             subtitle: 'Login to your account',
@@ -44,7 +47,7 @@ i18n
             failed: 'Registration failed',
             haveAccount: 'Already have an account?',
             createAccount: 'Create Account',
-            userName:"User Name"
+            userName: 'User Name',
           },
           resetPage: {
             welcome: 'Reset Password',
@@ -77,6 +80,9 @@ i18n
           logout: 'تسجيل الخروج',
           login: 'تسجيل الدخول',
           register: 'إنشاء حساب جديد',
+          booksCount: 'كتاب',
+          viewCategory: 'عرض التصنيف',
+          browseBooks: 'تصفح الكتب في هذا التصنيف.',
           loginPage: {
             welcome: 'مرحبًا بعودتك',
             subtitle: 'سجّل الدخول إلى حسابك',
@@ -100,7 +106,7 @@ i18n
             failed: 'فشل إنشاء الحساب',
             haveAccount: 'لديك حساب بالفعل؟',
             createAccount: 'إنشاء الحساب',
-            userName:"اسم المستخدم"
+            userName: 'اسم المستخدم',
           },
           resetPage: {
             welcome: 'إعادة تعيين كلمة المرور',
