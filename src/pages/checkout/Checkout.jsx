@@ -1,4 +1,3 @@
-
 import { useState } from 'react';
 
 import useCart from '@/hooks/useCart';
@@ -38,18 +37,16 @@ export default function Checkout() {
                 <div>
                   <h3 className="font-semibold">{item.productName}</h3>
 
-                  <p className="text-sm text-muted-foreground">
+                  <p className="text-muted-foreground text-sm">
                     Quantity: {item.count}
                   </p>
 
-                  <p className="text-sm text-muted-foreground">
+                  <p className="text-muted-foreground text-sm">
                     Price: ${item.price}
                   </p>
                 </div>
 
-                <p className="font-bold">
-                  ${item.totalPrice}
-                </p>
+                <p className="font-bold">${item.totalPrice}</p>
               </div>
             ))}
 
@@ -92,13 +89,11 @@ export default function Checkout() {
             </label>
 
             <div className="rounded-lg border p-4">
-              <p className="text-sm text-muted-foreground">
+              <p className="text-muted-foreground text-sm">
                 Selected Payment Method
               </p>
 
-              <p className="mt-2 font-semibold">
-                {paymentMethod}
-              </p>
+              <p className="mt-2 font-semibold">{paymentMethod}</p>
             </div>
 
             <Button
@@ -115,4 +110,3 @@ export default function Checkout() {
     </div>
   );
 }
-

@@ -10,7 +10,6 @@ export default function Cart() {
   const navigate = useNavigate();
   const { data: cart, isLoading, error } = useCart();
 
-
   const { mutate: updateQty, isPending: isUpdating } = useUpdateQty();
 
   const { mutate: removeFromCart, isPending: isRemoving } = useRemoveFromCart();
