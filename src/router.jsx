@@ -1,52 +1,105 @@
-import { Routes, Route } from 'react-router-dom';
+import { createBrowserRouter } from "react-router-dom";
 
-import MainLayout from '@/layout/MainLayout';
+import MainLayout from "@/layout/MainLayout";
+import ProfileLayout from "@/layout/ProfileLayout";
 
-import ProtectedRouter from '@/ProtectedRouter';
-import GuestRouter from '@/GuestRouter';
+import ProtectedRouter from "@/ProtectedRouter";
+import GuestRouter from "@/GuestRouter";
 
-import Home from '@/pages/home/Home';
-import Books from '@/pages/books/Books';
-import Book from '@/pages/books/Book';
-import Categories from '@/pages/categories/Categories';
+import Home from "@/pages/home/Home";
+import Books from "@/pages/books/Books";
+import Book from "@/pages/books/Book";
+import Categories from "@/pages/categories/Categories";
 
-import Login from '@/pages/login/Login';
-import Register from '@/pages/register/Register';
+import Login from "@/pages/login/Login";
+import Register from "@/pages/register/Register";
+import ForgotPassword from "@/pages/fogotPass/ForgotPassword";
 
-import Profile from '@/pages/profile/Profile';
-import Cart from '@/pages/cart/Cart';
+import Cart from "@/pages/cart/Cart";
+import Checkout from "@/pages/checkout/Checkout";
 
-import ForgotPassword from '@/pages/fogotPass/ForgotPassword';
+import Page404 from "@/pages/page404/Page404";
 
-import Page404 from '@/pages/page404/Page404';
-import Checkout from './pages/checkout/Checkout';
+import ProfileInfo from "@/components/forProfile/ProfileInfo";
+import ProfileOrders from "@/components/forProfile/ProfileOrders";
 
-export default function router() {
-  return (
-    <Routes>
-      <Route element={<MainLayout />}>
-        <Route path="/" element={<Home />} />
+const router = createBrowserRouter([
+  {
+    element: <MainLayout />,
+    children: [
+      {
+        path: "/",
+        element: <Home />,
+      },
+      {
+        path: "/books",
+        element: <Books />,
+      },
+      {
+        path: "/books/:id",
+        element: <Books />,
+      },
+      {
+        path: "/book/:id",
+        element: <Book />,
+      },
+      {
+        path: "/categories",
+        element: <Categories />,
+      },
 
-        <Route path="/books" element={<Books />} />
-        <Route path="/books/:id" element={<Books />} />
-        <Route path="/book/:id" element={<Book />} />
-        <Route path="/categories" element={<Categories />} />
+      {
+        element: <ProtectedRouter />,
+        children: [
+          {
+            path: "/profile",
+            element: <ProfileLayout />,
+            children: [
+              {
+                index: true,
+                element: <ProfileInfo />,
+              },
+              {
+                path: "orders",
+                element: <ProfileOrders />,
+              },
+            ],
+          },
+          {
+            path: "/cart",
+            element: <Cart />,
+          },
+          {
+            path: "/checkout",
+            element: <Checkout />,
+          },
+        ],
+      },
 
-        <Route element={<ProtectedRouter />}>
-          <Route path="/profile" element={<Profile />} />
-          <Route path="/cart" element={<Cart />} />
-          <Route path="/checkout" element={<Checkout />} />
-          Checkout
-        </Route>
+      {
+        path: "*",
+        element: <Page404 />,
+      },
+    ],
+  },
 
-        <Route path="*" element={<Page404 />} />
-      </Route>
+  {
+    element: <GuestRouter />,
+    children: [
+      {
+        path: "/login",
+        element: <Login />,
+      },
+      {
+        path: "/register",
+        element: <Register />,
+      },
+      {
+        path: "/forgotPass",
+        element: <ForgotPassword />,
+      },
+    ],
+  },
+]);
 
-      <Route element={<GuestRouter />}>
-        <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Register />} />
-        <Route path="/forgotPass" element={<ForgotPassword />} />
-      </Route>
-    </Routes>
-  );
-}
+export default router;
