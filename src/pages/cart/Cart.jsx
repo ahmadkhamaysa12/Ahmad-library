@@ -3,11 +3,13 @@ import useCart from '../../hooks/useCart';
 import useUpdateQty from '../../hooks/useUpdateQty';
 import useRemoveFromCart from '../../hooks/useRemoveFromCart';
 import useClearCart from '../../hooks/useClearCart';
+import { useNavigate } from 'react-router-dom';
 
 export default function Cart() {
   const { mutate: clearCart, isPending: isClearing } = useClearCart();
-
+  const navigate = useNavigate();
   const { data: cart, isLoading, error } = useCart();
+
 
   const { mutate: updateQty, isPending: isUpdating } = useUpdateQty();
 
@@ -90,13 +92,23 @@ export default function Cart() {
       <div className="mt-6 flex items-center justify-between border-t pt-4">
         <h2 className="text-xl font-bold">Total: ${cart?.cartTotal}</h2>
 
-        <button
-          disabled={isClearing}
-          onClick={() => clearCart()}
-          className="border-destructive text-destructive hover:bg-destructive/10 rounded-lg border px-4 py-2 font-bold transition disabled:opacity-50"
-        >
-          {isClearing ? 'Clearing...' : 'Clear Cart'}
-        </button>
+        <div className="flex gap-3">
+          <button
+            disabled={!cart?.items?.length}
+            onClick={() => navigate('/checkout')}
+            className="rounded-lg bg-green-600 px-5 py-2 font-bold text-white transition hover:bg-green-700 disabled:opacity-50"
+          >
+            Checkout
+          </button>
+
+          <button
+            disabled={isClearing}
+            onClick={() => clearCart()}
+            className="border-destructive text-destructive hover:bg-destructive/10 rounded-lg border px-4 py-2 font-bold transition disabled:opacity-50"
+          >
+            {isClearing ? 'Clearing...' : 'Clear Cart'}
+          </button>
+        </div>
       </div>
     </div>
   );

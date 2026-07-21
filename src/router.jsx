@@ -19,6 +19,7 @@ import Cart from '@/pages/cart/Cart';
 import ForgotPassword from '@/pages/fogotPass/ForgotPassword';
 
 import Page404 from '@/pages/page404/Page404';
+import Checkout from './pages/checkout/Checkout';
 
 export default function router() {
   return (
@@ -34,6 +35,9 @@ export default function router() {
         <Route element={<ProtectedRouter />}>
           <Route path="/profile" element={<Profile />} />
           <Route path="/cart" element={<Cart />} />
+          <Route path="/checkout" element={<Checkout />} />
+
+          Checkout
         </Route>
 
         <Route path="*" element={<Page404 />} />
