@@ -5,6 +5,7 @@ import useCheckout from '@/hooks/useCheckout';
 
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
+import Container from '@/components/ui/container';
 
 export default function Checkout() {
   const [paymentMethod, setPaymentMethod] = useState('Cash');
@@ -18,11 +19,10 @@ export default function Checkout() {
   if (error) return <div>Error loading cart</div>;
 
   return (
-    <div className="container mx-auto max-w-6xl p-6">
+    <Container className=" py-6">
       <h1 className="mb-8 text-3xl font-bold">Checkout</h1>
 
       <div className="grid gap-6 lg:grid-cols-2">
-        {/* Order Summary */}
         <Card>
           <CardHeader>
             <CardTitle>Order Summary</CardTitle>
@@ -57,7 +57,6 @@ export default function Checkout() {
           </CardContent>
         </Card>
 
-        {/* Payment */}
         <Card>
           <CardHeader>
             <CardTitle>Payment Method</CardTitle>
@@ -107,6 +106,6 @@ export default function Checkout() {
           </CardContent>
         </Card>
       </div>
-    </div>
+    </Container>
   );
 }

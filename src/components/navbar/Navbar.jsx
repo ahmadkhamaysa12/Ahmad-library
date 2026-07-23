@@ -56,7 +56,7 @@ export default function Navbar() {
   return (
     <header className="bg-background border-border sticky top-0 z-50 w-full border-b backdrop-blur-xl">
       <Container>
-        <div className="container mx-auto flex h-16 items-center justify-between px-4">
+        <div className="container mx-auto flex h-16 items-center justify-between">
           {/* Logo */}
           <Link to="/" className="text-primary text-2xl font-bold">
             {t('lib_name')}
