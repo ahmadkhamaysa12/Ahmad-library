@@ -30,7 +30,7 @@ import { Sheet, SheetContent, SheetTrigger } from '../ui/sheet';
 export default function Navbar() {
   const { t } = useTranslation();
   const { theme, setTheme } = useTheme();
-const navigate = useNavigate();
+  const navigate = useNavigate();
   const direction = i18n.language === 'ar' ? 'rtl' : 'ltr';
 
   const token = useAuthStore((state) => state.token);
@@ -54,7 +54,7 @@ const navigate = useNavigate();
     'text-foreground hover:bg-accent hover:text-accent-foreground transition-colors';
 
   return (
-    <header className="bg-background/80 border-border sticky top-0 z-50 w-full border-b backdrop-blur-xl">
+    <header className="bg-background border-border sticky top-0 z-50 w-full border-b backdrop-blur-xl">
       <Container>
         <div className="container mx-auto flex h-16 items-center justify-between px-4">
           {/* Logo */}
@@ -87,7 +87,12 @@ const navigate = useNavigate();
 
           {/* Desktop Actions */}
           <div className="hidden items-center gap-1 lg:flex">
-            <Button onClick={() => navigate(`/cart`)} variant="ghost" size="icon" className={iconButton}>
+            <Button
+              onClick={() => navigate(`/cart`)}
+              variant="ghost"
+              size="icon"
+              className={iconButton}
+            >
               <ShoppingCart className="h-5 w-5" />
             </Button>
 
