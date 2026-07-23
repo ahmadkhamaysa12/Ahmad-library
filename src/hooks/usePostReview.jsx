@@ -9,7 +9,7 @@ export default function usePostReview() {
       const response = await authAxiosInstance.post(
         `/Products/${productId}/reviews`,
         {
-          Rating: rating,
+          Rating: Number(rating),
           Comment: comment,
         },
       );
@@ -24,7 +24,8 @@ export default function usePostReview() {
     },
 
     onError: (error) => {
-      console.log('Review Error:', error.response?.data);
+      console.log('STATUS:', error.response?.status);
+      console.log('DATA:', error.response?.data);
     },
   });
 }

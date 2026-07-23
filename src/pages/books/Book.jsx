@@ -1,5 +1,5 @@
 import Container from '@/components/ui/container';
-
+import AddReview from '@/components/forBook/AddReview';
 import BookGallery from '@/components/forBook/BookGallery';
 import BookInfo from '@/components/forBook/BookInfo';
 import BookPurchase from '@/components/forBook/BookPurchase';
@@ -33,19 +33,19 @@ export default function Book() {
   return (
     <Container className="py-10">
       <div className="grid gap-10 lg:grid-cols-12">
-  <section className="space-y-10 lg:col-span-7">
-    <BookGallery book={book} />
-    <BookInfo book={book} />
-    <BookDetails book={book} />
-  </section>
+        <section className="space-y-10 lg:col-span-7">
+          <BookGallery book={book} />
+          <BookInfo book={book} />
+          <BookDetails book={book} />
+        </section>
 
-  <aside className="lg:col-span-5">
-    <div className="sticky top-24">
-      <BookPurchase book={book} />
-    </div>
-  </aside>
-</div>
-
+        <aside className="lg:col-span-5">
+          <div className="sticky top-24">
+            <BookPurchase book={book} />
+          </div>
+        </aside>
+      </div>
+      <AddReview productId={book.id} />
       <BookReviews reviews={book.reviews ?? []} />
     </Container>
   );
