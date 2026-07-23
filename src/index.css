@@ -12,8 +12,8 @@
   --popover: oklch(99% 0.012 90);
   --popover-foreground: oklch(0.25 0.04 165);
 
-  --search: oklch(96% 0.04 90);
-  --search-foreground: oklch(0.45 0.03 160);
+  --search: oklch(99% 0.012 90);
+  --search-foreground: oklch(0.25 0.04 165);
 
   --primary: oklch(0.42 0.09 165);
   --primary-foreground: oklch(1 0 0);
