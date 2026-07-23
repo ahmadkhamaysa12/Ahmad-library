@@ -7,7 +7,7 @@ import {
   DialogHeader,
   DialogTitle,
 } from '@/components/ui/dialog';
-
+import { useNavigate } from 'react-router-dom';
 import useCart from '@/hooks/useCart';
 import useCheckout from '@/hooks/useCheckout';
 import useBooks from '@/hooks/useBooks';
@@ -16,6 +16,7 @@ import OrderSummary from '@/components/forCheckout/OrderSummary';
 import PaymentMethod from '@/components/forCheckout/PaymentMethod';
 
 export default function Checkout() {
+  const navigate = useNavigate();
   const [paymentMethod, setPaymentMethod] = useState('Cash');
   const [showSuccess, setShowSuccess] = useState(false);
 
@@ -77,7 +78,10 @@ export default function Checkout() {
             </p>
 
             <button
-              onClick={() => setShowSuccess(false)}
+              onClick={() => {
+                setShowSuccess(false);
+                navigate('/');
+              }}
               className="bg-primary text-primary-foreground w-full rounded-xl py-3 font-semibold transition hover:opacity-90"
             >
               Continue Shopping
