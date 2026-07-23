@@ -6,7 +6,6 @@ export default function CartList({
   onUpdateQty,
   onRemove,
   isUpdating,
-  isRemoving,
 }) {
   if (!items?.length) {
     return (

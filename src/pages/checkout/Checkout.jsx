@@ -1,111 +1,90 @@
 import { useState } from 'react';
 
+import Container from '@/components/ui/container';
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+} from '@/components/ui/dialog';
+
 import useCart from '@/hooks/useCart';
 import useCheckout from '@/hooks/useCheckout';
+import useBooks from '@/hooks/useBooks';
 
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
-import Container from '@/components/ui/container';
+import OrderSummary from '@/components/forCheckout/OrderSummary';
+import PaymentMethod from '@/components/forCheckout/PaymentMethod';
 
 export default function Checkout() {
   const [paymentMethod, setPaymentMethod] = useState('Cash');
+  const [showSuccess, setShowSuccess] = useState(false);
 
+  const { data: books } = useBooks();
   const { data: cart, isLoading, error } = useCart();
-
   const { mutate: checkout, isPending } = useCheckout();
 
-  if (isLoading) return <div>Loading...</div>;
+  const handleCheckout = () => {
+    checkout(paymentMethod, {
+      onSuccess: () => {
+        if (paymentMethod === 'Cash') {
+          setShowSuccess(true);
+        }
+      },
+    });
+  };
 
+  if (isLoading) return <div>Loading...</div>;
   if (error) return <div>Error loading cart</div>;
 
   return (
-    <Container className=" py-6">
-      <h1 className="mb-8 text-3xl font-bold">Checkout</h1>
+    <Container className="py-8">
+      <h1 className="mb-8 font-serif text-4xl font-bold">Checkout</h1>
 
-      <div className="grid gap-6 lg:grid-cols-2">
-        <Card>
-          <CardHeader>
-            <CardTitle>Order Summary</CardTitle>
-          </CardHeader>
+      <div className="grid gap-8 lg:grid-cols-3">
+        <div className="lg:col-span-2">
+          <OrderSummary cart={cart} books={books} />
+        </div>
 
-          <CardContent className="space-y-4">
-            {cart?.items?.map((item) => (
-              <div
-                key={item.productId}
-                className="flex items-center justify-between border-b pb-4"
-              >
-                <div>
-                  <h3 className="font-semibold">{item.productName}</h3>
-
-                  <p className="text-muted-foreground text-sm">
-                    Quantity: {item.count}
-                  </p>
-
-                  <p className="text-muted-foreground text-sm">
-                    Price: ${item.price}
-                  </p>
-                </div>
-
-                <p className="font-bold">${item.totalPrice}</p>
-              </div>
-            ))}
-
-            <div className="flex items-center justify-between border-t pt-4 text-xl font-bold">
-              <span>Total</span>
-              <span>${cart?.cartTotal}</span>
-            </div>
-          </CardContent>
-        </Card>
-
-        <Card>
-          <CardHeader>
-            <CardTitle>Payment Method</CardTitle>
-          </CardHeader>
-
-          <CardContent className="space-y-6">
-            <label className="flex cursor-pointer items-center gap-3 rounded-lg border p-4">
-              <input
-                type="radio"
-                name="payment"
-                value="Cash"
-                checked={paymentMethod === 'Cash'}
-                onChange={(e) => setPaymentMethod(e.target.value)}
-              />
-
-              <span>💵 Cash on Delivery</span>
-            </label>
-
-            <label className="flex cursor-pointer items-center gap-3 rounded-lg border p-4">
-              <input
-                type="radio"
-                name="payment"
-                value="Visa"
-                checked={paymentMethod === 'Visa'}
-                onChange={(e) => setPaymentMethod(e.target.value)}
-              />
-
-              <span>💳 Visa / Mastercard</span>
-            </label>
-
-            <div className="rounded-lg border p-4">
-              <p className="text-muted-foreground text-sm">
-                Selected Payment Method
-              </p>
-
-              <p className="mt-2 font-semibold">{paymentMethod}</p>
-            </div>
-
-            <Button
-              className="w-full"
-              size="lg"
-              disabled={isPending}
-              onClick={() => checkout(paymentMethod)}
-            >
-              {isPending ? 'Processing...' : 'Place Order'}
-            </Button>
-          </CardContent>
-        </Card>
+        <div>
+          <PaymentMethod
+            paymentMethod={paymentMethod}
+            setPaymentMethod={setPaymentMethod}
+            checkout={handleCheckout}
+            isPending={isPending}
+          />
+        </div>
       </div>
+
+      <Dialog open={showSuccess} onOpenChange={setShowSuccess}>
+        <DialogContent className="max-w-md rounded-2xl p-8 text-center shadow-2xl">
+          <DialogHeader className="items-center">
+            <div className="bg-primary/10 mb-4 flex h-20 w-20 items-center justify-center rounded-full text-4xl">
+              ✓
+            </div>
+
+            <DialogTitle className="font-serif text-3xl">
+              Order Confirmed
+            </DialogTitle>
+          </DialogHeader>
+
+          <div className="space-y-4">
+            <p className="text-muted-foreground">
+              Your order has been placed successfully.
+            </p>
+
+            <p className="bg-secondary/10 rounded-lg p-3 text-sm font-medium">
+              💵 Payment method: Cash on Delivery
+            </p>
+
+            <button
+              onClick={() => setShowSuccess(false)}
+              className="bg-primary text-primary-foreground w-full rounded-xl py-3 font-semibold transition hover:opacity-90"
+            >
+              Continue Shopping
+            </button>
+          </div>
+        </DialogContent>
+      </Dialog>
     </Container>
   );
 }
