@@ -25,7 +25,7 @@ export default function CartItem({
         <div className="flex flex-1 flex-col justify-between">
           <div>
             <h3 className="line-clamp-1 text-lg font-semibold">
-              {item.productName}
+              {book.name}
             </h3>
           </div>
 
