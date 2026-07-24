@@ -1,105 +1,140 @@
-import { createBrowserRouter } from "react-router-dom";
+import { createBrowserRouter } from 'react-router-dom';
 
-import MainLayout from "@/layout/MainLayout";
-import ProfileLayout from "@/layout/ProfileLayout";
+import MainLayout from '@/layout/MainLayout';
+import ProfileLayout from '@/layout/ProfileLayout';
 
-import ProtectedRouter from "@/ProtectedRouter";
-import GuestRouter from "@/GuestRouter";
+import ProtectedRouter from '@/ProtectedRouter';
+import GuestRouter from '@/GuestRouter';
 
-import Home from "@/pages/home/Home";
-import Books from "@/pages/books/Books";
-import Book from "@/pages/books/Book";
-import Categories from "@/pages/categories/Categories";
+import Home from '@/pages/home/Home';
+import Books from '@/pages/books/Books';
+import Book from '@/pages/books/Book';
+import Categories from '@/pages/categories/Categories';
 
-import Login from "@/pages/login/Login";
-import Register from "@/pages/register/Register";
-import ForgotPassword from "@/pages/fogotPass/ForgotPassword";
+import Login from '@/pages/login/Login';
+import Register from '@/pages/register/Register';
+import ForgotPassword from '@/pages/fogotPass/ForgotPassword';
 
-import Cart from "@/pages/cart/Cart";
-import Checkout from "@/pages/checkout/Checkout";
+import Cart from '@/pages/cart/Cart';
+import Checkout from '@/pages/checkout/Checkout';
 
-import Page404 from "@/pages/page404/Page404";
+import Page404 from '@/pages/page404/Page404';
 
-import ProfileInfo from "@/components/forProfile/ProfileInfo";
-import ProfileOrders from "@/components/forProfile/ProfileOrders";
+import ProfileInfo from '@/components/forProfile/ProfileInfo';
+import ProfileOrders from '@/components/forProfile/ProfileOrders';
+
 
 const router = createBrowserRouter([
+
   {
     element: <MainLayout />,
+
     children: [
+
       {
-        path: "/",
+        path: '/',
         element: <Home />,
       },
+
+
       {
-        path: "/books",
+        path: '/books',
         element: <Books />,
       },
+
+
       {
-        path: "/books/:id",
-        element: <Books />,
-      },
-      {
-        path: "/book/:id",
+        path: '/book/:id',
         element: <Book />,
       },
+
+
       {
-        path: "/categories",
+        path: '/categories',
         element: <Categories />,
       },
 
+
+      // Protected Routes
       {
         element: <ProtectedRouter />,
+
         children: [
+
           {
-            path: "/profile",
+            path: '/profile',
+
             element: <ProfileLayout />,
+
             children: [
+
               {
                 index: true,
                 element: <ProfileInfo />,
               },
+
+
               {
-                path: "orders",
+                path: 'orders',
                 element: <ProfileOrders />,
               },
+
             ],
           },
+
+
           {
-            path: "/cart",
+            path: '/cart',
             element: <Cart />,
           },
+
+
           {
-            path: "/checkout",
+            path: '/checkout',
             element: <Checkout />,
           },
+
         ],
       },
 
+
       {
-        path: "*",
+        path: '*',
         element: <Page404 />,
       },
+
     ],
   },
 
+
+
+  // Guest Routes
   {
     element: <GuestRouter />,
+
     children: [
+
       {
-        path: "/login",
+        path: '/login',
         element: <Login />,
       },
+
+
       {
-        path: "/register",
+        path: '/register',
         element: <Register />,
       },
+
+
       {
-        path: "/forgotPass",
+        path: '/forgotPass',
         element: <ForgotPassword />,
       },
+
     ],
   },
+
 ]);
+
 
 export default router;
