@@ -1,15 +1,37 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import authinstance from '../api/authAxiosInstance';
+import authAxiosInstance from '../api/authAxiosInstance';
 
 export default function useUpdateEmail() {
   const queryClient = useQueryClient();
+
   return useMutation({
-    mutationFn: (data) => authinstance.patch(`/Profile/change-email`, data),
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['profile'] });
+    mutationFn: async (NewEmail) => {
+
+      console.log("Sending email:", {
+        NewEmail,
+      });
+
+      const response = await authAxiosInstance.patch(
+        '/Profile/change-email',
+        {
+          NewEmail,
+        }
+      );
+
+      return response.data;
     },
+
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: ['profile'],
+      });
+    },
+
     onError: (error) => {
-      console.error('Failed to update email', error);
+      console.log(
+        "Email update error:",
+        error.response?.data
+      );
     },
   });
 }

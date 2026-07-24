@@ -1,7 +1,7 @@
 import { NavLink, Outlet } from 'react-router-dom';
 import { User, Package } from 'lucide-react';
 import useProfile from '@/hooks/useProfile';
-
+import { Settings } from 'lucide-react';
 import { Card } from '@/components/ui/card';
 import { Avatar, AvatarFallback } from '@/components/ui/avatar';
 
@@ -62,7 +62,19 @@ export default function ProfileLayout() {
               >
                 <Package className="h-5 w-5" />
                 <span className="font-medium">Orders</span>
-              </NavLink>
+              </NavLink><NavLink
+  to="/profile/settings"
+  className={({ isActive }) =>
+    `flex items-center gap-3 rounded-xl px-4 py-3 transition-all ${
+      isActive
+        ? 'bg-primary text-primary-foreground'
+        : 'hover:bg-muted'
+    }`
+  }
+>
+  <Settings className="h-5 w-5" />
+  <span>Settings</span>
+</NavLink>
             </nav>
           </Card>
 

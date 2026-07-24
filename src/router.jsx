@@ -10,7 +10,6 @@ import Home from '@/pages/home/Home';
 import Books from '@/pages/books/Books';
 import Book from '@/pages/books/Book';
 import Categories from '@/pages/categories/Categories';
-
 import Login from '@/pages/login/Login';
 import Register from '@/pages/register/Register';
 import ForgotPassword from '@/pages/fogotPass/ForgotPassword';
@@ -22,6 +21,7 @@ import Page404 from '@/pages/page404/Page404';
 
 import ProfileInfo from '@/components/forProfile/ProfileInfo';
 import ProfileOrders from '@/components/forProfile/ProfileOrders';
+import ProfileSettings from '@/components/forProfile/ProfileSettings';
 
 const router = createBrowserRouter([
   {
@@ -67,6 +67,10 @@ const router = createBrowserRouter([
               {
                 path: 'orders',
                 element: <ProfileOrders />,
+              },
+              {
+                path: 'settings',
+                element: <ProfileSettings />,
               },
             ],
           },
