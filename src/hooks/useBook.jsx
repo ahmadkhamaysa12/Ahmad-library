@@ -13,7 +13,6 @@ export default function useBook(id) {
   return useQuery({
     queryKey: ['book', i18n.language, id],
     queryFn: getBook,
-    enabled: !!id,
     staleTime: 1000 * 60 * 2,
   });
 }
