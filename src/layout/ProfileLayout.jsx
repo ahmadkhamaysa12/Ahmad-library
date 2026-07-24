@@ -26,9 +26,7 @@ export default function ProfileLayout() {
                 {profile?.fullName || 'Loading...'}
               </h1>
 
-              <p className="text-muted-foreground mt-1">
-                {profile?.email}
-              </p>
+              <p className="text-muted-foreground mt-1">{profile?.email}</p>
             </div>
           </div>
         </Card>
