@@ -1,30 +1,19 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import authAxiosInstance from '../api/authAxiosInstance';
 
-export default function usePostReview() {
+export default function useCheckout() {
   const queryClient = useQueryClient();
-
   return useMutation({
-    mutationFn: async ({ productId, rating, comment }) => {
-      const response = await authAxiosInstance.post(
-        `/Products/${productId}/reviews`,
-        {
-          Rating: rating,
-          Comment: comment,
-        },
-      );
-
-      return response.data;
+    mutationFn: async (PaymentMethod) => {
+      return await authAxiosInstance.post(`/Checkouts`, { PaymentMethod });
     },
-
-    onSuccess: (_, variables) => {
+    onSuccess: (response) => {
+      if (response.data.url) {
+        location.href = response.data.url;
+      }
       queryClient.invalidateQueries({
-        queryKey: ['book', variables.productId],
+        queryKey: ['cart'],
       });
-    },
-
-    onError: (error) => {
-      console.log('Review Error:', error.response?.data);
     },
   });
 }
