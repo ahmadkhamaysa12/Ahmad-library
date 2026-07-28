@@ -1,7 +1,7 @@
 import { createBrowserRouter } from 'react-router-dom';
 
 import MainLayout from '@/layout/MainLayout';
-import ProfileLayout from '@/layout/ProfileLayout';
+import ProfileLayout from '@/pages/profile/ProfileLayout';
 
 import ProtectedRouter from '@/ProtectedRouter';
 import GuestRouter from '@/GuestRouter';
