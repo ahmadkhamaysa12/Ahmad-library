@@ -125,7 +125,7 @@ i18n
             liabilityText:
               'Ahmad Library strives for accuracy but cannot guarantee uninterrupted access.',
           },
-          about: {
+          aboutPage: {
             badge: 'About Ahmad Library',
 
             title: 'Our Story',
@@ -174,6 +174,14 @@ i18n
 
             accessibilityDescription:
               'Connecting readers and researchers worldwide with valuable knowledge and resources.',
+          },
+          footer: {
+            archive: 'About Our Archive',
+            shipping: 'Shipping & Returns',
+            privacy: 'Privacy Policy',
+            terms: 'Terms of Service',
+            contact: 'Contact Scholar',
+            copyright: 'Preserving Heritage Through Knowledge.',
           },
         },
       },
@@ -294,7 +302,7 @@ i18n
             liabilityText:
               'نسعى لتقديم معلومات دقيقة ولكن لا نضمن عدم حدوث انقطاع كامل للخدمة.',
           },
-          about: {
+          aboutPage: {
             badge: 'عن مكتبة أحمد',
 
             title: 'قصتنا',
@@ -343,6 +351,14 @@ i18n
 
             accessibilityDescription:
               'ربط القراء والباحثين حول العالم بالمعرفة والمصادر القيمة.',
+          },
+          footer: {
+            archive: 'عن أرشيفنا',
+            shipping: 'الشحن والإرجاع',
+            privacy: 'سياسة الخصوصية',
+            terms: 'شروط الخدمة',
+            contact: 'تواصل مع المكتبة',
+            copyright: 'الحفاظ على التراث من خلال المعرفة.',
           },
         },
       },

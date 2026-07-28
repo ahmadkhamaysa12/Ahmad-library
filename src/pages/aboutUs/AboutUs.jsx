@@ -16,7 +16,7 @@ import libraryImage from '@/assets/logo.svg';
 export default function AboutLibraryPage() {
   const { t } = useTranslation();
 
-  const timeline = t('about.timeline', {
+  const timeline = t('aboutPage.timeline', {
     returnObjects: true,
   });
 
@@ -27,15 +27,15 @@ export default function AboutLibraryPage() {
           <div className="grid items-center gap-14 lg:grid-cols-2">
             <div className="space-y-6">
               <Badge variant="secondary" className="rounded-full px-4 py-1">
-                {t('about.badge')}
+                {t('aboutPage.badge')}
               </Badge>
 
               <h1 className="text-primary font-serif text-5xl font-bold lg:text-6xl">
-                {t('about.title')}
+                {t('aboutPage.title')}
               </h1>
 
               <p className="text-muted-foreground max-w-xl text-lg leading-8">
-                {t('about.description')}
+                {t('aboutPage.description')}
               </p>
             </div>
 
@@ -43,7 +43,7 @@ export default function AboutLibraryPage() {
               <AspectRatio ratio={4 / 3}>
                 <img
                   src={libraryImage}
-                  alt={t('about.title')}
+                  alt={t('aboutPage.title')}
                   className="bg-muted/30 h-full w-full object-contain p-10 transition-transform duration-700 hover:scale-105"
                 />
               </AspectRatio>
@@ -56,11 +56,11 @@ export default function AboutLibraryPage() {
         <Container>
           <div className="mb-16 text-center">
             <Badge variant="outline" className="mb-4">
-              {t('about.timelineBadge')}
+              {t('aboutPage.timelineBadge')}
             </Badge>
 
             <h2 className="text-secondary font-serif text-4xl font-bold">
-              {t('about.timelineTitle')}
+              {t('aboutPage.timelineTitle')}
             </h2>
           </div>
 
@@ -103,15 +103,15 @@ export default function AboutLibraryPage() {
         <Container>
           <div className="mb-14">
             <Badge variant="secondary" className="mb-4">
-              {t('about.valuesBadge')}
+              {t('aboutPage.valuesBadge')}
             </Badge>
 
             <h2 className="text-primary font-serif text-4xl font-bold">
-              {t('about.valuesTitle')}
+              {t('aboutPage.valuesTitle')}
             </h2>
 
             <p className="text-muted-foreground mt-4 max-w-2xl leading-8">
-              {t('about.valuesDescription')}
+              {t('aboutPage.valuesDescription')}
             </p>
           </div>
 
@@ -123,11 +123,11 @@ export default function AboutLibraryPage() {
                 </div>
 
                 <CardTitle className="font-serif text-2xl">
-                  {t('about.preservationTitle')}
+                  {t('aboutPage.preservationTitle')}
                 </CardTitle>
 
                 <CardDescription className="text-muted-foreground text-base leading-7">
-                  {t('about.preservationDescription')}
+                  {t('aboutPage.preservationDescription')}
                 </CardDescription>
               </CardHeader>
             </Card>
@@ -141,11 +141,11 @@ export default function AboutLibraryPage() {
 
                   <div>
                     <h3 className="font-serif text-2xl font-semibold">
-                      {t('about.accessibilityTitle')}
+                      {t('aboutPage.accessibilityTitle')}
                     </h3>
 
                     <p className="text-muted-foreground mt-3 leading-7">
-                      {t('about.accessibilityDescription')}
+                      {t('aboutPage.accessibilityDescription')}
                     </p>
                   </div>
                 </CardContent>
@@ -154,7 +154,7 @@ export default function AboutLibraryPage() {
                   <AspectRatio ratio={1}>
                     <img
                       src={libraryImage}
-                      alt={t('about.accessibilityTitle')}
+                      alt={t('aboutPage.accessibilityTitle')}
                       className="bg-muted/30 h-full w-full rounded-lg object-contain p-8 transition-transform duration-500 hover:scale-105"
                     />
                   </AspectRatio>

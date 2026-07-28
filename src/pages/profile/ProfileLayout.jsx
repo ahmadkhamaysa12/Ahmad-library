@@ -13,7 +13,7 @@ export default function ProfileLayout() {
     <div className="bg-muted/30 min-h-screen">
       <div className="container mx-auto py-10">
         {/* Header */}
-        <Card className="from-primary/10 mb-8 overflow-hidden bg-gradient-to-r to-transparent">
+        <Card className="from-primary/10 mb-8 overflow-hidden bg-linear-to-r to-transparent">
           <div className="flex flex-col items-center gap-5 p-8 md:flex-row">
             <Avatar className="h-20 w-20">
               <AvatarFallback className="text-3xl font-bold">
