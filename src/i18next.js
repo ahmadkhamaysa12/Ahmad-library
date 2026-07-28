@@ -125,6 +125,56 @@ i18n
             liabilityText:
               'Ahmad Library strives for accuracy but cannot guarantee uninterrupted access.',
           },
+          about: {
+            badge: 'About Ahmad Library',
+
+            title: 'Our Story',
+
+            description:
+              'For centuries, Ahmad Library has preserved knowledge and connected generations of readers with the wisdom of scholars, authors, and thinkers. We are more than a library; we are a place where knowledge and heritage continue to grow.',
+
+            timelineBadge: 'Our Journey',
+
+            timelineTitle: 'A Heritage of Knowledge',
+
+            timeline: [
+              {
+                year: '1892',
+                title: 'The Foundation',
+                description:
+                  'A modest collection of regional manuscripts curated by visionary scholars.',
+              },
+              {
+                year: '1954',
+                title: 'The Great Expansion',
+                description:
+                  'The library expanded by acquiring rare manuscripts and valuable historical collections.',
+              },
+              {
+                year: '2024',
+                title: 'Digital Transformation',
+                description:
+                  'Ahmad Library became accessible worldwide through modern digital technology.',
+              },
+            ],
+
+            valuesBadge: 'Our Values',
+
+            valuesTitle: 'Core Values',
+
+            valuesDescription:
+              'Our mission is built around preserving knowledge and making it accessible for everyone.',
+
+            preservationTitle: 'Preservation',
+
+            preservationDescription:
+              'Safeguarding rare books and manuscripts through careful conservation and modern archival techniques.',
+
+            accessibilityTitle: 'Accessibility',
+
+            accessibilityDescription:
+              'Connecting readers and researchers worldwide with valuable knowledge and resources.',
+          },
         },
       },
 
@@ -243,6 +293,56 @@ i18n
 
             liabilityText:
               'نسعى لتقديم معلومات دقيقة ولكن لا نضمن عدم حدوث انقطاع كامل للخدمة.',
+          },
+          about: {
+            badge: 'عن مكتبة أحمد',
+
+            title: 'قصتنا',
+
+            description:
+              'منذ عقود، تعمل مكتبة أحمد على حفظ المعرفة وربط أجيال القراء بحكمة العلماء والكتّاب والمفكرين. نحن أكثر من مجرد مكتبة، نحن مساحة يستمر فيها نمو العلم والتراث.',
+
+            timelineBadge: 'رحلتنا',
+
+            timelineTitle: 'إرث من المعرفة',
+
+            timeline: [
+              {
+                year: '1892',
+                title: 'البداية',
+                description:
+                  'بدأت المكتبة بمجموعة متواضعة من المخطوطات الإقليمية التي جمعها علماء متميزون.',
+              },
+              {
+                year: '1954',
+                title: 'مرحلة التوسع',
+                description:
+                  'توسعت المكتبة من خلال اقتناء مخطوطات نادرة ومجموعات تاريخية قيّمة.',
+              },
+              {
+                year: '2024',
+                title: 'التحول الرقمي',
+                description:
+                  'أصبحت مكتبة أحمد متاحة للقراء حول العالم من خلال التقنيات الرقمية الحديثة.',
+              },
+            ],
+
+            valuesBadge: 'قيمنا',
+
+            valuesTitle: 'قيمنا الأساسية',
+
+            valuesDescription:
+              'تقوم رسالتنا على الحفاظ على المعرفة وجعلها متاحة للجميع.',
+
+            preservationTitle: 'الحفاظ',
+
+            preservationDescription:
+              'الحفاظ على الكتب والمخطوطات النادرة باستخدام أساليب الحفظ والأرشفة الحديثة.',
+
+            accessibilityTitle: 'إتاحة المعرفة',
+
+            accessibilityDescription:
+              'ربط القراء والباحثين حول العالم بالمعرفة والمصادر القيمة.',
           },
         },
       },

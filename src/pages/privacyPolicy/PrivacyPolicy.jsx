@@ -3,15 +3,10 @@ import { Separator } from '@/components/ui/separator';
 import { useTranslation } from 'react-i18next';
 
 export default function PrivacyPolicy() {
-  const { t, i18n } = useTranslation();
-
-  const isArabic = i18n.language === 'ar';
+  const { t } = useTranslation();
 
   return (
-    <div
-      dir={isArabic ? 'rtl' : 'ltr'}
-      className="bg-background text-foreground min-h-screen"
-    >
+    <div className="bg-background text-foreground min-h-screen">
       {/* Header */}
       <section className="border-border border-b py-10 text-center">
         <h1 className="text-primary font-serif text-4xl font-bold">

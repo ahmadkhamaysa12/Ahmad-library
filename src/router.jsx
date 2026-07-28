@@ -23,6 +23,7 @@ import ProfileInfo from '@/components/forProfile/ProfileInfo';
 import ProfileOrders from '@/components/forProfile/ProfileOrders';
 import ProfileSettings from '@/components/forProfile/ProfileSettings';
 import PrivacyPolicy from './pages/privacyPolicy/PrivacyPolicy';
+import AboutUs from './pages/aboutUs/AboutUs';
 
 const router = createBrowserRouter([
   {
@@ -33,9 +34,13 @@ const router = createBrowserRouter([
         path: '/',
         element: <Home />,
       },
-{
+      {
         path: '/privacy',
         element: <PrivacyPolicy />,
+      },
+      {
+        path: '/about',
+        element: <AboutUs />,
       },
       {
         path: '/books',
