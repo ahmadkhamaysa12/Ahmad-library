@@ -25,14 +25,23 @@ export default function BookCard({ book }) {
 
       <div
         onClick={openBook}
-        className="group/image bg-muted/30 relative flex aspect-4/5 cursor-pointer items-center justify-center overflow-hidden p-6"
+        className="group/image bg-muted relative aspect-[4/5] cursor-pointer overflow-hidden"
       >
+        {/* Background effect */}
+
+        <div className="from-primary/10 absolute inset-0 bg-gradient-to-br via-transparent to-black/20" />
+
         <img
           src={book.imageUrl || book.image}
           alt={book.name || book.title}
-          className="relative h-full w-full rounded-md object-contain transition-all duration-700 ease-out group-hover/image:scale-105"
+          className="relative z-10 h-full w-full object-cover transition-all duration-700 ease-out group-hover/image:scale-105"
         />
+
+        {/* Bottom image shadow */}
+
+        <div className="absolute inset-x-0 bottom-0 z-20 h-24 bg-gradient-to-t from-black/40 to-transparent" />
       </div>
+
       <CardContent className="space-y-4 p-5">
         {/* Category */}
 

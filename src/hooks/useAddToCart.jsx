@@ -5,10 +5,11 @@ export default function useAddToCart() {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: async ({ ProductId, Count }) => {
+    mutationFn: async ({ ProductId, count }) => {
+      // Changed 'Count' to 'count'
       const response = await authAxiosInstance.post('/Carts', {
-        ProductId,
-        Count,
+        ProductId, // Assuming ProductId is still capitalized as per API
+        count,
       });
 
       return response.data;

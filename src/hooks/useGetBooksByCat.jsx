@@ -7,9 +7,14 @@ export default function useGetBooksByCat(id) {
   const { i18n } = useTranslation();
 
   const fetchBooksByCat = async () => {
-    const response = await instance.get(`/Products/category/${id}`);
+    const response = await instance.get(`/Products/category/${id}`); // Removed console.log
 
-    return response.data.response.data;
+    return (
+      response.data?.response?.data ??
+      response.data?.data ??
+      response.data ??
+      []
+    );
   };
 
   return useQuery({

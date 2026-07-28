@@ -5,7 +5,7 @@ export default function useUpdateQty() {
   const queryClient = useQueryClient();
   return useMutation({
     mutationFn: async ({ productId, count }) => {
-      await authAxiosInstance.patch(`/Carts/${productId}`, { count }); // i can do {count:count} but since they are the same name, react will understand it
+      await authAxiosInstance.patch(`/Carts/${productId}`, { count });
     },
     onSuccess: () => {
       queryClient.invalidateQueries({

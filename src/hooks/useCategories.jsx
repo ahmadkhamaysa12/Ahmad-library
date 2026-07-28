@@ -4,13 +4,13 @@ import axiosInstance from '@/api/axiosInstance';
 
 export default function useCategories() {
   const { i18n } = useTranslation();
-  const useCategories = async () => {
+  const fetchCategories = async () => {
     const response = await axiosInstance.get(`/Categories`);
     return response.data.response.data;
   };
   return useQuery({
     queryKey: ['categories', i18n.language],
-    queryFn: useCategories,
+    queryFn: fetchCategories,
     staleTime: 1000 * 60 * 5,
   });
 }

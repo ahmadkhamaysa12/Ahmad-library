@@ -1,12 +1,12 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import authinstance from '../api/authAxiosInstance';
+import authAxiosInstance from '../api/authAxiosInstance'; // Corrected import name
 
 export default function useClearCart() {
   const queryClient = useQueryClient();
 
   return useMutation({
     mutationFn: async () => {
-      const response = await authinstance.delete('/Carts/clear');
+      const response = await authAxiosInstance.delete('/Carts/clear'); // Changed authinstance to authAxiosInstance
       return response.data;
     },
 
