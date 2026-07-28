@@ -1,5 +1,4 @@
 import { Link } from 'react-router-dom';
-import { Separator } from '@/components/ui/separator';
 
 const links = [
   {
@@ -26,9 +25,9 @@ const links = [
 
 export default function Footer() {
   return (
-    <footer className="border-t border-border bg-background">
+    <footer className="border-border bg-background border-t">
       <div className="container mx-auto flex flex-col items-center px-6 py-20">
-        <h2 className="font-serif text-4xl font-bold tracking-tight text-secondary md:text-5xl">
+        <h2 className="text-secondary font-serif text-4xl font-bold tracking-tight md:text-5xl">
           Ahmad Library
         </h2>
 
@@ -37,16 +36,16 @@ export default function Footer() {
             <Link
               key={link.title}
               to={link.href}
-              className="text-base font-medium tracking-wide text-muted-foreground underline underline-offset-4 transition-all duration-200 hover:text-primary hover:underline-offset-8"
+              className="text-muted-foreground hover:text-primary text-base font-medium tracking-wide underline underline-offset-4 transition-all duration-200 hover:underline-offset-8"
             >
               {link.title}
             </Link>
           ))}
         </nav>
 
-        <p className="text-center text-lg text-primary/80">
-          © {new Date().getFullYear()} Ahmad Library. Preserving Heritage Through
-          Knowledge.
+        <p className="text-primary/80 text-center text-lg">
+          © {new Date().getFullYear()} Ahmad Library. Preserving Heritage
+          Through Knowledge.
         </p>
       </div>
     </footer>
