@@ -1,28 +1,42 @@
 import useBooks from '@/hooks/useBooks';
 import useGetProductByCat from '@/hooks/useGetProductByCat';
+
 import BooksGrid from './BooksGrid';
 
-export default function AllBooks({ categoryId }) {
+
+export default function AllBooks({ categoryId, view }) {
+
   const allBooksQuery = useBooks();
-  const categoryBooksQuery = useGetProductByCat(categoryId);
 
-const { data, isLoading, error } = categoryId
-  ? categoryBooksQuery
-  : allBooksQuery;
+  const categoryBooksQuery =
+    useGetProductByCat(categoryId);
 
-const books = data?.response ?? data ?? [];
+
+  const {
+    data: books = [],
+    isLoading,
+    error,
+  } =
+    categoryId
+      ? categoryBooksQuery
+      : allBooksQuery;
+
+
 
   if (isLoading) {
     return <div>Loading...</div>;
   }
 
+
   if (error) {
     return <div>Error loading books</div>;
   }
 
-  if (!books || books.length === 0) {
-    return <div>No books found</div>;
-  }
 
-  return <BooksGrid books={books} />;
+  return (
+    <BooksGrid
+      books={books}
+      view={view}
+    />
+  );
 }

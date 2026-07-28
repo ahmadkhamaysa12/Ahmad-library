@@ -183,6 +183,33 @@ i18n
             contact: 'Contact Scholar',
             copyright: 'Preserving Heritage Through Knowledge.',
           },
+          booksPage: {
+            title: 'Browse Books',
+            description:
+              'Explore our collection of Islamic books, rare manuscripts, and educational works preserved for knowledge seekers.',
+            sort: 'Sort by',
+            featured: 'Featured',
+
+            category: 'Category',
+            language: 'Language',
+            price: 'Price Range',
+
+            all: 'All',
+            islamic: 'Islamic Books',
+            history: 'History',
+            science: 'Science',
+
+            arabic: 'Arabic',
+            english: 'English',
+
+            addToCart: 'Add To Cart',
+            wishlist: 'Add to Wishlist',
+
+            previous: 'Previous',
+            next: 'Next',
+
+            noBooks: 'No books found.',
+          },
         },
       },
 
@@ -359,6 +386,34 @@ i18n
             terms: 'شروط الخدمة',
             contact: 'تواصل مع المكتبة',
             copyright: 'الحفاظ على التراث من خلال المعرفة.',
+          },
+          booksPage: {
+            title: 'تصفح الكتب',
+            description:
+              'استكشف مجموعتنا من الكتب الإسلامية والمخطوطات النادرة والكتب التعليمية المحفوظة لطالبي المعرفة.',
+
+            sort: 'ترتيب حسب',
+            featured: 'الأكثر تميزًا',
+
+            category: 'التصنيف',
+            language: 'اللغة',
+            price: 'نطاق السعر',
+
+            all: 'الكل',
+            islamic: 'كتب إسلامية',
+            history: 'التاريخ',
+            science: 'العلوم',
+
+            arabic: 'العربية',
+            english: 'الإنجليزية',
+
+            addToCart: 'أضف إلى السلة',
+            wishlist: 'أضف للمفضلة',
+
+            previous: 'السابق',
+            next: 'التالي',
+
+            noBooks: 'لم يتم العثور على كتب.',
           },
         },
       },
