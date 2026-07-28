@@ -76,7 +76,54 @@ i18n
             shipping: 'Shipping',
             express: 'Express',
             noDescription: 'No description available.',
-            cat:"bad api dont have this"
+            cat: 'bad api dont have this',
+          },
+          privacy: {
+            title: 'Legal & Privacy',
+            subtitle:
+              'Our commitment to protecting your data and outlining the terms of our service.',
+            updated: 'Last Updated: October 2024',
+
+            contents: 'Contents',
+
+            policy: 'Privacy Policy',
+            terms: 'Terms & Conditions',
+
+            dataCollection: 'Data Collection',
+            dataUsage: 'Data Usage',
+            cookies: 'Cookies & Tracking',
+
+            userObligations: 'User Obligations',
+            ip: 'Intellectual Property',
+            liability: 'Limitation of Liability',
+
+            policyText:
+              'At Ahmad Library, the preservation of heritage is paramount. We collect and manage information responsibly to improve your experience.',
+
+            collectionText:
+              'We collect information that you voluntarily provide when registering or using our services.',
+
+            personal: 'Contact Information (Name, Email Address)',
+            academic: 'Academic interests or research interests',
+            interaction: 'Interaction history with digital materials',
+
+            usageText:
+              'The information collected is used to enhance your experience within Ahmad Library digital ecosystem.',
+
+            quote:
+              'Your data is only used to provide better recommendations and improve our services.',
+
+            cookiesText:
+              'We use minimal necessary cookies to ensure functionality and security.',
+
+            userText:
+              'Users agree to interact with digital artifacts responsibly and respect intellectual property.',
+
+            ipText:
+              'All content and digital interfaces remain the intellectual property of Ahmad Library.',
+
+            liabilityText:
+              'Ahmad Library strives for accuracy but cannot guarantee uninterrupted access.',
           },
         },
       },
@@ -150,7 +197,52 @@ i18n
             shipping: 'الشحن',
             express: 'سريع',
             noDescription: 'لا يوجد وصف متاح.',
-            cat:"صنف الكتاب"
+            cat: 'صنف الكتاب',
+          },
+          privacy: {
+            title: 'القانون والخصوصية',
+            subtitle: 'التزامنا بحماية بياناتك وتوضيح شروط استخدام خدماتنا.',
+            updated: 'آخر تحديث: أكتوبر 2024',
+
+            contents: 'المحتويات',
+
+            policy: 'سياسة الخصوصية',
+            terms: 'الشروط والأحكام',
+
+            dataCollection: 'جمع البيانات',
+            dataUsage: 'استخدام البيانات',
+            cookies: 'ملفات تعريف الارتباط والتتبع',
+
+            userObligations: 'التزامات المستخدم',
+            ip: 'الملكية الفكرية',
+            liability: 'حدود المسؤولية',
+
+            policyText:
+              'في مكتبة أحمد، نولي أهمية كبيرة للحفاظ على التراث وإدارة المعلومات بشكل مسؤول لتحسين تجربة المستخدم.',
+
+            collectionText:
+              'نقوم بجمع المعلومات التي يقدمها المستخدم طوعاً عند التسجيل أو استخدام الخدمات.',
+
+            personal: 'معلومات التواصل مثل الاسم والبريد الإلكتروني',
+            academic: 'الاهتمامات العلمية والبحثية',
+            interaction: 'سجل التفاعل مع المواد الرقمية',
+
+            usageText:
+              'تستخدم البيانات لتحسين تجربة المستخدم داخل النظام الرقمي للمكتبة.',
+
+            quote: 'يتم استخدام بياناتك فقط لتحسين الخدمات وتقديم تجربة أفضل.',
+
+            cookiesText:
+              'نستخدم ملفات تعريف ارتباط ضرورية لضمان تشغيل وأمان الموقع.',
+
+            userText:
+              'يلتزم المستخدم باستخدام المحتوى الرقمي بطريقة مسؤولة واحترام الحقوق الفكرية.',
+
+            ipText:
+              'جميع المحتويات والواجهات الرقمية تعتبر ملكية فكرية لمكتبة أحمد.',
+
+            liabilityText:
+              'نسعى لتقديم معلومات دقيقة ولكن لا نضمن عدم حدوث انقطاع كامل للخدمة.',
           },
         },
       },

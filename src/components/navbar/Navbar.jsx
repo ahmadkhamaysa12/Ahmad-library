@@ -60,7 +60,7 @@ export default function Navbar() {
   return (
     <header className="bg-background/90 border-border sticky top-0 z-50 w-full border-b backdrop-blur-md">
       <Container>
-        <div className="mx-auto flex h-[72px] items-center justify-between">
+        <div className="mx-auto flex h-18 items-center justify-between">
           {/* Logo */}
 
           <Link
@@ -88,7 +88,7 @@ export default function Navbar() {
               <Link
                 key={link.to}
                 to={link.to}
-                className="text-muted-foreground hover:text-primary after:bg-primary relative text-[15px] font-medium tracking-wide transition-colors duration-200 after:absolute after:bottom-[-6px] after:left-0 after:h-[2px] after:w-0 after:transition-all after:duration-300 hover:after:w-full"
+                className="text-muted-foreground hover:text-primary after:bg-primary relative text-[15px] font-medium tracking-wide transition-colors duration-200 after:absolute after:-bottom-1.5 after:left-0 after:h-0.5 after:w-0 after:transition-all after:duration-300 hover:after:w-full"
               >
                 {link.name}
               </Link>
