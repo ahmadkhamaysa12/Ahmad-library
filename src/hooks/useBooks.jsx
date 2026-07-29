@@ -25,7 +25,7 @@ export default function useBooks({
       },
     });
 
-    return response.data.response.data;
+    return response.data.response.data ?? [];
   };
 
   return useQuery({

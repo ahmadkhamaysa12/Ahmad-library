@@ -24,7 +24,7 @@ export default function BooksGrid({
           />
         ))
       ) : (
-        <div className="col-span-full flex min-h-[350px] items-center justify-center rounded-xl border border-dashed border-border">
+        <div className="col-span-full flex min-h-87.5 items-center justify-center rounded-xl border border-dashed border-border">
           <p className="text-muted-foreground text-lg">
             No books found.
           </p>

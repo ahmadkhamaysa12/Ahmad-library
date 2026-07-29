@@ -8,12 +8,11 @@ import {
   Sun,
   User,
 } from 'lucide-react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useSearchParams } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import i18n from '../../i18next';
 import { useTheme } from 'next-themes';
-import { useState } from 'react';
-
+import { useEffect, useState } from 'react';
 import { Button } from '../ui/button';
 import { Input } from '@/components/ui/input';
 import Container from '@/components/ui/container';
@@ -32,7 +31,25 @@ export default function Navbar() {
   const { t } = useTranslation();
   const navigate = useNavigate();
   const { theme, setTheme } = useTheme();
+  const [searchParams] = useSearchParams();
 
+  const urlSearch = searchParams.get('search') || '';
+
+  const [search, setSearch] = useState(urlSearch);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      if (search === urlSearch) return;
+
+      if (search.trim()) {
+        navigate(`/books?search=${encodeURIComponent(search)}`);
+      } else {
+        navigate('/books');
+      }
+    }, 500);
+
+    return () => clearTimeout(timer);
+  }, [search, urlSearch, navigate]);
   const direction = i18n.language === 'ar' ? 'rtl' : 'ltr';
 
   const [open, setOpen] = useState(false);
@@ -76,6 +93,8 @@ export default function Navbar() {
             <Search className="text-muted-foreground h-4 w-4" />
 
             <Input
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
               placeholder={t('search')}
               className="border-0 bg-transparent p-0 shadow-none focus-visible:ring-0"
             />

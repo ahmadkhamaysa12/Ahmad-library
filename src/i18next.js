@@ -9,6 +9,10 @@ i18n
     resources: {
       en: {
         translation: {
+          cart: 'Cart',
+          language: 'Language',
+          light_mode: 'Light Mode',
+          dark_mode: 'Dark Mode',
           lib_name: 'Ahmad Library',
           home: 'Home',
           books: 'Books',
@@ -183,7 +187,6 @@ i18n
             contact: 'Contact Scholar',
             copyright: 'Preserving Heritage Through Knowledge.',
           },
-
           booksPage: {
             title: 'Browse Books',
             description:
@@ -201,30 +204,23 @@ i18n
             nameZA: 'Name (Z-A)',
 
             category: 'Category',
-            language: 'Language',
-            price: 'Price Range',
-
             all: 'All Books',
-            islamic: 'Islamic Books',
-            history: 'History',
-            science: 'Science',
 
-            arabic: 'Arabic',
-            english: 'English',
-
+            searchResult: 'Search results for',
+            noBooks: 'No books found.',
+topRated: 'Highest Rated',
             addToCart: 'Add To Cart',
             wishlist: 'Add to Wishlist',
-
-            previous: 'Previous',
-            next: 'Next',
-
-            noBooks: 'No books found.',
           },
         },
       },
 
       ar: {
         translation: {
+          cart: 'السلة',
+          language: 'اللغة',
+          light_mode: 'الوضع الفاتح',
+          dark_mode: 'الوضع الداكن',
           lib_name: 'مكتبة احمد',
           home: 'الرئيسية',
           books: 'الكتب',
@@ -414,24 +410,13 @@ i18n
             nameZA: 'الاسم (ي-أ)',
 
             category: 'التصنيف',
-            language: 'اللغة',
-            price: 'نطاق السعر',
-
             all: 'جميع الكتب',
-            islamic: 'كتب إسلامية',
-            history: 'التاريخ',
-            science: 'العلوم',
 
-            arabic: 'العربية',
-            english: 'الإنجليزية',
-
+            searchResult: 'نتائج البحث عن',
+            noBooks: 'لم يتم العثور على كتب.',
+topRated: 'الأعلى تقييماً',
             addToCart: 'أضف إلى السلة',
             wishlist: 'أضف للمفضلة',
-
-            previous: 'السابق',
-            next: 'التالي',
-
-            noBooks: 'لم يتم العثور على كتب.',
           },
         },
       },

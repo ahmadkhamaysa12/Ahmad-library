@@ -2,8 +2,8 @@ import useBooks from '@/hooks/useBooks';
 import BooksGrid from './BooksGrid';
 
 export default function AllBooks({
-  categoryId,
   view,
+  categoryId,
   sortBy,
   minPrice,
   maxPrice,
@@ -12,8 +12,8 @@ export default function AllBooks({
 }) {
   const {
     data: books = [],
-    isLoading,
     error,
+    isLoading,
   } = useBooks({
     categoryId,
     sortBy,
