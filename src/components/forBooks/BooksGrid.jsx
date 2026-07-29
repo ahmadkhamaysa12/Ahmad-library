@@ -1,28 +1,34 @@
 import BookCard from './BookCard';
 
-/**
- * BooksGrid component displays a collection of books in a grid or list layout.
- * It is a presentational component and does not handle data fetching.
- *
- * @param {object} props - The component props.
- * @param {Array<object>} props.books - An array of book objects to display.
- * @param {'grid' | 'list'} props.view - The current display view ('grid' or 'list').
- */
-export default function BooksGrid({ books, view }) {
-  // You can customize the grid/list layout based on the 'view' prop here.
-  // For example, using different Tailwind CSS classes.
-  const gridClasses =
-    'grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6';
-  const listClasses = 'space-y-6'; // Example for a list layout
+export default function BooksGrid({
+  books = [],
+  view = 'grid',
+}) {
+  const isGrid = view === 'grid';
+  const list = Array.isArray(books) ? books : [];
 
   return (
-    <div className={view === 'grid' ? gridClasses : listClasses}>
-      {Array.isArray(books) && books.length > 0 ? (
-        books.map((book) => <BookCard key={book.id} book={book} />)
+    <div
+      className={
+        isGrid
+          ? 'grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3'
+          : 'flex flex-col gap-5'
+      }
+    >
+      {list.length ? (
+        list.map((book) => (
+          <BookCard
+            key={book.id}
+            book={book}
+            view={view}
+          />
+        ))
       ) : (
-        <p className="text-muted-foreground col-span-full text-center">
-          No books found.
-        </p>
+        <div className="col-span-full flex min-h-[350px] items-center justify-center rounded-xl border border-dashed border-border">
+          <p className="text-muted-foreground text-lg">
+            No books found.
+          </p>
+        </div>
       )}
     </div>
   );
