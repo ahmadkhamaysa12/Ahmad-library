@@ -1,8 +1,13 @@
-import AllBooks from '../../components/forBooks/AllBooks';
-import AllCategories from '../../components/forCategories/AllCategories'
+import Hero from '@/components/forHome/Hero';
+import CategoriesSection from '@/components/forHome/CategoriesSection';
+import FeaturedBooks from '@/components/forHome/FeaturedBooks';
+
 export default function Home() {
-  return (<>
-  <AllBooks />
-  <AllCategories/>
-  </>);
+  return (
+    <>
+      <Hero />
+      <CategoriesSection />
+      <FeaturedBooks />
+    </>
+  );
 }

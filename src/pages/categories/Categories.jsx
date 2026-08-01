@@ -1,7 +1,6 @@
-import 'react'
-import AllCategories from '../../components/forCategories/AllCategories'
+
+import AllCategories from '@/components/forCategories/AllCategories';
+
 export default function Categories() {
-  return (
-    <AllCategories/>
-  )
-}
+  return <AllCategories/> 
+} 

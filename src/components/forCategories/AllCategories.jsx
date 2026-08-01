@@ -1,32 +1,49 @@
-import useCategories from '@/hooks/useCategories';
-import 'react';
+import {
+  BookOpen,
+  GraduationCap,
+  Globe,
+  Languages,
+  Landmark,
+  Library,
+  ScrollText,
+  Shapes,
+} from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 
-import { Badge } from '@/components/ui/badge';
-import { Button } from '@/components/ui/button';
+import useCategories from '@/hooks/useCategories';
+
 import {
   Card,
   CardDescription,
-  CardFooter,
   CardHeader,
   CardTitle,
 } from '@/components/ui/card';
 
-import logo from '../../assets/logo.svg';
+const icons = [
+  BookOpen,
+  GraduationCap,
+  Globe,
+  Languages,
+  Landmark,
+  Library,
+  ScrollText,
+  Shapes,
+];
 
 export default function AllCategories() {
   const navigate = useNavigate();
-  const { data: categories, isLoading, error } = useCategories();
   const { t } = useTranslation();
+
+  const { data: categories, isLoading, error } = useCategories();
 
   if (isLoading) {
     return (
-      <div className="grid gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
-        {Array.from({ length: 4 }).map((_, index) => (
+      <div className="grid gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
+        {Array.from({ length: 10 }).map((_, index) => (
           <div
             key={index}
-            className="bg-muted h-96 animate-pulse rounded-xl border"
+            className="bg-muted h-72 animate-pulse rounded-3xl"
           />
         ))}
       </div>
@@ -35,58 +52,47 @@ export default function AllCategories() {
 
   if (error) {
     return (
-      <div className="border-destructive bg-destructive/10 text-destructive flex h-40 items-center justify-center rounded-xl border">
-        Failed to load categories
+      <div className="border-destructive bg-destructive/10 text-destructive flex h-40 items-center justify-center rounded-2xl border">
+        {t('failedToLoadCategories')}
       </div>
     );
   }
 
-  if (!categories || categories.length === 0) {
+  if (!categories?.length) {
     return (
-      <div className="bg-muted flex h-40 items-center justify-center rounded-xl border">
-        No categories found
+      <div className="bg-muted flex h-40 items-center justify-center rounded-2xl border">
+        {t('noCategoriesFound')}
       </div>
     );
   }
 
   return (
-    <div className="grid justify-center gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
-      {categories.map((category) => (
-        <Card
-          key={category.id}
-          className="group mx-auto w-full max-w-60 overflow-hidden rounded-xl border pt-0 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl"
-        >
-          <div className="bg-muted flex h-48 items-center justify-center p-5">
-            <img
-              src={logo}
-              alt={category.name}
-              className="h-full object-contain transition-transform duration-500 group-hover:scale-105"
-            />
-          </div>
+    <div className="grid gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
+      {categories.map((category) => {
+        const Icon = icons[category.id % icons.length];
 
-          <CardHeader className="space-y-2">
-            <div className="flex items-center justify-between gap-2">
-              <CardTitle className="line-clamp-1 text-base font-semibold">
+        return (
+          <Card
+            key={category.id}
+            onClick={() => navigate(`/books/${category.id}`)}
+            className="group border-border/60 bg-card hover:border-primary/30 cursor-pointer overflow-hidden rounded-3xl border transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl"
+          >
+            <CardHeader className="flex flex-col items-center justify-center px-6 py-10 text-center">
+              <div className="bg-primary/10 text-primary group-hover:bg-primary group-hover:text-primary-foreground mb-6 rounded-3xl p-6 transition-all duration-500 group-hover:scale-110 group-hover:rotate-6">
+                <Icon className="h-12 w-12" />
+              </div>
+
+              <CardTitle className="group-hover:text-primary mb-2 line-clamp-2 text-xl font-bold transition-colors duration-300">
                 {category.name}
               </CardTitle>
 
-              <Badge variant="books">
-                {category.booksCount ?? 0} {t('booksCount')}
-              </Badge>
-            </div>
-
-            <CardDescription className="line-clamp-2 text-xs">
-              {t('browseBooks')}
-            </CardDescription>
-          </CardHeader>
-
-          <CardFooter>
-            <Button onClick={() => navigate(`/books/${category.id}`)} className="w-full">
-              {t('viewCategory')}
-            </Button>
-          </CardFooter>
-        </Card>
-      ))}
+              <CardDescription className="max-w-[180px] text-sm leading-relaxed">
+                {t('browseBooks')}
+              </CardDescription>
+            </CardHeader>
+          </Card>
+        );
+      })}
     </div>
   );
 }
