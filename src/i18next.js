@@ -692,7 +692,7 @@ i18n
         },
       },
     },
-
+    
     interpolation: { escapeValue: false },
     detection: {
       order: ['localStorage', 'navigator'],
