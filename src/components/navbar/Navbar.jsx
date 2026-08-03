@@ -156,8 +156,8 @@ export default function Navbar() {
               <DropdownMenuContent align="end">
                 {token ? (
                   <>
-                    <DropdownMenuItem asChild>
-                      <Link to="/Profile">{t('profile')}</Link>
+                    <DropdownMenuItem render={<Link to="/Profile" />}>
+                      {t('profile')}
                     </DropdownMenuItem>
 
                     <DropdownMenuItem
@@ -169,12 +169,12 @@ export default function Navbar() {
                   </>
                 ) : (
                   <>
-                    <DropdownMenuItem asChild>
-                      <Link to="/Login">{t('login')}</Link>
+                    <DropdownMenuItem render={<Link to="/Login" />}>
+                      {t('login')}
                     </DropdownMenuItem>
 
-                    <DropdownMenuItem asChild>
-                      <Link to="/register">{t('register')}</Link>
+                    <DropdownMenuItem render={<Link to="/register" />}>
+                      {t('register')}
                     </DropdownMenuItem>
                   </>
                 )}

@@ -1,34 +1,26 @@
 import { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
-
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-
 import { Eye, EyeOff, Languages, Moon, Sun } from 'lucide-react';
-
 import { useTranslation } from 'react-i18next';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useTheme } from 'next-themes';
-
 import logo from '../../assets/logo.svg';
 import { LoginSchema } from '../../validation/LoginSchema';
-
 import authinstance from '../../api/authAxiosInstance';
 import useAuthStore from '../../store/useAuthStore';
 import i18n from '../../i18next';
 
 export default function LoginForm() {
   const [showPassword, setShowPassword] = useState(false);
-
   const { t } = useTranslation();
   const { theme, setTheme } = useTheme();
-
   const navigate = useNavigate();
-
   const setToken = useAuthStore((state) => state.setToken);
 
   const {

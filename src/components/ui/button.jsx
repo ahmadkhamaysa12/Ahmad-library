@@ -1,4 +1,4 @@
-import { Button as ButtonPrimitive } from '@base-ui/react/button';
+import { Slot } from '@radix-ui/react-slot';
 import { cva } from 'class-variance-authority';
 
 import { cn } from '@/lib/utils';
@@ -27,18 +27,17 @@ const buttonVariants = cva(
       },
 
       size: {
-        default:
-          'h-11 gap-2 rounded-xl px-4 has-data-[icon=inline-end]:pr-3 has-data-[icon=inline-start]:pl-3',
+        default: 'h-11 gap-2 rounded-xl px-4',
 
-        xs: 'h-7 gap-1 rounded-lg px-2 text-xs [&_svg:not([class*=size-])]:size-3',
+        xs: 'h-7 gap-1 rounded-lg px-2 text-xs',
 
-        sm: 'h-9 gap-1.5 rounded-lg px-3 text-sm [&_svg:not([class*=size-])]:size-3.5',
+        sm: 'h-9 gap-1.5 rounded-lg px-3 text-sm',
 
-        lg: 'h-12 gap-2 rounded-xl px-5 has-data-[icon=inline-end]:pr-4 has-data-[icon=inline-start]:pl-4',
+        lg: 'h-12 gap-2 rounded-xl px-5',
 
         icon: 'size-10 rounded-full',
 
-        'icon-xs': 'size-7 rounded-full [&_svg:not([class*=size-])]:size-3',
+        'icon-xs': 'size-7 rounded-full',
 
         'icon-sm': 'size-9 rounded-full',
 
@@ -53,16 +52,19 @@ const buttonVariants = cva(
   },
 );
 
-function Button({
-  className,
-  variant = 'default',
-  size = 'default',
-  ...props
-}) {
+function Button({ className, variant, size, asChild = false, ...props }) {
+  const Comp = asChild ? Slot : 'button';
+
   return (
-    <ButtonPrimitive
+    <Comp
       data-slot="button"
-      className={cn(buttonVariants({ variant, size, className }))}
+      className={cn(
+        buttonVariants({
+          variant,
+          size,
+          className,
+        }),
+      )}
       {...props}
     />
   );
