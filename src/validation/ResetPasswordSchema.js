@@ -3,6 +3,8 @@ import * as yup from 'yup';
 export const ResetPasswordSchema = yup.object({
   email: yup
     .string()
+    .trim()
+    .lowercase()
     .email('Email must be a valid email.')
     .required('Email is required.')
     .matches(

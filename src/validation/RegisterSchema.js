@@ -3,6 +3,8 @@ import * as yup from 'yup';
 export const RegisterSchema = yup.object({
   email: yup
     .string()
+    .trim()
+    .lowercase()
     .email('Email must be a valid email.')
     .required('Email is required.')
     .matches(
@@ -13,7 +15,7 @@ export const RegisterSchema = yup.object({
   password: yup
     .string()
     .required('Password is required.')
-    .min(6, 'Password must be at least 6 characters')
+    .min(6, 'Password must be at least 6 characters.')
     .matches(
       /^[A-Z][A-Za-z0-9!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]*$/,
       'Password must begin with a capital letter and may include letters, numbers, and special characters.',
@@ -21,13 +23,22 @@ export const RegisterSchema = yup.object({
 
   userName: yup
     .string()
+    .trim()
     .required('Username is required.')
     .matches(
       /^[A-Za-z][A-Za-z0-9_]{3,15}$/,
       'Use 4–16 characters. Start with a letter. Letters, numbers, and underscores only.',
     ),
 
-  fullName: yup.string().required('Full name is required.'),
+  fullName: yup
+    .string()
+    .trim()
+    .required('Full name is required.')
+    .min(3, 'Full name must be at least 3 characters.'),
 
-  phoneNumber: yup.string().required('Phone number is required.'),
+  phoneNumber: yup
+    .string()
+    .trim()
+    .required('Phone number is required.')
+    .matches(/^\+?[0-9]{10,15}$/, 'Phone number must contain 10 to 15 digits.'),
 });
