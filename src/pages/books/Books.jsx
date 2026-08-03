@@ -49,11 +49,9 @@ export default function Books() {
           <div className="flex items-center gap-3">
             {/* Sort */}
             <DropdownMenu>
-              <DropdownMenuTrigger asChild>
-                <Button variant="outline">
-                  {t('booksPage.sort')}
-                  <ChevronDown className="ml-2 h-4 w-4" />
-                </Button>
+              <DropdownMenuTrigger className="border-border bg-background hover:bg-accent hover:text-primary inline-flex h-11 items-center gap-2 rounded-xl border px-4 text-sm font-medium shadow-xs transition">
+                {t('booksPage.sort')}
+                <ChevronDown className="h-4 w-4" />
               </DropdownMenuTrigger>
               <DropdownMenuContent align="end">
                 <DropdownMenuItem
@@ -177,7 +175,6 @@ export default function Books() {
                   {t('booksPage.price')}
                 </h3>
                 <div className="space-y-4 pt-2">
-                  
                   <Slider
                     value={priceRange}
                     onValueChange={setPriceRange}
