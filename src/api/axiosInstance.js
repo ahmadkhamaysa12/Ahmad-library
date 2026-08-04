@@ -6,12 +6,19 @@ const axiosInstance = axios.create({
   withCredentials: true,
 });
 
-axiosInstance.interceptors.request.use((config) => {
-  config.headers = config.headers || {};
+axiosInstance.interceptors.request.use(
+  (config) => {
+    config.headers = config.headers || {};
 
-  config.headers['Accept-Language'] = i18next.resolvedLanguage ?? 'en';
+    config.headers['Accept-Language'] =
+      i18next.resolvedLanguage || i18next.language || 'en';
 
-  return config;
-});
+    return config;
+  },
+
+  (error) => {
+    return Promise.reject(error);
+  },
+);
 
 export default axiosInstance;

@@ -10,8 +10,8 @@ const authAxiosInstance = axios.create({
 authAxiosInstance.interceptors.request.use((config) => {
   config.headers = config.headers || {};
 
-  config.headers['Accept-Language'] = i18next.resolvedLanguage ?? 'en';
-
+  config.headers['Accept-Language'] =
+    i18next.resolvedLanguage || i18next.language || 'en';
   const token = useAuthStore.getState().token;
 
   if (token) {

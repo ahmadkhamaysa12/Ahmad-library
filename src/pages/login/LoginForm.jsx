@@ -10,6 +10,7 @@ import { useTranslation } from 'react-i18next';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useTheme } from 'next-themes';
+import { useMemo } from 'react';
 import logo from '../../assets/logo.svg';
 import { LoginSchema } from '../../validation/LoginSchema';
 import authinstance from '../../api/authAxiosInstance';
@@ -22,15 +23,15 @@ export default function LoginForm() {
   const { theme, setTheme } = useTheme();
   const navigate = useNavigate();
   const setToken = useAuthStore((state) => state.setToken);
-
-  const {
-    register,
-    handleSubmit,
-    formState: { errors, isSubmitting },
-  } = useForm({
-    resolver: yupResolver(LoginSchema),
-    mode: 'onBlur',
-  });
+const schema = useMemo(() => LoginSchema(t), [t]);
+const {
+  register,
+  handleSubmit,
+  formState: { errors, isSubmitting },
+} = useForm({
+  resolver: yupResolver(schema),
+  mode: 'onBlur',
+});
 
   const onSubmit = async (data) => {
     try {
@@ -58,14 +59,10 @@ export default function LoginForm() {
     <Card className="w-full border-none shadow-lg">
       <CardHeader className="flex flex-col items-center justify-center text-center">
         <Link to="/">
-          <img
-            src={logo}
-            alt="Logo"
-            className="mb-4 h-20 w-20 object-contain"
-          />
+          <img src={logo} alt="Logo" className="h-40 w-40" />
         </Link>
 
-        <CardTitle className="text-2xl font-bold">
+        <CardTitle className="my-4 text-4xl font-bold">
           {t('loginPage.welcome')}
         </CardTitle>
 
@@ -78,7 +75,7 @@ export default function LoginForm() {
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
           {/* Email */}
 
-          <div className="space-y-2">
+          <div className="space-y-3">
             <Label>{t('loginPage.email')}</Label>
 
             <Input
@@ -88,13 +85,15 @@ export default function LoginForm() {
             />
 
             {errors.email && (
-              <p className="text-sm text-red-500">{t(errors.email.message)}</p>
-            )}
+  <p className="text-sm text-red-500">
+    {errors.email.message}
+  </p>
+)}
           </div>
 
           {/* Password */}
 
-          <div className="space-y-2">
+          <div className="space-y-3">
             <Label>{t('loginPage.password')}</Label>
 
             <div className="bg-search relative rounded-lg">
@@ -121,10 +120,10 @@ export default function LoginForm() {
             </div>
 
             {errors.password && (
-              <p className="text-sm text-red-500">
-                {t(errors.password.message)}
-              </p>
-            )}
+  <p className="text-sm text-red-500">
+    {errors.password.message}
+  </p>
+)}
           </div>
 
           {/* Remember */}

@@ -1,47 +1,25 @@
-import  { useEffect } from 'react';
 import sideImage from '../../assets/side.png';
 import LoginForm from './LoginForm';
 
 export default function Login() {
-  useEffect(() => {
-    const mediaQuery = window.matchMedia('(min-width: 768px)');
-
-    const updateOverflow = () => {
-      const value = mediaQuery.matches ? 'hidden' : 'auto';
-
-      document.documentElement.style.overflow = value;
-      document.body.style.overflow = value;
-    };
-
-    updateOverflow();
-
-    mediaQuery.addEventListener('change', updateOverflow);
-
-    return () => {
-      document.documentElement.style.overflow = '';
-      document.body.style.overflow = '';
-
-      mediaQuery.removeEventListener('change', updateOverflow);
-    };
-  }, []);
-
   return (
-    <main className="h-dvh w-full overflow-hidden">
-      <div className="grid h-dvh md:grid-cols-2">
-        {/* Form */}
-        <div className="flex h-full items-center justify-center overflow-y-auto px-4 md:overflow-hidden">
+    <main className="min-h-dvh md:h-dvh">
+      <div className="grid h-full md:grid-cols-2">
+        <section className="flex items-center justify-center overflow-y-auto px-4 py-8 md:py-0">
           <div className="w-full max-w-lg lg:max-w-xl xl:max-w-2xl">
             <LoginForm />
           </div>
-        </div>
-        {/* Image */}
-        <div className="hidden h-full md:block">
+        </section>
+
+        <aside className="hidden md:block">
           <img
             src={sideImage}
-            alt="login"
+            alt="Login illustration"
             className="h-full w-full object-cover"
+            loading="eager"
+            draggable={false}
           />
-        </div>
+        </aside>
       </div>
     </main>
   );

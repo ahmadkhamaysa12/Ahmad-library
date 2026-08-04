@@ -1,26 +1,33 @@
 import * as yup from 'yup';
 
-export const LoginSchema = yup.object({
-  email: yup
-    .string()
-    .trim()
-    .lowercase()
-    .required('Email is required.')
-    .email('Email must be a valid email.')
-    .matches(
-      /^[A-Za-z0-9._%+-]+@(gmail\.com|yahoo\.com|icloud\.com)$/,
-      'Please enter a valid Gmail, Yahoo, or iCloud email address.',
-    ),
+export const LoginSchema = (t) =>
+  yup.object({
+    email: yup
+      .string()
+      .trim()
+      .lowercase()
+      .required(t('validation.email.required'))
+      .email(t('validation.email.invalid'))
+      .matches(
+        /^[A-Za-z0-9._%+-]+@(gmail\.com|yahoo\.com|icloud\.com)$/,
+        t('validation.email.domain')
+      ),
 
-  password: yup
-    .string()
-    .trim()
-    .required('Password is required.')
-    .min(6, 'Password must be at least 6 characters.')
-    .matches(/^[A-Z]/, 'Password must start with a capital letter.')
-    .matches(/[0-9]/, 'Password must contain at least one number.')
-    .matches(
-      /[!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]/,
-      'Password must contain at least one special character.',
-    ),
-});
+    password: yup
+      .string()
+      .trim()
+      .required(t('validation.password.required'))
+      .min(6, t('validation.password.min'))
+      .matches(
+        /^[A-Z]/,
+        t('validation.password.uppercase')
+      )
+      .matches(
+        /[0-9]/,
+        t('validation.password.number')
+      )
+      .matches(
+        /[!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]/,
+        t('validation.password.special')
+      ),
+  });

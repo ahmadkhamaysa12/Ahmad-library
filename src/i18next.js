@@ -148,7 +148,8 @@ i18n
             authenticity: 'Authenticity Included',
             quantity: 'Quantity',
             adding: 'Adding...',
-            shipsInternationally: 'Ships internationally. Price includes archival boxing and insurance.',
+            shipsInternationally:
+              'Ships internationally. Price includes archival boxing and insurance.',
             reviews: 'Reviews',
             noReviews: 'No reviews yet.',
             writeReview: 'Write a Review',
@@ -347,6 +348,21 @@ i18n
             terms: 'Terms of Service',
             contact: 'Contact Scholar',
             copyright: 'Preserving Heritage Through Knowledge.',
+          },
+          validation: {
+            email: {
+              required: 'Email is required.',
+              invalid: 'Email must be a valid email.',
+              domain:
+                'Please enter a valid Gmail, Yahoo, or iCloud email address.',
+            },
+            password: {
+              required: 'Password is required.',
+              min: 'Password must be at least 6 characters.',
+              uppercase: 'Password must start with a capital letter.',
+              number: 'Password must contain at least one number.',
+              special: 'Password must contain at least one special character.',
+            },
           },
         },
       },
@@ -689,10 +705,25 @@ i18n
             contact: 'تواصل مع المكتبة',
             copyright: 'الحفاظ على التراث من خلال المعرفة.',
           },
+
+          validation: {
+            email: {
+              required: 'البريد الإلكتروني مطلوب.',
+              invalid: 'يرجى إدخال بريد إلكتروني صالح.',
+              domain: 'يسمح فقط بعناوين Gmail وYahoo وiCloud.',
+            },
+            password: {
+              required: 'كلمة المرور مطلوبة.',
+              min: 'يجب أن تتكون كلمة المرور من 6 أحرف على الأقل.',
+              uppercase: 'يجب أن تبدأ كلمة المرور بحرف إنجليزي كبير.',
+              number: 'يجب أن تحتوي كلمة المرور على رقم واحد على الأقل.',
+              special: 'يجب أن تحتوي كلمة المرور على رمز خاص واحد على الأقل.',
+            },
+          },
         },
       },
     },
-    
+
     interpolation: { escapeValue: false },
     detection: {
       order: ['localStorage', 'navigator'],
