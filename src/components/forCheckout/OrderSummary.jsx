@@ -1,10 +1,14 @@
+import { useTranslation } from 'react-i18next';
+
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 
 export default function OrderSummary({ cart, books }) {
+  const { t } = useTranslation();
+
   return (
     <Card className="shadow-md">
       <CardHeader>
-        <CardTitle>Order Summary</CardTitle>
+        <CardTitle>{t('cartPage.orderSummary')}</CardTitle>
       </CardHeader>
 
       <CardContent className="space-y-4">
@@ -22,23 +26,21 @@ export default function OrderSummary({ cart, books }) {
                 </h3>
 
                 <p className="text-muted-foreground text-sm">
-                  Quantity: {item.count}
+                  {t('cartPage.items')}: {item.count}
                 </p>
 
-                <p className="text-muted-foreground text-sm">
-                  Price: ${item.price}
-                </p>
+                <p className="text-muted-foreground text-sm">{item.price} $</p>
               </div>
 
-              <p className="font-bold">${item.totalPrice}</p>
+              <p className="font-bold">{item.totalPrice} $</p>
             </div>
           );
         })}
 
         <div className="bg-primary/10 flex justify-between rounded-lg p-4 text-xl font-bold">
-          <span>Total</span>
+          <span>{t('cartPage.total')}</span>
 
-          <span>${cart?.cartTotal}</span>
+          <span>{cart?.cartTotal} $</span>
         </div>
       </CardContent>
     </Card>

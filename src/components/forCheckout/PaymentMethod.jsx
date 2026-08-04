@@ -1,3 +1,5 @@
+import { useTranslation } from 'react-i18next';
+
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 
 import { Button } from '@/components/ui/button';
@@ -5,11 +7,11 @@ import { Button } from '@/components/ui/button';
 export const paymentOptions = [
   {
     value: 'Cash',
-    label: '💵 Cash on Delivery',
+    label: 'checkoutPage.cashPayment',
   },
   {
     value: 'Visa',
-    label: '💳 Visa / Mastercard',
+    label: 'checkoutPage.visaPayment',
   },
 ];
 
@@ -19,10 +21,12 @@ export default function PaymentMethod({
   checkout,
   isPending,
 }) {
+  const { t } = useTranslation();
+
   return (
     <Card className="shadow-md">
       <CardHeader>
-        <CardTitle>Payment Method</CardTitle>
+        <CardTitle>{t('checkoutPage.paymentMethod')}</CardTitle>
       </CardHeader>
 
       <CardContent className="space-y-6">
@@ -40,7 +44,7 @@ export default function PaymentMethod({
                 onChange={(e) => setPaymentMethod(e.target.value)}
               />
 
-              <span>{option.label}</span>
+              <span>{t(option.label)}</span>
             </label>
           ))}
         </div>
@@ -51,7 +55,9 @@ export default function PaymentMethod({
           disabled={isPending}
           onClick={checkout}
         >
-          {isPending ? 'Processing...' : 'Place Order'}
+          {isPending
+            ? t('checkoutPage.processing')
+            : t('checkoutPage.placeOrder')}
         </Button>
       </CardContent>
     </Card>

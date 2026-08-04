@@ -28,7 +28,6 @@ i18n
           viewCategory: 'View Category',
           browseBooks: 'Browse books in this category.',
           search: 'Search title, author',
-
           common: {
             viewAll: 'View All',
             viewDetails: 'View Details',
@@ -66,7 +65,6 @@ i18n
             view: 'View',
             details: 'Details',
           },
-
           homePage: {
             hero: {
               badge: '🌟 Welcome to Ahmad Library',
@@ -100,7 +98,6 @@ i18n
               reference: '— Islamic Tradition',
             },
           },
-
           featured: {
             badge: '✨ Featured',
             title: 'Featured Books',
@@ -109,7 +106,6 @@ i18n
             new: 'New',
             viewAll: 'View All Books',
           },
-
           booksPage: {
             title: 'Browse Books',
             description:
@@ -140,7 +136,6 @@ i18n
             addToCart: 'Add To Cart',
             wishlist: 'Add to Wishlist',
           },
-
           bookPage: {
             home: 'Home',
             books: 'Books',
@@ -188,7 +183,6 @@ i18n
 
             sending: 'Sending...',
           },
-
           loginPage: {
             welcome: 'Welcome Back',
             subtitle: 'Login to your account',
@@ -206,7 +200,6 @@ i18n
 
             loggingIn: 'Signing in...',
           },
-
           registerPage: {
             welcome: 'Create Account',
             subtitle: 'Create your new account',
@@ -227,7 +220,6 @@ i18n
 
             userName: 'User Name',
           },
-
           resetPage: {
             welcome: 'Reset Password',
             subtitle: 'Create a new password for your account',
@@ -306,7 +298,6 @@ i18n
 
             passwordsDoNotMatch: 'Passwords do not match',
           },
-
           cartPage: {
             title: 'Your Cart',
 
@@ -343,7 +334,6 @@ i18n
 
             continueShopping: 'Continue Shopping',
           },
-
           aboutPage: {
             badge: 'About Ahmad Library',
 
@@ -394,7 +384,6 @@ i18n
             accessibilityDescription:
               'Connecting readers and researchers worldwide with valuable knowledge and resources.',
           },
-
           privacy: {
             title: 'Legal & Privacy',
 
@@ -467,7 +456,6 @@ i18n
 
             copyright: 'Preserving Heritage Through Knowledge.',
           },
-
           validation: {
             email: {
               required: 'Email is required.',
@@ -504,6 +492,17 @@ i18n
               required: 'Phone number is required.',
               pattern: 'Phone number must contain 10 to 15 digits.',
             },
+          },
+          checkoutPage: {
+            title: 'Checkout',
+            orderConfirmed: 'Order Confirmed',
+            orderPlaced: 'Your order has been placed successfully.',
+            paymentMethod: 'Payment Method',
+            cashPayment: '💵 Cash on Delivery',
+            visaPayment: '💳 Visa / Mastercard',
+            processing: 'Processing...',
+            placeOrder: 'Place Order',
+            continueShopping: 'Continue Shopping',
           },
         },
       },
@@ -566,7 +565,6 @@ i18n
             view: 'عرض',
             details: 'تفاصيل',
           },
-
           homePage: {
             hero: {
               badge: '🌟 مرحباً بك في مكتبة أحمد',
@@ -613,7 +611,6 @@ i18n
               reference: '— التراث الإسلامي',
             },
           },
-
           featured: {
             badge: '✨ مميز',
 
@@ -626,7 +623,6 @@ i18n
 
             viewAll: 'عرض جميع الكتب',
           },
-
           booksPage: {
             title: 'تصفح الكتب',
 
@@ -718,7 +714,6 @@ i18n
 
             sending: 'جاري الإرسال...',
           },
-
           loginPage: {
             welcome: 'مرحباً بعودتك',
 
@@ -738,7 +733,6 @@ i18n
 
             loggingIn: 'جارٍ تسجيل الدخول...',
           },
-
           registerPage: {
             welcome: 'إنشاء حساب جديد',
 
@@ -764,7 +758,6 @@ i18n
 
             userName: 'اسم المستخدم',
           },
-
           resetPage: {
             welcome: 'إعادة تعيين كلمة المرور',
 
@@ -863,7 +856,6 @@ i18n
 
             passwordsDoNotMatch: 'كلمات المرور غير متطابقة',
           },
-
           cartPage: {
             title: 'سلة التسوق',
 
@@ -901,7 +893,6 @@ i18n
 
             continueShopping: 'مواصلة التسوق',
           },
-
           aboutPage: {
             badge: 'عن مكتبة أحمد',
 
@@ -1006,7 +997,6 @@ i18n
             liabilityText:
               'نسعى لتقديم معلومات دقيقة ولكن لا نضمن عدم حدوث انقطاع كامل للخدمة.',
           },
-
           footer: {
             archive: 'عن أرشيفنا',
 
@@ -1023,7 +1013,6 @@ i18n
 
             copyright: 'الحفاظ على التراث من خلال المعرفة.',
           },
-
           validation: {
             email: {
               required: 'البريد الإلكتروني مطلوب.',
@@ -1069,6 +1058,17 @@ i18n
 
               pattern: 'يجب أن يحتوي رقم الهاتف على 10 إلى 15 رقمًا.',
             },
+          },
+          checkoutPage: {
+            title: 'إتمام الطلب',
+            orderConfirmed: 'تم تأكيد الطلب',
+            orderPlaced: 'تم تقديم طلبك بنجاح.',
+            paymentMethod: 'طريقة الدفع',
+            cashPayment: '💵 الدفع عند الاستلام',
+            visaPayment: '💳 فيزا / ماستركارد',
+            processing: 'جاري المعالجة...',
+            placeOrder: 'تقديم الطلب',
+            continueShopping: 'متابعة التسوق',
           },
         },
       },

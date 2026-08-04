@@ -1,3 +1,6 @@
+import { useTranslation } from 'react-i18next';
+import { useNavigate } from 'react-router-dom';
+
 import {
   Dialog,
   DialogContent,
@@ -7,8 +10,6 @@ import {
 
 import { Button } from '@/components/ui/button';
 
-import { useNavigate } from 'react-router-dom';
-
 import { paymentOptions } from './PaymentMethod';
 
 export default function OrderSuccessDialog({
@@ -17,6 +18,7 @@ export default function OrderSuccessDialog({
   paymentMethod,
 }) {
   const navigate = useNavigate();
+  const { t } = useTranslation();
 
   const selectedPayment = paymentOptions.find(
     (option) => option.value === paymentMethod,
@@ -36,23 +38,23 @@ export default function OrderSuccessDialog({
           </div>
 
           <DialogTitle className="font-serif text-3xl">
-            Order Confirmed
+            {t('checkoutPage.orderConfirmed')}
           </DialogTitle>
         </DialogHeader>
 
         <div className="space-y-4">
           <p className="text-muted-foreground">
-            Your order has been placed successfully.
+            {t('checkoutPage.orderPlaced')}
           </p>
 
           {selectedPayment && (
             <p className="bg-secondary/10 rounded-lg p-3 text-sm font-medium">
-              Payment method: {selectedPayment.label}
+              {t('checkoutPage.paymentMethod')}: {t(selectedPayment.label)}
             </p>
           )}
 
           <Button onClick={handleContinue} className="w-full rounded-xl">
-            Continue Shopping
+            {t('checkoutPage.continueShopping')}
           </Button>
         </div>
       </DialogContent>
