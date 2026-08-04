@@ -1,38 +1,68 @@
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+
 import useCart from '../../hooks/useCart';
 import useUpdateQty from '../../hooks/useUpdateQty';
 import useRemoveFromCart from '../../hooks/useRemoveFromCart';
 import useClearCart from '../../hooks/useClearCart';
-import { useNavigate } from 'react-router-dom';
+import useBooks from '@/hooks/useBooks';
+
 import Container from '@/components/ui/container';
 import CartSummary from '@/components/forCart/CartSummary';
 import CartList from '@/components/forCart/CartList';
-import useBooks from '@/hooks/useBooks';
 
 export default function Cart() {
-  const { mutate: clearCart, isPending: isClearing } = useClearCart();
   const navigate = useNavigate();
+
+  const [updatingId, setUpdatingId] = useState(null);
+  const [removingId, setRemovingId] = useState(null);
+
   const { data: cart, cartIsLoading, cartError } = useCart();
   const { data: books } = useBooks();
-  const { mutate: updateQty, isPending: isUpdating } = useUpdateQty();
 
-  const { mutate: removeFromCart, isPending: isRemoving } = useRemoveFromCart();
-  if (cartIsLoading) return <div>Cart is loading...</div>;
+  const { mutate: clearCart, isPending: isClearing } = useClearCart();
 
-  if (cartError) return <div>Error loading cart</div>;
+  const { mutate: updateQty } = useUpdateQty();
+
+  const { mutate: removeFromCart } = useRemoveFromCart();
+
+  if (cartIsLoading) {
+    return <div>Cart is loading...</div>;
+  }
+
+  if (cartError) {
+    return <div>Error loading cart</div>;
+  }
+
   const handleUpdateQty = (productId, count) => {
     if (count === 0) {
-      removeFromCart(productId);
+      handleRemove(productId);
       return;
     }
 
-    updateQty({
-      productId,
-      count,
-    });
+    setUpdatingId(productId);
+
+    updateQty(
+      {
+        productId,
+        count,
+      },
+      {
+        onSettled: () => {
+          setUpdatingId(null);
+        },
+      },
+    );
   };
 
   const handleRemove = (productId) => {
-    removeFromCart(productId);
+    setRemovingId(productId);
+
+    removeFromCart(productId, {
+      onSettled: () => {
+        setRemovingId(null);
+      },
+    });
   };
 
   return (
@@ -43,8 +73,8 @@ export default function Cart() {
           books={books}
           onUpdateQty={handleUpdateQty}
           onRemove={handleRemove}
-          isUpdating={isUpdating}
-          isRemoving={isRemoving}
+          updatingId={updatingId}
+          removingId={removingId}
         />
       </section>
 

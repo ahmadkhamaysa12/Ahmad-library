@@ -5,7 +5,7 @@ export default function CartList({
   books,
   onUpdateQty,
   onRemove,
-  isUpdating,
+  updatingId,
 }) {
   if (!items?.length) {
     return (
@@ -13,22 +13,20 @@ export default function CartList({
     );
   }
 
+  const booksMap = new Map(books?.map((book) => [book.id, book]) ?? []);
+
   return (
     <div className="space-y-4">
-      {items.map((item) => {
-        const book = books?.find((book) => book.id === item.productId);
-
-        return (
-          <CartItem
-            key={item.productId}
-            item={item}
-            book={book}
-            onUpdateQty={onUpdateQty}
-            onRemove={onRemove}
-            isUpdating={isUpdating}
-          />
-        );
-      })}
+      {items.map((item) => (
+        <CartItem
+          key={item.productId}
+          item={item}
+          book={booksMap.get(item.productId)}
+          onUpdateQty={onUpdateQty}
+          onRemove={onRemove}
+          isUpdating={updatingId === item.productId}
+        />
+      ))}
     </div>
   );
 }
