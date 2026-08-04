@@ -4,7 +4,11 @@ import {
   DialogHeader,
   DialogTitle,
 } from '@/components/ui/dialog';
+
+import { Button } from '@/components/ui/button';
+
 import { useNavigate } from 'react-router-dom';
+
 import { paymentOptions } from './PaymentMethod';
 
 export default function OrderSuccessDialog({
@@ -14,14 +18,14 @@ export default function OrderSuccessDialog({
 }) {
   const navigate = useNavigate();
 
+  const selectedPayment = paymentOptions.find(
+    (option) => option.value === paymentMethod,
+  );
+
   const handleContinue = () => {
     onOpenChange(false);
     navigate('/');
   };
-
-  const selectedPayment = paymentOptions.find(
-    (option) => option.value === paymentMethod,
-  );
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
@@ -30,25 +34,26 @@ export default function OrderSuccessDialog({
           <div className="bg-primary/10 mb-4 flex h-20 w-20 items-center justify-center rounded-full text-4xl">
             ✓
           </div>
+
           <DialogTitle className="font-serif text-3xl">
             Order Confirmed
           </DialogTitle>
         </DialogHeader>
+
         <div className="space-y-4">
           <p className="text-muted-foreground">
             Your order has been placed successfully.
           </p>
+
           {selectedPayment && (
             <p className="bg-secondary/10 rounded-lg p-3 text-sm font-medium">
               Payment method: {selectedPayment.label}
             </p>
           )}
-          <button
-            onClick={handleContinue}
-            className="bg-primary text-primary-foreground w-full rounded-xl py-3 font-semibold transition hover:opacity-90"
-          >
+
+          <Button onClick={handleContinue} className="w-full rounded-xl">
             Continue Shopping
-          </button>
+          </Button>
         </div>
       </DialogContent>
     </Dialog>

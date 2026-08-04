@@ -37,6 +37,7 @@ export default function OrderSummary({ cart, books }) {
 
         <div className="bg-primary/10 flex justify-between rounded-lg p-4 text-xl font-bold">
           <span>Total</span>
+
           <span>${cart?.cartTotal}</span>
         </div>
       </CardContent>

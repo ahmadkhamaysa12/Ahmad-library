@@ -1,4 +1,5 @@
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+
 import { Button } from '@/components/ui/button';
 
 export const paymentOptions = [
@@ -38,6 +39,7 @@ export default function PaymentMethod({
                 checked={paymentMethod === option.value}
                 onChange={(e) => setPaymentMethod(e.target.value)}
               />
+
               <span>{option.label}</span>
             </label>
           ))}

@@ -7,6 +7,7 @@ import {
   DialogHeader,
   DialogTitle,
 } from '@/components/ui/dialog';
+
 import { useNavigate } from 'react-router-dom';
 import useCart from '@/hooks/useCart';
 import useCheckout from '@/hooks/useCheckout';
@@ -17,6 +18,7 @@ import PaymentMethod from '@/components/forCheckout/PaymentMethod';
 
 export default function Checkout() {
   const navigate = useNavigate();
+
   const [paymentMethod, setPaymentMethod] = useState('Cash');
   const [showSuccess, setShowSuccess] = useState(false);
 
@@ -26,9 +28,15 @@ export default function Checkout() {
 
   const handleCheckout = () => {
     checkout(paymentMethod, {
-      onSuccess: () => {
+      onSuccess: (data) => {
+        // Cash payment
         if (paymentMethod === 'Cash') {
           setShowSuccess(true);
+        }
+
+        // Visa / Stripe payment
+        if (paymentMethod === 'Visa' && data?.url) {
+          window.location.href = data.url;
         }
       },
     });
@@ -56,6 +64,7 @@ export default function Checkout() {
         </div>
       </div>
 
+      {/* Cash Success */}
       <Dialog open={showSuccess} onOpenChange={setShowSuccess}>
         <DialogContent className="max-w-md rounded-2xl p-8 text-center shadow-2xl">
           <DialogHeader className="items-center">
