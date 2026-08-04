@@ -1,20 +1,14 @@
 import { useOutletContext } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-
 import { Badge } from '@/components/ui/badge';
 import { Skeleton } from '@/components/ui/skeleton';
 
 import { Package, CalendarDays, CreditCard, DollarSign } from 'lucide-react';
 
-const statusMap = {
-  0: 'Pending',
-  1: 'Processing',
-  2: 'Completed',
-  3: 'Cancelled',
-};
-
 export default function ProfileOrders() {
+  const { t, i18n } = useTranslation();
   const { data: profile, isLoading, error } = useOutletContext();
 
   if (isLoading) {
@@ -30,13 +24,33 @@ export default function ProfileOrders() {
     return (
       <Card>
         <CardContent className="text-destructive py-10 text-center">
-          Error loading orders.
+          {t('profilePage.errorLoading')}
         </CardContent>
       </Card>
     );
   }
 
-  const orders = profile?.orders ?? [];
+  const orders = [...(profile?.orders ?? [])].sort(
+    (a, b) => new Date(b.orderDate) - new Date(a.orderDate),
+  );
+
+  const statusMap = {
+    0: t('profilePage.pending'),
+    1: t('profilePage.processing'),
+    2: t('profilePage.completed'),
+    3: t('profilePage.cancelled'),
+
+    Active: t('profilePage.active'),
+    Pending: t('profilePage.pending'),
+    Processing: t('profilePage.processing'),
+    Completed: t('profilePage.completed'),
+    Cancelled: t('profilePage.cancelled'),
+  };
+
+  const paymentStatusMap = {
+    paid: t('profilePage.paid'),
+    unpaid: t('profilePage.unpaid'),
+  };
 
   if (orders.length === 0) {
     return (
@@ -44,10 +58,10 @@ export default function ProfileOrders() {
         <CardContent className="py-16 text-center">
           <Package className="text-muted-foreground mx-auto mb-4 h-12 w-12" />
 
-          <h3 className="text-xl font-semibold">No Orders Yet</h3>
+          <h3 className="text-xl font-semibold">{t('profilePage.noOrders')}</h3>
 
           <p className="text-muted-foreground mt-2">
-            Your orders will appear here.
+            {t('profilePage.noOrdersDesc')}
           </p>
         </CardContent>
       </Card>
@@ -57,57 +71,79 @@ export default function ProfileOrders() {
   return (
     <div className="space-y-6">
       <div>
-        <h1 className="text-3xl font-bold">My Orders</h1>
+        <h1 className="text-3xl font-bold">{t('profilePage.myOrders')}</h1>
 
-        <p className="text-muted-foreground">Track and manage your purchases</p>
+        <p className="text-muted-foreground">{t('profilePage.trackManage')}</p>
       </div>
 
-      {orders.map((order) => (
-        <Card
-          key={order.id}
-          className="overflow-hidden transition-all hover:shadow-lg"
-        >
-          <CardHeader className="bg-muted/30 flex-row items-center justify-between border-b">
-            <div className="flex items-center gap-3">
-              <div className="bg-primary/10 rounded-full p-3">
-                <Package className="text-primary h-5 w-5" />
+      {orders.map((order) => {
+        const formattedDate = new Date(order.orderDate).toLocaleDateString(
+          i18n.language,
+        );
+
+        const formattedAmount = new Intl.NumberFormat(i18n.language, {
+          style: 'currency',
+          currency: 'USD',
+        }).format(order.amountPaid);
+
+        return (
+          <Card
+            key={order.id}
+            className="overflow-hidden transition-all hover:shadow-lg"
+          >
+            <CardHeader className="bg-muted/30 flex-row items-center justify-between border-b">
+              <div className="flex items-center gap-3">
+                <div className="bg-primary/10 rounded-full p-3">
+                  <Package className="text-primary h-5 w-5" />
+                </div>
+
+                <div>
+                  <CardTitle>
+                    {t('profilePage.order')} #{order.id}
+                  </CardTitle>
+
+                  <p className="text-muted-foreground text-sm">
+                    {formattedDate}
+                  </p>
+                </div>
               </div>
 
-              <div>
-                <CardTitle>Order #{order.id}</CardTitle>
+              <Badge
+                variant={
+                  order.status === 2 || order.status === 'Completed'
+                    ? 'default'
+                    : 'secondary'
+                }
+              >
+                {statusMap[order.status] ?? order.status}
+              </Badge>
+            </CardHeader>
 
-                <p className="text-muted-foreground text-sm">
-                  {new Date(order.orderDate).toLocaleDateString()}
-                </p>
-              </div>
-            </div>
+            <CardContent className="grid gap-5 p-6 sm:grid-cols-3">
+              <OrderInfo
+                icon={<DollarSign />}
+                label={t('profilePage.amount')}
+                value={formattedAmount}
+              />
 
-            <Badge variant={order.status === 2 ? 'default' : 'secondary'}>
-              {statusMap[order.status] ?? order.status}
-            </Badge>
-          </CardHeader>
+              <OrderInfo
+                icon={<CreditCard />}
+                label={t('profilePage.payment')}
+                value={
+                  paymentStatusMap[order.paymentStatus] ??
+                  t('profilePage.pending')
+                }
+              />
 
-          <CardContent className="grid gap-5 p-6 sm:grid-cols-3">
-            <OrderInfo
-              icon={<DollarSign />}
-              label="Amount"
-              value={`$${order.amountPaid}`}
-            />
-
-            <OrderInfo
-              icon={<CreditCard />}
-              label="Payment"
-              value={order.paymentStatus || 'Pending'}
-            />
-
-            <OrderInfo
-              icon={<CalendarDays />}
-              label="Date"
-              value={new Date(order.orderDate).toLocaleDateString()}
-            />
-          </CardContent>
-        </Card>
-      ))}
+              <OrderInfo
+                icon={<CalendarDays />}
+                label={t('profilePage.date')}
+                value={formattedDate}
+              />
+            </CardContent>
+          </Card>
+        );
+      })}
     </div>
   );
 }

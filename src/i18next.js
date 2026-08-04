@@ -246,13 +246,23 @@ i18n
             passwordPlaceholder: 'Enter your new password',
           },
           profilePage: {
+            orders: 'Orders',
+            totalSpent: 'Total Spent',
+            status: 'Status',
+            verified: 'Verified',
+            memberAccount: 'Member Account',
+
+            fullName: 'Full Name',
+            email: 'Email',
+            phone: 'Phone',
+            city: 'City',
+            notProvided: 'Not provided',
+
             myOrders: 'My Orders',
             trackManage: 'Track and manage your purchases',
-
+            errorLoading: 'Error loading orders.',
             noOrders: 'No Orders Yet',
             noOrdersDesc: 'Your orders will appear here.',
-
-            errorLoading: 'Error loading orders.',
 
             order: 'Order',
             amount: 'Amount',
@@ -263,21 +273,10 @@ i18n
             processing: 'Processing',
             completed: 'Completed',
             cancelled: 'Cancelled',
+            active: 'Active',
 
-            memberAccount: 'Member Account',
-
-            fullName: 'Full Name',
-            email: 'Email',
-            phone: 'Phone',
-            city: 'City',
-
-            notProvided: 'Not provided',
-
-            orders: 'Orders',
-            totalSpent: 'Total Spent',
-
-            status: 'Status',
-            verified: 'Verified',
+            paid: 'Paid',
+            unpaid: 'Unpaid',
 
             settings: 'Settings',
 
@@ -285,18 +284,16 @@ i18n
             newEmail: 'New Email',
             updateEmail: 'Update Email',
 
-            updating: 'Updating...',
-            updated: 'Updated',
-
             changePassword: 'Change Password',
-
             currentPassword: 'Current Password',
             newPassword: 'New Password',
             confirmNewPassword: 'Confirm New Password',
-
             updatePassword: 'Update Password',
 
-            passwordsDoNotMatch: 'Passwords do not match',
+            updating: 'Updating...',
+            updated: 'Updated',
+
+            passwordsDoNotMatch: 'Passwords do not match.',
           },
           cartPage: {
             title: 'Your Cart',
@@ -786,75 +783,54 @@ i18n
             rememberPassword: 'تذكرت كلمة المرور؟',
           },
           profilePage: {
-            myOrders: 'طلباتي',
-
-            trackManage: 'تتبع وإدارة مشترياتك',
-
-            noOrders: 'لا توجد طلبات بعد',
-
-            noOrdersDesc: 'ستظهر طلباتك هنا.',
-
-            errorLoading: 'حدث خطأ في تحميل الطلبات.',
-
-            order: 'طلب',
-
-            amount: 'المبلغ',
-
-            payment: 'الدفع',
-
-            date: 'التاريخ',
-
-            pending: 'قيد الانتظار',
-
-            processing: 'قيد المعالجة',
-
-            completed: 'مكتمل',
-
-            cancelled: 'ملغي',
-
+            orders: 'الطلبات',
+            totalSpent: 'إجمالي الإنفاق',
+            status: 'الحالة',
+            verified: 'موثق',
             memberAccount: 'حساب عضو',
 
             fullName: 'الاسم الكامل',
-
             email: 'البريد الإلكتروني',
-
-            phone: 'الهاتف',
-
+            phone: 'رقم الهاتف',
             city: 'المدينة',
+            notProvided: 'غير متوفر',
 
-            notProvided: 'غير محدد',
+            myOrders: 'طلباتي',
+            trackManage: 'تتبع وإدارة طلباتك',
+            errorLoading: 'حدث خطأ أثناء تحميل الطلبات.',
+            noOrders: 'لا توجد طلبات',
+            noOrdersDesc: 'ستظهر طلباتك هنا.',
 
-            orders: 'الطلبات',
+            order: 'الطلب',
+            amount: 'المبلغ',
+            payment: 'الدفع',
+            date: 'التاريخ',
 
-            totalSpent: 'إجمالي الإنفاق',
+            pending: 'قيد الانتظار',
+            processing: 'قيد المعالجة',
+            completed: 'مكتمل',
+            cancelled: 'ملغي',
+            active: 'نشط',
 
-            status: 'الحالة',
-
-            verified: 'موثق',
+            paid: 'مدفوع',
+            unpaid: 'غير مدفوع',
 
             settings: 'الإعدادات',
 
             changeEmail: 'تغيير البريد الإلكتروني',
-
-            newEmail: 'بريد إلكتروني جديد',
-
-            updateEmail: 'تحديث البريد',
-
-            updating: 'جاري التحديث...',
-
-            updated: 'تم التحديث',
+            newEmail: 'البريد الإلكتروني الجديد',
+            updateEmail: 'تحديث البريد الإلكتروني',
 
             changePassword: 'تغيير كلمة المرور',
-
             currentPassword: 'كلمة المرور الحالية',
-
             newPassword: 'كلمة المرور الجديدة',
-
             confirmNewPassword: 'تأكيد كلمة المرور الجديدة',
-
             updatePassword: 'تحديث كلمة المرور',
 
-            passwordsDoNotMatch: 'كلمات المرور غير متطابقة',
+            updating: 'جارٍ التحديث...',
+            updated: 'تم التحديث',
+
+            passwordsDoNotMatch: 'كلمتا المرور غير متطابقتين.',
           },
           cartPage: {
             title: 'سلة التسوق',
