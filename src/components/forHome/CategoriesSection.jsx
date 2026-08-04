@@ -1,12 +1,18 @@
 import { useTranslation } from 'react-i18next';
+
 import useCategories from '@/hooks/useCategories';
+
 import SectionHeader from './SectionHeader';
 import CategoryCard from './CategoryCard';
+
 import { Skeleton } from '@/components/ui/skeleton';
 
 export default function CategoriesSection() {
   const { t } = useTranslation();
+
   const { data: categories = [], isLoading } = useCategories();
+
+  const list = Array.isArray(categories) ? categories.slice(0, 4) : [];
 
   return (
     <section className="bg-muted/20 dark:bg-muted/10 py-24">
@@ -20,13 +26,13 @@ export default function CategoriesSection() {
 
         {isLoading ? (
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-            {Array.from({ length: 4 }).map((_, index) => (
-              <Skeleton key={index} className="h-64 rounded-xl" />
+            {[1, 2, 3, 4].map((item) => (
+              <Skeleton key={item} className="h-64 rounded-xl" />
             ))}
           </div>
         ) : (
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-            {categories.slice(0, 4).map((category) => (
+            {list.map((category) => (
               <CategoryCard key={category.id} category={category} />
             ))}
           </div>

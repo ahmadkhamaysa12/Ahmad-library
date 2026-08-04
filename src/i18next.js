@@ -32,38 +32,9 @@ i18n
             viewAll: 'View All',
             viewDetails: 'View Details',
             explore: 'Explore',
+            currency: '$',
             loading: 'Loading...',
             error: 'Something went wrong',
-            noResults: 'No results found',
-
-            back: 'Go Back',
-            save: 'Save',
-            cancel: 'Cancel',
-            confirm: 'Confirm',
-            delete: 'Delete',
-            edit: 'Edit',
-            close: 'Close',
-
-            search: 'Search',
-            filter: 'Filter',
-            sort: 'Sort',
-            apply: 'Apply',
-            reset: 'Reset',
-
-            optional: 'Optional',
-            required: 'Required',
-
-            success: 'Success',
-            failed: 'Failed',
-
-            new: 'New',
-            featured: 'Featured',
-
-            addToCart: 'Add To Cart',
-            buyNow: 'Buy Now',
-
-            view: 'View',
-            details: 'Details',
           },
           homePage: {
             hero: {
@@ -126,7 +97,9 @@ i18n
             addToCart: 'Add to Cart',
 
             noBooks: 'No books found.',
-          },
+          },category: {
+  books: 'Books',
+},
           bookPage: {
             home: 'Home',
             books: 'Books',
@@ -528,83 +501,34 @@ i18n
             viewAll: 'عرض الكل',
             viewDetails: 'عرض التفاصيل',
             explore: 'استكشف',
-            loading: 'جاري التحميل...',
-            error: 'حدث خطأ ما',
-            noResults: 'لا توجد نتائج',
-
-            back: 'رجوع',
-            save: 'حفظ',
-            cancel: 'إلغاء',
-            confirm: 'تأكيد',
-            delete: 'حذف',
-            edit: 'تعديل',
-            close: 'إغلاق',
-
-            search: 'بحث',
-            filter: 'تصفية',
-            sort: 'ترتيب',
-            apply: 'تطبيق',
-            reset: 'إعادة تعيين',
-
-            optional: 'اختياري',
-            required: 'مطلوب',
-
-            success: 'تم بنجاح',
-            failed: 'فشل',
-
-            new: 'جديد',
-            featured: 'مميز',
-
-            addToCart: 'أضف إلى السلة',
-            buyNow: 'شراء الآن',
-
-            view: 'عرض',
-            details: 'تفاصيل',
+            currency: 'دولار',
           },
           homePage: {
             hero: {
-              badge: '🌟 مرحباً بك في مكتبة أحمد',
-
-              title: 'اكتشف عالم',
-
-              highlight: 'المعرفة',
-
+              badge: 'مكتبة إسلامية مميزة',
+              title: 'اكتشف المعرفة',
+              highlight: 'من خلال الكتب',
               description:
-                'استكشف مجموعتنا الواسعة من الكتب الإسلامية والمخطوطات النادرة والموارد التعليمية المحفوظة لأجيال من طالبي العلم.',
-
+                'مجموعة مختارة من الكتب القيمة لكل من يبحث عن العلم والإلهام.',
               browse: 'تصفح الكتب',
-
               categories: 'التصنيفات',
-
-              books: 'كتب متوفرة',
-
-              authors: 'مؤلفون',
-
-              authentic: 'مصادر موثوقة',
             },
 
             categories: {
               title: 'استكشف التصنيفات',
-
-              description:
-                'اكتشف مجموعاتنا المختارة في مختلف التخصصات الإسلامية والأكاديمية.',
-
-              button: 'عرض جميع التصنيفات',
+              description: 'اكتشف الكتب مرتبة حسب مجالات المعرفة المختلفة.',
+              button: 'عرض التصنيفات',
             },
 
             featured: {
               title: 'الكتب المميزة',
-
-              description:
-                'اكتشف كتبنا الأكثر قيمة والمخطوطات النادرة، مختارة بعناية لطالبي المعرفة.',
-
+              description: 'مجموعة كتب مختارة بعناية لقرائنا.',
               button: 'عرض جميع الكتب',
             },
 
             quote: {
-              text: 'مداد العالم أقدس من دم الشهيد',
-
-              reference: '— التراث الإسلامي',
+              text: 'العلم كنز يزداد عندما تتم مشاركته.',
+              reference: 'حكمة',
             },
           },
           featured: {
@@ -689,7 +613,9 @@ i18n
             submitReview: 'إرسال التقييم',
 
             sending: 'جاري الإرسال...',
-          },
+          },category: {
+  books: 'كتب',
+},
           loginPage: {
             welcome: 'مرحباً بعودتك',
 
