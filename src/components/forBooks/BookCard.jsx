@@ -8,13 +8,21 @@ import { Card, CardContent, CardFooter } from '@/components/ui/card';
 
 import useAddToCart from '@/hooks/useAddToCart';
 
-export default function FeaturedBookCard({ book }) {
-  const { t } = useTranslation();
+export default function BookCard({ book }) {
+  const { t, i18n } = useTranslation();
   const navigate = useNavigate();
+
   const { mutate: addToCart } = useAddToCart();
 
-  const imageUrl = book.image || book.imageUrl || '/placeholder-book.jpg';
-  const price = book.price ? `$${book.price}` : '';
+  const imageUrl =
+    book.image || book.imageUrl || '/placeholder-book.jpg';
+
+  const price = book.price
+    ? new Intl.NumberFormat(i18n.language, {
+        style: 'currency',
+        currency: 'USD',
+      }).format(book.price)
+    : '';
 
   const openBook = () => navigate(`/book/${book.id}`);
 
@@ -29,6 +37,7 @@ export default function FeaturedBookCard({ book }) {
           <img
             src={imageUrl}
             alt={book.name}
+            loading="lazy"
             className="h-full w-full object-cover transition duration-500 group-hover:scale-105"
           />
         </AspectRatio>
@@ -36,7 +45,7 @@ export default function FeaturedBookCard({ book }) {
 
       <CardContent className="space-y-4 p-5">
         {/* Rating */}
-        {book.rate !== undefined && (
+        {typeof book.rate === 'number' && (
           <div className="flex items-center gap-2">
             <div className="flex">
               {[1, 2, 3, 4, 5].map((star) => (
@@ -67,7 +76,7 @@ export default function FeaturedBookCard({ book }) {
 
         {/* Price */}
         {price && (
-          <p className="text-2xl font-bold text-primary">
+          <p className="text-primary text-2xl font-bold">
             {price}
           </p>
         )}

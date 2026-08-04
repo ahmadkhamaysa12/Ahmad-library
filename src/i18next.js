@@ -107,34 +107,25 @@ i18n
             viewAll: 'View All Books',
           },
           booksPage: {
-            title: 'Browse Books',
+            title: 'Books',
             description:
-              'Explore our collection of Islamic books, rare manuscripts, and educational works preserved for knowledge seekers.',
+              'Explore our collection of valuable books and discover your next favorite read.',
 
-            sort: 'Sort by',
-
-            featured: 'Featured',
-            newest: 'Newest',
-            oldest: 'Oldest',
-
+            sort: 'Sort',
             priceLowHigh: 'Price: Low to High',
             priceHighLow: 'Price: High to Low',
-
-            rating: 'Highest Rated',
-
-            nameAZ: 'Name (A-Z)',
-            nameZA: 'Name (Z-A)',
+            nameAZ: 'Name: A-Z',
+            nameZA: 'Name: Z-A',
+            topRated: 'Top Rated',
 
             category: 'Category',
-            all: 'All Books',
+            all: 'All',
 
-            searchResult: 'Search results for',
+            price: 'Price',
+
+            addToCart: 'Add to Cart',
+
             noBooks: 'No books found.',
-
-            topRated: 'Highest Rated',
-
-            addToCart: 'Add To Cart',
-            wishlist: 'Add to Wishlist',
           },
           bookPage: {
             home: 'Home',
@@ -252,7 +243,7 @@ i18n
             submit: 'Submit Review',
             sending: 'Sending...',
             noReviews: 'No reviews yet.',
-          },  
+          },
           profilePage: {
             orders: 'Orders',
             totalSpent: 'Total Spent',
@@ -629,42 +620,24 @@ i18n
             viewAll: 'عرض جميع الكتب',
           },
           booksPage: {
-            title: 'تصفح الكتب',
+            title: 'الكتب',
+            description: 'استكشف مجموعتنا من الكتب القيمة واكتشف كتابك القادم.',
 
-            description:
-              'استكشف مجموعتنا من الكتب الإسلامية والمخطوطات النادرة والكتب التعليمية المحفوظة لطالبي المعرفة.',
-
-            sort: 'ترتيب حسب',
-
-            featured: 'المميزة',
-
-            newest: 'الأحدث',
-
-            oldest: 'الأقدم',
-
+            sort: 'ترتيب',
             priceLowHigh: 'السعر: من الأقل إلى الأعلى',
-
             priceHighLow: 'السعر: من الأعلى إلى الأقل',
-
-            rating: 'الأعلى تقييماً',
-
-            nameAZ: 'الاسم (أ-ي)',
-
-            nameZA: 'الاسم (ي-أ)',
+            nameAZ: 'الاسم: أ - ي',
+            nameZA: 'الاسم: ي - أ',
+            topRated: 'الأعلى تقييماً',
 
             category: 'التصنيف',
+            all: 'الكل',
 
-            all: 'جميع الكتب',
-
-            searchResult: 'نتائج البحث عن',
-
-            noBooks: 'لم يتم العثور على كتب.',
-
-            topRated: 'الأعلى تقييماً',
+            price: 'السعر',
 
             addToCart: 'أضف إلى السلة',
 
-            wishlist: 'أضف للمفضلة',
+            noBooks: 'لا توجد كتب.',
           },
           bookPage: {
             home: 'الرئيسية',

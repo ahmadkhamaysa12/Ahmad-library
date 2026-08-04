@@ -1,9 +1,10 @@
+import { useTranslation } from 'react-i18next';
+
 import BookCard from './BookCard';
 
-export default function BooksGrid({
-  books = [],
-  view = 'grid',
-}) {
+export default function BooksGrid({ books = [], view = 'grid' }) {
+  const { t } = useTranslation();
+
   const isGrid = view === 'grid';
   const list = Array.isArray(books) ? books : [];
 
@@ -16,17 +17,11 @@ export default function BooksGrid({
       }
     >
       {list.length ? (
-        list.map((book) => (
-          <BookCard
-            key={book.id}
-            book={book}
-            view={view}
-          />
-        ))
+        list.map((book) => <BookCard key={book.id} book={book} view={view} />)
       ) : (
-        <div className="col-span-full flex min-h-87.5 items-center justify-center rounded-xl border border-dashed border-border">
+        <div className="border-border col-span-full flex min-h-87.5 items-center justify-center rounded-xl border border-dashed">
           <p className="text-muted-foreground text-lg">
-            No books found.
+            {t('booksPage.noBooks')}
           </p>
         </div>
       )}

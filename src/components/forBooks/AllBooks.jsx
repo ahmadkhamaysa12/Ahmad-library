@@ -1,3 +1,5 @@
+import { useTranslation } from 'react-i18next';
+
 import useBooks from '@/hooks/useBooks';
 import BooksGrid from './BooksGrid';
 
@@ -10,6 +12,8 @@ export default function AllBooks({
   search,
   ascending,
 }) {
+  const { t } = useTranslation();
+
   const {
     data: books = [],
     error,
@@ -24,11 +28,19 @@ export default function AllBooks({
   });
 
   if (isLoading) {
-    return <div>Loading...</div>;
+    return (
+      <div className="text-muted-foreground flex min-h-60 items-center justify-center text-lg">
+        {t('common.loading')}
+      </div>
+    );
   }
 
   if (error) {
-    return <div>Error loading books</div>;
+    return (
+      <div className="text-destructive flex min-h-60 items-center justify-center text-lg">
+        {t('common.error')}
+      </div>
+    );
   }
 
   return <BooksGrid books={books} view={view} />;
