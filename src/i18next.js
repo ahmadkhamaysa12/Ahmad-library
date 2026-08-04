@@ -245,6 +245,14 @@ i18n
 
             passwordPlaceholder: 'Enter your new password',
           },
+          reviews: {
+            title: 'Reviews',
+            writeReview: 'Write a Review',
+            placeholder: 'Write your comment...',
+            submit: 'Submit Review',
+            sending: 'Sending...',
+            noReviews: 'No reviews yet.',
+          },  
           profilePage: {
             orders: 'Orders',
             totalSpent: 'Total Spent',
@@ -679,8 +687,6 @@ i18n
 
             noDescription: 'لا يوجد وصف متاح.',
 
-            cat: 'صنف الكتاب',
-
             about: 'عن هذا المنتج',
 
             purchase: 'الشراء',
@@ -781,6 +787,14 @@ i18n
             passwordPlaceholder: 'أدخل كلمة المرور الجديدة',
 
             rememberPassword: 'تذكرت كلمة المرور؟',
+          },
+          reviews: {
+            title: 'التقييمات',
+            writeReview: 'اكتب تقييماً',
+            placeholder: 'اكتب تعليقك...',
+            submit: 'إرسال التقييم',
+            sending: 'جاري الإرسال...',
+            noReviews: 'لا توجد تقييمات بعد.',
           },
           profilePage: {
             orders: 'الطلبات',

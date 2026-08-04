@@ -1,8 +1,11 @@
 import { Star } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 
-export default function ProductInfo({ book }) {
+export default function BookInfo({ book }) {
+  const { t } = useTranslation();
+
   const reviewsCount = book.reviews?.length || 0;
-  const rating = Math.round(book.rate || 0);
+  const rating = Math.floor(book.rate || 0);
 
   return (
     <div className="space-y-4 border-b pb-8">
@@ -27,7 +30,9 @@ export default function ProductInfo({ book }) {
           ))}
         </div>
 
-        <span>({reviewsCount} Reviews)</span>
+        <span>
+          ({reviewsCount}) {t('bookPage.reviews')}
+        </span>
       </div>
     </div>
   );

@@ -1,10 +1,15 @@
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
+import { Star } from 'lucide-react';
+
 import { Button } from '@/components/ui/button';
 import { Textarea } from '@/components/ui/textarea';
-import { Star } from 'lucide-react';
+
 import usePostReview from '@/hooks/usePostReview';
 
 export default function AddReview({ productId }) {
+  const { t } = useTranslation();
+
   const [rating, setRating] = useState(0);
   const [comment, setComment] = useState('');
 
@@ -17,23 +22,23 @@ export default function AddReview({ productId }) {
 
     postReview(
       {
-        productId,
+        productId: Number(productId),
         rating,
-        comment,
+        comment: comment.trim(),
       },
       {
         onSuccess: () => {
           setRating(0);
           setComment('');
         },
-      }
+      },
     );
   }
 
   return (
     <form onSubmit={handleSubmit} className="mt-10 space-y-5">
       <h3 className="font-serif text-2xl font-bold">
-        Write a Review
+        {t('bookPage.writeReview')}
       </h3>
 
       <div className="flex gap-2">
@@ -41,7 +46,7 @@ export default function AddReview({ productId }) {
           <Star
             key={i}
             size={28}
-            onClick={() => setRating(i + 1)}
+            onClick={() => setRating(rating === i + 1 ? 0 : i + 1)}
             className={`cursor-pointer transition ${
               i < rating
                 ? 'fill-secondary text-secondary'
@@ -52,7 +57,7 @@ export default function AddReview({ productId }) {
       </div>
 
       <Textarea
-        placeholder="Write your comment..."
+        placeholder={t('bookPage.comment')}
         value={comment}
         onChange={(e) => setComment(e.target.value)}
       />
@@ -61,7 +66,7 @@ export default function AddReview({ productId }) {
         type="submit"
         disabled={isPending || rating === 0 || !comment.trim()}
       >
-        {isPending ? 'Sending...' : 'Submit Review'}
+        {isPending ? t('bookPage.sending') : t('bookPage.submitReview')}
       </Button>
     </form>
   );

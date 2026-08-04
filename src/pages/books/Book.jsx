@@ -1,12 +1,14 @@
 import Container from '@/components/ui/container';
-import AddReview from '@/components/forBook/AddReview';
+
 import BookGallery from '@/components/forBook/BookGallery';
 import BookInfo from '@/components/forBook/BookInfo';
 import BookPurchase from '@/components/forBook/BookPurchase';
 import BookDetails from '@/components/forBook/BookDetails';
 import BookReviews from '@/components/forBook/BookReviews';
+import AddReview from '@/components/forBook/AddReview';
 
 import useBook from '@/hooks/useBook';
+
 import { useParams } from 'react-router-dom';
 
 export default function Book() {
@@ -35,7 +37,9 @@ export default function Book() {
       <div className="grid gap-10 lg:grid-cols-12">
         <section className="space-y-10 lg:col-span-7">
           <BookGallery book={book} />
+
           <BookInfo book={book} />
+
           <BookDetails book={book} />
         </section>
 
@@ -45,8 +49,10 @@ export default function Book() {
           </div>
         </aside>
       </div>
-      <AddReview productId={book.id} />
+
       <BookReviews reviews={book.reviews ?? []} />
+
+      <AddReview productId={book.id} />
     </Container>
   );
 }

@@ -1,27 +1,34 @@
 import { useState } from 'react';
+
 import { ShoppingCart, Minus, Plus, Truck, ShieldCheck } from 'lucide-react';
 
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+
 import { Button } from '@/components/ui/button';
 
 import useAddToCart from '@/hooks/useAddToCart';
 
+import { useTranslation } from 'react-i18next';
+
 export default function BookPurchase({ book }) {
+  const { t } = useTranslation();
+
   const [count, setCount] = useState(1);
 
   const { mutate: addToCart, isPending } = useAddToCart();
 
-  const handleAddToCart = () => {
+  function handleAddToCart() {
     addToCart({
       ProductId: Number(book.id),
-      Count: count,
+
+      count: count,
     });
-  };
+  }
 
   return (
-    <Card className="border-border bg-card w-full">
+    <Card>
       <CardHeader>
-        <CardTitle className="text-xl">Purchase</CardTitle>
+        <CardTitle>{t('bookPage.purchase')}</CardTitle>
       </CardHeader>
 
       <CardContent className="space-y-6">
@@ -29,32 +36,40 @@ export default function BookPurchase({ book }) {
           <span className="text-primary text-3xl font-bold">${book.price}</span>
 
           <span className="bg-secondary/20 text-secondary rounded-full px-3 py-1 text-xs font-bold">
-            AVAILABLE
+            {t('bookPage.available')}
           </span>
         </div>
 
         <div className="space-y-4 text-sm">
           <div className="flex items-center justify-between">
-            <span className="text-muted-foreground">DELIVERY</span>
+            <span className="text-muted-foreground">
+              {t('bookPage.delivery')}
+            </span>
 
             <span className="flex items-center gap-2">
               <Truck className="text-primary h-4 w-4" />
-              Secure Courier
+
+              {t('bookPage.secureCourier')}
             </span>
           </div>
 
           <div className="flex items-center justify-between">
-            <span className="text-muted-foreground">CERTIFICATE</span>
+            <span className="text-muted-foreground">
+              {t('bookPage.certificate')}
+            </span>
 
             <span className="flex items-center gap-2">
               <ShieldCheck className="text-secondary h-4 w-4" />
-              Authenticity Included
+
+              {t('bookPage.authenticity')}
             </span>
           </div>
         </div>
 
         <div className="flex items-center justify-between rounded-lg border p-3">
-          <span className="text-muted-foreground text-sm">Quantity</span>
+          <span className="text-muted-foreground text-sm">
+            {t('bookPage.quantity')}
+          </span>
 
           <div className="flex items-center gap-3">
             <Button
@@ -78,18 +93,18 @@ export default function BookPurchase({ book }) {
         </div>
 
         <Button
-          className="w-full gap-2 text-base"
           size="lg"
+          className="w-full gap-2"
           disabled={isPending}
           onClick={handleAddToCart}
         >
           <ShoppingCart className="h-5 w-5" />
 
-          {isPending ? 'Adding...' : 'Add To Cart'}
+          {isPending ? t('bookPage.adding') : t('bookPage.addToCart')}
         </Button>
 
         <p className="text-muted-foreground text-center text-xs">
-          Ships internationally. Price includes archival boxing and insurance.
+          {t('bookPage.shipsInternationally')}
         </p>
       </CardContent>
     </Card>

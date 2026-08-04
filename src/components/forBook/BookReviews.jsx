@@ -1,17 +1,23 @@
-import { Card, CardContent } from '@/components/ui/card';
+import { useTranslation } from 'react-i18next';
 import { Star } from 'lucide-react';
 
-export default function ProductReviews({ reviews = [] }) {
+import { Card, CardContent } from '@/components/ui/card';
+
+export default function BookReviews({ reviews = [] }) {
+  const { t } = useTranslation();
+
   return (
     <section className="mt-16">
-      <h2 className="mb-6 font-serif text-3xl font-bold">Reviews</h2>
+      <h2 className="mb-6 font-serif text-3xl font-bold">
+        {t('reviews.title')}
+      </h2>
 
       {reviews.length === 0 ? (
-        <p className="text-muted-foreground">No reviews yet.</p>
+        <p className="text-muted-foreground">{t('reviews.noReviews')}</p>
       ) : (
         <div className="grid gap-5 md:grid-cols-3">
-          {reviews.map((review, index) => (
-            <Card key={index} className="transition hover:shadow-md">
+          {reviews.map((review) => (
+            <Card key={review.id} className="transition hover:shadow-md">
               <CardContent className="space-y-3 p-5">
                 <div className="font-semibold">{review.userName}</div>
 

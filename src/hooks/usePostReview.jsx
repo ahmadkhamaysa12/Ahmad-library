@@ -1,5 +1,6 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import authAxiosInstance from '../api/authAxiosInstance';
+
+import authAxiosInstance from '@/api/authAxiosInstance';
 
 export default function usePostReview() {
   const queryClient = useQueryClient();
@@ -10,7 +11,7 @@ export default function usePostReview() {
         `/Products/${productId}/reviews`,
         {
           Rating: Number(rating),
-          Comment: comment,
+          Comment: comment.trim(),
         },
       );
 
@@ -21,11 +22,14 @@ export default function usePostReview() {
       queryClient.invalidateQueries({
         queryKey: ['book', variables.productId],
       });
+
+      queryClient.invalidateQueries({
+        queryKey: ['books'],
+      });
     },
 
     onError: (error) => {
-      console.log('STATUS:', error.response?.status);
-      console.log('DATA:', error.response?.data);
+      console.error('Review Error:', error.response?.data || error.message);
     },
   });
 }
