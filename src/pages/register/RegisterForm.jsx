@@ -157,18 +157,6 @@ export default function RegisterForm() {
                 placeholder={t('registerPage.phoneNumber')}
                 {...register('phoneNumber')}
               />
-
-              <button
-                type="button"
-                onClick={() => setShowPassword((prev) => !prev)}
-                className="absolute top-1/2 right-3 -translate-y-1/2"
-              >
-                {showPassword ? (
-                  <EyeOff className="h-5 w-5" />
-                ) : (
-                  <Eye className="h-5 w-5" />
-                )}
-              </button>
             </div>
 
             {errors.password && (

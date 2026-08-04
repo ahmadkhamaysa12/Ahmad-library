@@ -1,31 +1,40 @@
+import { useMemo } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import { useForm, useWatch } from 'react-hook-form';
+import { Languages, Moon, Sun } from 'lucide-react';
+
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 
 import { useTranslation } from 'react-i18next';
-import { Languages, Moon, Sun } from 'lucide-react';
+import { useForm, useWatch } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
 import { useTheme } from 'next-themes';
 
 import logo from '../../assets/logo.svg';
 import authinstance from '../../api/authAxiosInstance';
 import i18n from '../../i18next';
 
+import { ResetPasswordSchema } from '../../validation/ResetPasswordSchema';
+
 export default function ResetPassword() {
   const { t } = useTranslation();
   const { theme, setTheme } = useTheme();
-
   const navigate = useNavigate();
+
+  const schema = useMemo(() => ResetPasswordSchema(t), [t]);
 
   const {
     register,
     handleSubmit,
     control,
     formState: { errors, isSubmitting },
-  } = useForm();
+  } = useForm({
+    resolver: yupResolver(schema),
+    mode: 'onBlur',
+  });
 
   const email = useWatch({
     control,
@@ -37,6 +46,11 @@ export default function ResetPassword() {
   };
 
   const sendCode = async () => {
+    if (!email) {
+      toast.error(t('validation.email.required'));
+      return;
+    }
+
     try {
       await authinstance.post('/auth/Account/SendCode', {
         email,
@@ -69,16 +83,12 @@ export default function ResetPassword() {
 
   return (
     <Card className="w-full border-none shadow-lg">
-      <CardHeader className="flex flex-col items-center text-center">
+      <CardHeader className="flex flex-col items-center justify-center text-center">
         <Link to="/">
-          <img
-            src={logo}
-            alt="Logo"
-            className="mb-4 h-20 w-20 object-contain"
-          />
+          <img src={logo} alt="Logo" className="h-40 w-40" />
         </Link>
 
-        <CardTitle className="text-2xl font-bold">
+        <CardTitle className="my-4 text-4xl font-bold">
           {t('resetPage.welcome')}
         </CardTitle>
 
@@ -88,8 +98,14 @@ export default function ResetPassword() {
       </CardHeader>
 
       <CardContent>
-        <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
-          <div className="space-y-2">
+        <form
+          noValidate
+          onSubmit={handleSubmit(onSubmit)}
+          className="space-y-5"
+        >
+          {/* Email */}
+
+          <div className="space-y-3">
             <Label>{t('resetPage.email')}</Label>
 
             <div className="flex gap-2">
@@ -110,43 +126,48 @@ export default function ResetPassword() {
             </div>
 
             {errors.email && (
-              <p className="text-sm text-red-500">{t(errors.email.message)}</p>
+              <p className="text-sm text-red-500">{errors.email.message}</p>
             )}
           </div>
 
-          <div className="space-y-2">
+          {/* Code */}
+
+          <div className="space-y-3">
             <Label>{t('resetPage.code')}</Label>
 
             <Input
               type="text"
+              inputMode="numeric"
               autoComplete="one-time-code"
               placeholder="0000"
               {...register('code')}
             />
 
             {errors.code && (
-              <p className="text-sm text-red-500">{t(errors.code.message)}</p>
+              <p className="text-sm text-red-500">{errors.code.message}</p>
             )}
           </div>
 
-          <div className="space-y-2">
+          {/* Password */}
+
+          <div className="space-y-3">
             <Label>{t('resetPage.password')}</Label>
 
             <Input
               type="password"
               autoComplete="new-password"
-              placeholder={t('resetPage.password')}
+              placeholder={t('resetPage.passwordPlaceholder')}
               {...register('newPassword')}
             />
 
             {errors.newPassword && (
               <p className="text-sm text-red-500">
-                {t(errors.newPassword.message)}
+                {errors.newPassword.message}
               </p>
             )}
           </div>
 
-          <Button type="submit" disabled={isSubmitting} className="w-full">
+          <Button type="submit" className="w-full" disabled={isSubmitting}>
             {isSubmitting ? t('resetPage.resetting') : t('resetPage.reset')}
           </Button>
 

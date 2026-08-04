@@ -201,6 +201,7 @@ i18n
             success: 'Password reset successfully',
             failed: 'Password reset failed',
             rememberPassword: 'Remember your password?',
+            passwordPlaceholder: 'أدخل كلمة المرور الجديدة',
           },
 
           // ============ PROFILE PAGE ============
@@ -362,6 +363,10 @@ i18n
               uppercase: 'Password must begin with a capital letter.',
               number: 'Password must contain at least one number.',
               special: 'Password must contain at least one special character.',
+            },
+            code: {
+              required: 'Code is required.',
+              pattern: 'Code must be 4 digits.',
             },
             username: {
               required: 'Username is required.',
@@ -571,6 +576,7 @@ i18n
             resetting: 'جارٍ إعادة التعيين...',
             success: 'تم تغيير كلمة المرور بنجاح',
             failed: 'فشل تغيير كلمة المرور',
+            passwordPlaceholder: 'أدخل كلمة المرور الجديدة',
             rememberPassword: 'تذكرت كلمة المرور؟',
           },
 
@@ -731,6 +737,10 @@ i18n
               uppercase: 'يجب أن تبدأ كلمة المرور بحرف كبير.',
               number: 'يجب أن تحتوي كلمة المرور على رقم واحد على الأقل.',
               special: 'يجب أن تحتوي كلمة المرور على رمز خاص واحد على الأقل.',
+            },
+            code: {
+              required: 'رمز التحقق مطلوب.',
+              pattern: 'رمز التحقق يجب أن يتكون من 4 أرقام.',
             },
             username: {
               required: 'اسم المستخدم مطلوب.',

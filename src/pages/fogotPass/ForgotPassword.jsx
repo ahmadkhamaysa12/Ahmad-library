@@ -1,47 +1,27 @@
-import  { useEffect } from 'react';
 import sideImage from '../../assets/side.png';
-import RestoreAcssessForm from './RestoreAccessForm';
+import RestoreAccessForm from './RestoreAccessForm';
 
-export default function Login() {
-  useEffect(() => {
-    const mediaQuery = window.matchMedia('(min-width: 768px)');
-
-    const updateOverflow = () => {
-      const value = mediaQuery.matches ? 'hidden' : 'auto';
-
-      document.documentElement.style.overflow = value;
-      document.body.style.overflow = value;
-    };
-
-    updateOverflow();
-
-    mediaQuery.addEventListener('change', updateOverflow);
-
-    return () => {
-      document.documentElement.style.overflow = '';
-      document.body.style.overflow = '';
-
-      mediaQuery.removeEventListener('change', updateOverflow);
-    };
-  }, []);
-
+export default function RestoreAccess() {
   return (
-    <main className="h-dvh w-full overflow-hidden">
-      <div className="grid h-dvh md:grid-cols-2">
+    <main className="min-h-dvh w-full">
+      <div className="grid min-h-dvh md:grid-cols-2">
         {/* Form */}
-        <div className="flex h-full items-center justify-center overflow-y-auto px-4 md:overflow-hidden">
+        <section className="flex items-center justify-center px-4 py-8">
           <div className="w-full max-w-lg lg:max-w-xl xl:max-w-2xl">
-            <RestoreAcssessForm />
+            <RestoreAccessForm />
           </div>
-        </div>
+        </section>
+
         {/* Image */}
-        <div className="hidden h-full md:block">
+        <aside className="hidden md:block">
           <img
             src={sideImage}
-            alt="login"
-            className="h-full w-full object-cover"
+            alt="Restore access illustration"
+            className="h-full min-h-dvh w-full object-cover"
+            loading="eager"
+            draggable={false}
           />
-        </div>
+        </aside>
       </div>
     </main>
   );
