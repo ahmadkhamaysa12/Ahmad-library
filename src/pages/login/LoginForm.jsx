@@ -23,15 +23,15 @@ export default function LoginForm() {
   const { theme, setTheme } = useTheme();
   const navigate = useNavigate();
   const setToken = useAuthStore((state) => state.setToken);
-const schema = useMemo(() => LoginSchema(t), [t]);
-const {
-  register,
-  handleSubmit,
-  formState: { errors, isSubmitting },
-} = useForm({
-  resolver: yupResolver(schema),
-  mode: 'onBlur',
-});
+  const schema = useMemo(() => LoginSchema(t), [t]);
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, isSubmitting },
+  } = useForm({
+    resolver: yupResolver(schema),
+    mode: 'onBlur',
+  });
 
   const onSubmit = async (data) => {
     try {
@@ -85,10 +85,8 @@ const {
             />
 
             {errors.email && (
-  <p className="text-sm text-red-500">
-    {errors.email.message}
-  </p>
-)}
+              <p className="text-sm text-red-500">{errors.email.message}</p>
+            )}
           </div>
 
           {/* Password */}
@@ -120,10 +118,8 @@ const {
             </div>
 
             {errors.password && (
-  <p className="text-sm text-red-500">
-    {errors.password.message}
-  </p>
-)}
+              <p className="text-sm text-red-500">{errors.password.message}</p>
+            )}
           </div>
 
           {/* Remember */}

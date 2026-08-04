@@ -359,9 +359,22 @@ i18n
             password: {
               required: 'Password is required.',
               min: 'Password must be at least 6 characters.',
-              uppercase: 'Password must start with a capital letter.',
+              uppercase: 'Password must begin with a capital letter.',
               number: 'Password must contain at least one number.',
               special: 'Password must contain at least one special character.',
+            },
+            username: {
+              required: 'Username is required.',
+              pattern:
+                'Use 4–16 characters. Start with a letter. Letters, numbers, and underscores only.',
+            },
+            fullName: {
+              required: 'Full name is required.',
+              min: 'Full name must be at least 3 characters.',
+            },
+            phone: {
+              required: 'Phone number is required.',
+              pattern: 'Phone number must contain 10 to 15 digits.',
             },
           },
         },
@@ -709,15 +722,28 @@ i18n
           validation: {
             email: {
               required: 'البريد الإلكتروني مطلوب.',
-              invalid: 'يرجى إدخال بريد إلكتروني صالح.',
-              domain: 'يسمح فقط بعناوين Gmail وYahoo وiCloud.',
+              invalid: 'يجب إدخال بريد إلكتروني صالح.',
+              domain: 'يرجى إدخال بريد Gmail أو Yahoo أو iCloud صالح.',
             },
             password: {
               required: 'كلمة المرور مطلوبة.',
-              min: 'يجب أن تتكون كلمة المرور من 6 أحرف على الأقل.',
-              uppercase: 'يجب أن تبدأ كلمة المرور بحرف إنجليزي كبير.',
+              min: 'يجب أن تكون كلمة المرور 6 أحرف على الأقل.',
+              uppercase: 'يجب أن تبدأ كلمة المرور بحرف كبير.',
               number: 'يجب أن تحتوي كلمة المرور على رقم واحد على الأقل.',
               special: 'يجب أن تحتوي كلمة المرور على رمز خاص واحد على الأقل.',
+            },
+            username: {
+              required: 'اسم المستخدم مطلوب.',
+              pattern:
+                'استخدم من 4 إلى 16 حرفًا. يجب أن يبدأ بحرف، ويسمح بالأحرف والأرقام والشرطة السفلية فقط.',
+            },
+            fullName: {
+              required: 'الاسم الكامل مطلوب.',
+              min: 'يجب أن يكون الاسم الكامل 3 أحرف على الأقل.',
+            },
+            phone: {
+              required: 'رقم الهاتف مطلوب.',
+              pattern: 'يجب أن يحتوي رقم الهاتف على 10 إلى 15 رقمًا.',
             },
           },
         },

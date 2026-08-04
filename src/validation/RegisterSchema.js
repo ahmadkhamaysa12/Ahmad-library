@@ -1,44 +1,48 @@
 import * as yup from 'yup';
 
-export const RegisterSchema = yup.object({
-  email: yup
-    .string()
-    .trim()
-    .lowercase()
-    .email('Email must be a valid email.')
-    .required('Email is required.')
-    .matches(
-      /^[A-Za-z0-9._%+-]+@(gmail\.com|yahoo\.com|icloud\.com)$/,
-      'Please enter a valid Gmail, Yahoo, or iCloud email address.',
-    ),
+export const RegisterSchema = (t) =>
+  yup.object({
+    email: yup
+      .string()
+      .trim()
+      .lowercase()
+      .required(t('validation.email.required'))
+      .email(t('validation.email.invalid'))
+      .matches(
+        /^[A-Za-z0-9._%+-]+@(gmail\.com|yahoo\.com|icloud\.com)$/,
+        t('validation.email.domain'),
+      ),
 
-  password: yup
-    .string()
-    .required('Password is required.')
-    .min(6, 'Password must be at least 6 characters.')
-    .matches(
-      /^[A-Z][A-Za-z0-9!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]*$/,
-      'Password must begin with a capital letter and may include letters, numbers, and special characters.',
-    ),
+    password: yup
+      .string()
+      .trim()
+      .required(t('validation.password.required'))
+      .min(6, t('validation.password.min'))
+      .matches(/^[A-Z]/, t('validation.password.uppercase'))
+      .matches(/[0-9]/, t('validation.password.number'))
+      .matches(
+        /[!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]/,
+        t('validation.password.special'),
+      ),
 
-  userName: yup
-    .string()
-    .trim()
-    .required('Username is required.')
-    .matches(
-      /^[A-Za-z][A-Za-z0-9_]{3,15}$/,
-      'Use 4–16 characters. Start with a letter. Letters, numbers, and underscores only.',
-    ),
+    userName: yup
+      .string()
+      .trim()
+      .required(t('validation.username.required'))
+      .matches(
+        /^[A-Za-z][A-Za-z0-9_]{3,15}$/,
+        t('validation.username.pattern'),
+      ),
 
-  fullName: yup
-    .string()
-    .trim()
-    .required('Full name is required.')
-    .min(3, 'Full name must be at least 3 characters.'),
+    fullName: yup
+      .string()
+      .trim()
+      .required(t('validation.fullName.required'))
+      .min(3, t('validation.fullName.min')),
 
-  phoneNumber: yup
-    .string()
-    .trim()
-    .required('Phone number is required.')
-    .matches(/^\+?[0-9]{10,15}$/, 'Phone number must contain 10 to 15 digits.'),
-});
+    phoneNumber: yup
+      .string()
+      .trim()
+      .required(t('validation.phone.required'))
+      .matches(/^\+?[0-9]{10,15}$/, t('validation.phone.pattern')),
+  });

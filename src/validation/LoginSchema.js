@@ -10,7 +10,7 @@ export const LoginSchema = (t) =>
       .email(t('validation.email.invalid'))
       .matches(
         /^[A-Za-z0-9._%+-]+@(gmail\.com|yahoo\.com|icloud\.com)$/,
-        t('validation.email.domain')
+        t('validation.email.domain'),
       ),
 
     password: yup
@@ -18,16 +18,10 @@ export const LoginSchema = (t) =>
       .trim()
       .required(t('validation.password.required'))
       .min(6, t('validation.password.min'))
-      .matches(
-        /^[A-Z]/,
-        t('validation.password.uppercase')
-      )
-      .matches(
-        /[0-9]/,
-        t('validation.password.number')
-      )
+      .matches(/^[A-Z]/, t('validation.password.uppercase'))
+      .matches(/[0-9]/, t('validation.password.number'))
       .matches(
         /[!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]/,
-        t('validation.password.special')
+        t('validation.password.special'),
       ),
   });
