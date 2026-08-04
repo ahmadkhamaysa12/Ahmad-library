@@ -14,24 +14,38 @@ export default function Footer() {
 
   return (
     <footer className="border-border bg-background border-t">
-      <div className="container mx-auto flex flex-col items-center px-6 py-20">
-        <h2 className="text-secondary font-serif text-4xl font-bold tracking-tight md:text-5xl">
+      <div className="container mx-auto flex flex-col items-center px-6 py-16">
+        {/* Logo */}
+        <Link
+          to="/"
+          className="text-secondary hover:text-primary font-serif text-4xl font-bold tracking-tight transition-all md:text-5xl"
+        >
           {t('lib_name')}
-        </h2>
+        </Link>
 
-        <nav className="my-8 flex flex-wrap justify-center gap-x-8 gap-y-4">
+        {/* Description */}
+        <p className="text-muted-foreground mt-5 max-w-xl text-center text-sm leading-7 md:text-base">
+          {t('footer.description')}
+        </p>
+
+        {/* Links */}
+        <nav className="mt-8 flex flex-wrap justify-center gap-x-8 gap-y-4">
           {links.map((link) => (
             <Link
               key={link.href}
               to={link.href}
-              className="text-muted-foreground hover:text-primary text-base font-medium underline underline-offset-4 transition-all"
+              className="text-muted-foreground hover:text-primary after:bg-primary relative text-sm font-medium transition-colors after:absolute after:start-0 after:-bottom-1 after:h-0.5 after:w-0 after:transition-all hover:after:w-full"
             >
               {link.title}
             </Link>
           ))}
         </nav>
 
-        <p className="text-primary/80 text-center text-lg">
+        {/* Divider */}
+        <div className="border-border mt-10 w-full border-t" />
+
+        {/* Copyright */}
+        <p className="text-muted-foreground mt-6 text-center text-sm">
           © {new Date().getFullYear()} {t('lib_name')}. {t('footer.copyright')}
         </p>
       </div>
