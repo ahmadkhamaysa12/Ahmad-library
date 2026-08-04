@@ -10,12 +10,13 @@ import {
 } from 'lucide-react';
 import { Link, useNavigate, useSearchParams } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import i18n from '../../i18next';
 import { useTheme } from 'next-themes';
 import { useEffect, useState } from 'react';
+
 import { Button } from '../ui/button';
 import { Input } from '@/components/ui/input';
 import Container from '@/components/ui/container';
+
 import useAuthStore from '../../store/useAuthStore';
 
 import {
@@ -28,34 +29,48 @@ import {
 import { Sheet, SheetContent, SheetTrigger } from '../ui/sheet';
 
 export default function Navbar() {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const navigate = useNavigate();
+
   const { theme, setTheme } = useTheme();
   const [searchParams] = useSearchParams();
 
   const urlSearch = searchParams.get('search') || '';
 
   const [search, setSearch] = useState(urlSearch);
+  const [open, setOpen] = useState(false);
+  const [mounted, setMounted] = useState(false);
+
+  const token = useAuthStore((state) => state.token);
+  const logout = useAuthStore((state) => state.logout);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  useEffect(() => {
+    setSearch(urlSearch);
+  }, [urlSearch]);
 
   useEffect(() => {
     const timer = setTimeout(() => {
       if (search === urlSearch) return;
 
       if (search.trim()) {
-        navigate(`/books?search=${encodeURIComponent(search)}`);
+        navigate(`/books?search=${encodeURIComponent(search)}`, {
+          replace: true,
+        });
       } else {
-        navigate('/books');
+        navigate('/books', {
+          replace: true,
+        });
       }
     }, 500);
 
     return () => clearTimeout(timer);
   }, [search, urlSearch, navigate]);
+
   const direction = i18n.language === 'ar' ? 'rtl' : 'ltr';
-
-  const [open, setOpen] = useState(false);
-
-  const token = useAuthStore((state) => state.token);
-  const logout = useAuthStore((state) => state.logout);
 
   const links = [
     { name: t('home'), to: '/' },
@@ -65,6 +80,7 @@ export default function Navbar() {
 
   const changeLanguage = () => {
     i18n.changeLanguage(i18n.language === 'en' ? 'ar' : 'en');
+    setOpen(false);
   };
 
   const toggleTheme = () => {
@@ -74,12 +90,14 @@ export default function Navbar() {
   const iconButton =
     'rounded-full text-muted-foreground transition-all duration-200 hover:bg-accent hover:text-primary hover:shadow-sm';
 
+  const mobileLink =
+    'border-border hover:bg-accent hover:text-primary flex items-center justify-center rounded-xl border py-3 text-base font-medium transition-all duration-200';
+
   return (
     <header className="bg-background/90 border-border sticky top-0 z-50 w-full border-b backdrop-blur-md">
       <Container>
         <div className="mx-auto flex h-18 items-center justify-between">
           {/* Logo */}
-
           <Link
             to="/"
             className="text-secondary hover:text-primary font-serif text-3xl font-bold tracking-tight transition-all duration-200"
@@ -88,8 +106,7 @@ export default function Navbar() {
           </Link>
 
           {/* Search */}
-
-          <div className="bg-card border-border hidden h-11 w-80 items-center gap-3 rounded-xl border px-4 shadow-xs transition-shadow duration-200 hover:shadow-sm lg:flex">
+          <div className="bg-card border-border hidden h-11 w-80 items-center gap-3 rounded-xl border px-4 shadow-xs transition-shadow duration-200 hover:shadow-sm sm:flex">
             <Search className="text-muted-foreground h-4 w-4" />
 
             <Input
@@ -101,7 +118,6 @@ export default function Navbar() {
           </div>
 
           {/* Desktop Navigation */}
-
           <nav className="hidden items-center gap-8 lg:flex">
             {links.map((link) => (
               <Link
@@ -115,7 +131,6 @@ export default function Navbar() {
           </nav>
 
           {/* Desktop Actions */}
-
           <div className="hidden items-center gap-2 lg:flex">
             <Button
               variant="ghost"
@@ -141,11 +156,12 @@ export default function Navbar() {
               className={iconButton}
               onClick={toggleTheme}
             >
-              {theme === 'dark' ? (
-                <Sun className="h-5 w-5" />
-              ) : (
-                <Moon className="h-5 w-5" />
-              )}
+              {mounted &&
+                (theme === 'dark' ? (
+                  <Sun className="h-5 w-5" />
+                ) : (
+                  <Moon className="h-5 w-5" />
+                ))}
             </Button>
 
             <DropdownMenu>
@@ -153,15 +169,22 @@ export default function Navbar() {
                 <User className="h-5 w-5" />
               </DropdownMenuTrigger>
 
-              <DropdownMenuContent align="end">
+              <DropdownMenuContent align="end" className="w-40">
                 {token ? (
                   <>
-                    <DropdownMenuItem render={<Link to="/Profile" />}>
+                    <DropdownMenuItem
+                      render={
+                        <Link
+                          to="/profile"
+                          className="flex w-full cursor-pointer items-center"
+                        />
+                      }
+                    >
                       {t('profile')}
                     </DropdownMenuItem>
 
                     <DropdownMenuItem
-                      className="cursor-pointer"
+                      className="flex w-full cursor-pointer items-center"
                       onClick={logout}
                     >
                       {t('logout')}
@@ -169,11 +192,25 @@ export default function Navbar() {
                   </>
                 ) : (
                   <>
-                    <DropdownMenuItem render={<Link to="/Login" />}>
+                    <DropdownMenuItem
+                      render={
+                        <Link
+                          to="/login"
+                          className="flex w-full cursor-pointer items-center"
+                        />
+                      }
+                    >
                       {t('login')}
                     </DropdownMenuItem>
 
-                    <DropdownMenuItem render={<Link to="/register" />}>
+                    <DropdownMenuItem
+                      render={
+                        <Link
+                          to="/register"
+                          className="flex w-full cursor-pointer items-center"
+                        />
+                      }
+                    >
                       {t('register')}
                     </DropdownMenuItem>
                   </>
@@ -183,118 +220,134 @@ export default function Navbar() {
           </div>
 
           {/* Mobile */}
-
           <div className="lg:hidden">
             <Sheet open={open} onOpenChange={setOpen}>
               <SheetTrigger className="text-muted-foreground hover:bg-accent hover:text-primary inline-flex h-10 w-10 items-center justify-center rounded-full transition-all duration-200">
                 <Menu className="h-5 w-5" />
               </SheetTrigger>
-
               <SheetContent
                 side={direction === 'rtl' ? 'left' : 'right'}
-                className="border-border bg-background w-80"
+                className="bg-background border-border w-[340px] p-0"
               >
-                <nav className="flex flex-col items-center gap-6 pt-10">
-                  <div className="flex w-full flex-col gap-2">
-                    {links.map((link) => (
-                      <Link
-                        key={link.to}
-                        to={link.to}
-                        onClick={() => setOpen(false)}
-                        className="border-border hover:bg-accent hover:text-primary flex items-center justify-center rounded-xl border py-3 text-base font-medium transition-all duration-200"
-                      >
-                        {link.name}
-                      </Link>
-                    ))}
-
+                <div className="flex h-full flex-col">
+                  {/* Header */}
+                  <div className="border-border flex items-center justify-center border-b px-6 py-6">
                     <Link
-                      to="/cart"
+                      to="/"
                       onClick={() => setOpen(false)}
-                      className="border-border hover:bg-accent hover:text-primary flex items-center justify-center rounded-xl border py-3 text-base font-medium transition-all duration-200"
+                      className="text-secondary font-serif text-2xl font-bold"
                     >
-                      <ShoppingCart className="mr-2 h-5 w-5" />
-                      {t('cart')}
+                      {t('lib_name')}
                     </Link>
                   </div>
-                  <div className="border-border w-full border-t" />{' '}
-                  {/* Settings */}
-                  <div className="border-border w-full border-t" />
-                  <div className="flex w-full flex-col gap-3">
-                    <Button
-                      variant="outline"
-                      className="w-full justify-center"
-                      onClick={changeLanguage}
-                    >
-                      <Languages className="mr-2 h-4 w-4" />
-                      {t('language')}
-                    </Button>
 
-                    <Button
-                      variant="outline"
-                      className="w-full justify-center"
-                      onClick={toggleTheme}
-                    >
-                      {theme === 'dark' ? (
+                  <nav className="flex flex-1 flex-col gap-6 overflow-y-auto px-6 py-8">
+                    {/* Navigation */}
+                    <div className="space-y-2">
+                      {links.map((link) => (
+                        <Link
+                          key={link.to}
+                          to={link.to}
+                          onClick={() => setOpen(false)}
+                          className="text-muted-foreground hover:bg-accent hover:text-primary flex items-center justify-center rounded-xl px-4 py-3 text-base font-medium transition-all"
+                        >
+                          {link.name}
+                        </Link>
+                      ))}
+
+                      <Link
+                        to="/cart"
+                        onClick={() => setOpen(false)}
+                        className="text-muted-foreground hover:bg-accent hover:text-primary flex items-center justify-center rounded-xl px-4 py-3 text-base font-medium transition-all"
+                      >
+                        {t('cart')}
+                      </Link>
+                    </div>
+
+                    <div className="border-border border-t" />
+
+                    {/* Settings */}
+                    <div className="space-y-3">
+                      <Button
+                        variant="outline"
+                        className="h-12 w-full rounded-xl"
+                        onClick={() => {
+                          changeLanguage();
+                          setOpen(false);
+                        }}
+                      >
+                        <Languages className="me-2 h-5 w-5" />
+                        {t('language')}
+                      </Button>
+
+                      <Button
+                        variant="outline"
+                        className="h-12 w-full rounded-xl"
+                        onClick={toggleTheme}
+                      >
+                        {mounted &&
+                          (theme === 'dark' ? (
+                            <>
+                              <Sun className="me-2 h-5 w-5" />
+                              {t('light_mode')}
+                            </>
+                          ) : (
+                            <>
+                              <Moon className="me-2 h-5 w-5" />
+                              {t('dark_mode')}
+                            </>
+                          ))}
+                      </Button>
+                    </div>
+
+                    <div className="border-border border-t" />
+
+                    {/* Account */}
+                    <div className="space-y-2">
+                      {token ? (
                         <>
-                          <Sun className="mr-2 h-4 w-4" />
-                          {t('light_mode')}
+                          <Link
+                            to="/profile"
+                            onClick={() => setOpen(false)}
+                            className="text-muted-foreground hover:bg-accent hover:text-primary flex h-12 items-center justify-center rounded-xl border font-medium transition"
+                          >
+                            <User className="me-2 h-5 w-5" />
+                            {t('profile')}
+                          </Link>
+
+                          <button
+                            onClick={() => {
+                              logout();
+                              setOpen(false);
+                            }}
+                            className="text-muted-foreground hover:bg-accent hover:text-primary flex h-12 w-full items-center justify-center rounded-xl border font-medium transition"
+                          >
+                            <LogOut className="me-2 h-5 w-5" />
+                            {t('logout')}
+                          </button>
                         </>
                       ) : (
                         <>
-                          <Moon className="mr-2 h-4 w-4" />
-                          {t('dark_mode')}
+                          <Link
+                            to="/login"
+                            onClick={() => setOpen(false)}
+                            className="text-muted-foreground hover:bg-accent hover:text-primary flex h-12 items-center justify-center rounded-xl border font-medium transition"
+                          >
+                            {t('login')}
+                          </Link>
+
+                          <Link
+                            to="/register"
+                            onClick={() => setOpen(false)}
+                            className="text-muted-foreground hover:bg-accent hover:text-primary flex h-12 items-center justify-center rounded-xl border font-medium transition"
+                          >
+                            {t('register')}
+                          </Link>
                         </>
                       )}
-                    </Button>
-                  </div>
-                  {/* Account */}
-                  <div className="border-border w-full border-t" />
-                  <div className="flex w-full flex-col gap-2">
-                    {token ? (
-                      <>
-                        <Link
-                          to="/Profile"
-                          onClick={() => setOpen(false)}
-                          className="border-border hover:bg-accent hover:text-primary flex items-center justify-center rounded-xl border py-3 text-base font-medium transition-all duration-200"
-                        >
-                          <User className="mr-2 h-5 w-5" />
-                          {t('profile')}
-                        </Link>
-
-                        <button
-                          onClick={() => {
-                            logout();
-                            setOpen(false);
-                          }}
-                          className="border-border hover:bg-accent hover:text-primary flex w-full items-center justify-center rounded-xl border py-3 text-base font-medium transition-all duration-200"
-                        >
-                          <LogOut className="mr-2 h-5 w-5" />
-                          {t('logout')}
-                        </button>
-                      </>
-                    ) : (
-                      <>
-                        <Link
-                          to="/Login"
-                          onClick={() => setOpen(false)}
-                          className="border-border hover:bg-accent hover:text-primary flex items-center justify-center rounded-xl border py-3 text-base font-medium transition-all duration-200"
-                        >
-                          <User className="mr-2 h-5 w-5" />
-                          {t('login')}
-                        </Link>
-
-                        <Link
-                          to="/register"
-                          onClick={() => setOpen(false)}
-                          className="border-border hover:bg-accent hover:text-primary flex items-center justify-center rounded-xl border py-3 text-base font-medium transition-all duration-200"
-                        >
-                          <User className="mr-2 h-5 w-5" />
-                          {t('register')}
-                        </Link>
-                      </>
-                    )}
-                  </div>
-                </nav>
+                    </div>
+                  </nav>
+                </div>
               </SheetContent>
             </Sheet>
           </div>

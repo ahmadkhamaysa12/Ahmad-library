@@ -201,7 +201,7 @@ i18n
             success: 'Password reset successfully',
             failed: 'Password reset failed',
             rememberPassword: 'Remember your password?',
-            passwordPlaceholder: 'أدخل كلمة المرور الجديدة',
+            passwordPlaceholder: 'Enter your new password',
           },
 
           // ============ PROFILE PAGE ============
@@ -651,19 +651,19 @@ i18n
             timelineTitle: 'إرث من المعرفة',
             timeline: [
               {
-                year: '١٨٩٢',
+                year: '1892',
                 title: 'البداية',
                 description:
                   'بدأت المكتبة بمجموعة متواضعة من المخطوطات الإقليمية التي جمعها علماء متميزون.',
               },
               {
-                year: '١٩٥٤',
+                year: '1892',
                 title: 'مرحلة التوسع',
                 description:
                   'توسعت المكتبة من خلال اقتناء مخطوطات نادرة ومجموعات تاريخية قيّمة.',
               },
               {
-                year: '٢٠٢٤',
+                year: '2026',
                 title: 'التحول الرقمي',
                 description:
                   'أصبحت مكتبة أحمد متاحة للقراء حول العالم من خلال التقنيات الرقمية الحديثة.',

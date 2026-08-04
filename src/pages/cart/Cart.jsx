@@ -16,7 +16,6 @@ export default function Cart() {
   const { mutate: updateQty, isPending: isUpdating } = useUpdateQty();
 
   const { mutate: removeFromCart, isPending: isRemoving } = useRemoveFromCart();
-  console.log(cart);
   if (cartIsLoading) return <div>Cart is loading...</div>;
 
   if (cartError) return <div>Error loading cart</div>;
